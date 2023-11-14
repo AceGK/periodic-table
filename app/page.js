@@ -12,7 +12,7 @@ export default function Home() {
   };
 
   return (
-    <main>
+    <main className="container">
       <SelectedElement selectedElement={selectedElement} />
       <div className="periodic-table">
         {PeriodicTable.elements.map((element) => (

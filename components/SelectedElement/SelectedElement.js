@@ -1,3 +1,4 @@
+import Link from "next/link";
 
 export default function SelectedElement({ selectedElement }) {
   return ( 
@@ -22,6 +23,10 @@ export default function SelectedElement({ selectedElement }) {
           <li>
             <label>Group</label>
             <value>{selectedElement.category}</value>
+          </li>
+          <li>
+            <label>Write up</label>
+            <value><Link href={selectedElement.source}>Wiki</Link></value>
           </li>
           <li>
             <label>State at ...</label>
@@ -68,8 +73,24 @@ export default function SelectedElement({ selectedElement }) {
             <value>...</value>
           </li>
           <li>
-            <label>Desnity</label>
+            <label>Density</label>
             <value>{selectedElement.density}</value>
+          </li>
+          <li>
+            <label>Conductivity</label>
+            <value>...</value>
+          </li>
+          <li>
+            <label>Heat</label>
+            <value>...</value>
+          </li>
+          <li>
+            <label>Abundance</label>
+            <value>...</value>
+          </li>
+          <li>
+            <label>Discovered</label>
+            <value>{selectedElement.discovered_by}</value>
           </li>
         </ul>
 

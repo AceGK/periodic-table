@@ -20,6 +20,11 @@ export default function SelectedElement({ selectedElement }) {
 
         {/* <h1>{selectedElement.name}</h1> */}
         <p>{selectedElement.summary}</p>
+   <Link href={selectedElement.source}>Wiki</Link>
+      </div>
+
+      <div>
+        Animation...
       </div>
 
       <ul data-type="element-data">
@@ -28,24 +33,16 @@ export default function SelectedElement({ selectedElement }) {
           <value>{selectedElement.category}</value>
         </li>
         <li>
-          <label>Write up</label>
-          <value><Link href={selectedElement.source}>Wiki</Link></value>
+          <label>Phase</label>
+          <value>{selectedElement.phase}</value>
         </li>
         <li>
-          <label>State at ...</label>
-          <value>...</value>
+          <label>Appearance</label>
+          <value>{selectedElement.apperance}</value>
         </li>
         <li>
           <label>Atomic Mass</label>
           <value>{selectedElement.atomic_mass}</value>
-        </li>
-        <li>
-          <label>Energy levels</label>
-          <value>...</value>
-        </li>
-        <li>
-          <label>Electronegativity</label>
-          <value>{selectedElement.electronegativity_pauling}</value>
         </li>
         <li>
           <label>Melting point (k)</label>
@@ -54,6 +51,24 @@ export default function SelectedElement({ selectedElement }) {
         <li>
           <label>Boling point (k)</label>
           <value>{selectedElement.boil}</value>
+        </li>
+        <li>
+          <label>Discovered by</label>
+          <value>{selectedElement.discovered_by}</value>
+        </li>
+        <li>
+          <label>Named by</label>
+          <value>{selectedElement.named}</value>
+        </li>
+       </ul>
+       <ul data-type="element-data">
+        <li>
+          <label>Energy levels</label>
+          <value>...</value>
+        </li>
+        <li>
+          <label>Electronegativity</label>
+          <value>{selectedElement.electronegativity_pauling}</value>
         </li>
         <li>
           <label>Electron Affinity</label>
@@ -90,10 +105,6 @@ export default function SelectedElement({ selectedElement }) {
         <li>
           <label>Abundance</label>
           <value>...</value>
-        </li>
-        <li>
-          <label>Discovered</label>
-          <value>{selectedElement.discovered_by}</value>
         </li>
       </ul>
 

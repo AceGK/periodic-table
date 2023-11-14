@@ -8,7 +8,7 @@ a {
 }
 
 .container {
-  max-width:1400px;
+  max-width:1320px;
   margin:auto;
 }
 
@@ -16,13 +16,19 @@ h1 {
   font-size: 3rem;
 }
 
+.table-wrapper {
+  display:flex;
+  overflow-x:auto;
+  padding-inline:1.5rem;
+}
+
 .periodic-table {
   display: grid;
-  justify-content: center;
   grid-template-columns: repeat(18, 64px);
   grid-template-rows: repeat(10, 64px);
   grid-gap: 4px;
-  margin-bottom:5rem;
+  margin:3rem 0rem;
+  // overflow-x:auto;
   // position: absolute;
   // top: 50%;
   // left: 50%;

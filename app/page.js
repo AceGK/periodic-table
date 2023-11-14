@@ -21,7 +21,7 @@ export default function Home() {
               gridRow: element.ypos,
               gridColumn: element.xpos,
             }}
-            onClick={() => handleElementClick(e)}
+            onClick={() => handleElementClick(element)}
           >
             <strong>{element.symbol}</strong>
             <small className="number">{element.number}</small>
@@ -40,7 +40,7 @@ export default function Home() {
               gridRow: selectedElement.ypos,
               gridColumn: selectedElement.xpos,
             }}
-            onClick={() => handleElementClick(e)}
+            onClick={() => handleElementClick(element)}
           >
             <strong>{selectedElement.symbol}</strong>
             <small className="number">{selectedElement.number}</small>

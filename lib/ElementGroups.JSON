@@ -1,0 +1,36 @@
+{
+  "elementGroups": [
+    {
+      "name": "alkali metals",
+      "groupNumber": 1
+    },
+    {
+      "name": "alkaline earth metals",
+      "groupNumber": 2
+    },
+    {
+      "name": "transition metals",
+      "groupNumber": "3-12"
+    },
+    {
+      "name": "post-transition metals",
+      "groupNumber": "13-16"
+    },
+    {
+      "name": "metalloids",
+      "groupNumber": "13-16"
+    },
+    {
+      "name": "diatomic nonmetals",
+      "groupNumber": "13-17"
+    },
+    {
+      "name": "noble gases",
+      "groupNumber": 18
+    },
+    {
+      "name": "Lanthanides",
+      "groupNumber": "f-block"
+    }
+  ]
+}

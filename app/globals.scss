@@ -37,20 +37,20 @@ h1 {
   align-items: center;
   justify-content: center;
   &:hover {
-    transform: scale(1.5, 1.5);
+    transform: scale(1.75, 1.75);
     z-index: 1;
     cursor: pointer;
   }
   .number {
     font-size: 0.75rem;
     position: absolute;
-    top: 5px;
+    top: 3px;
     left: 5px;
   }
   .name {
     font-size: 0.5rem;
     position: absolute;
-    bottom: 5px;
+    bottom: 3px;
     left: 5px;
     right: 5px;
     white-space: nowrap;
@@ -70,6 +70,10 @@ h1 {
     width:200px;
     height:200px;
     font-size:3rem;
+    &:hover {
+      transform: none;
+      cursor:default;
+    }
     .name {
       font-size:1.5rem;
       bottom: 5px;

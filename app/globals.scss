@@ -48,13 +48,13 @@ h1 {
     cursor: pointer;
   }
   .number {
-    font-size: 0.75rem;
+    font-size: 0.625rem;
     position: absolute;
     top: 3px;
     left: 5px;
   }
   .name {
-    font-size: 0.5rem;
+    font-size: 0.625rem;
     position: absolute;
     bottom: 3px;
     left: 5px;
@@ -62,6 +62,9 @@ h1 {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+  strong {
+    padding-bottom:3px;
   }
 }
 
@@ -71,6 +74,9 @@ h1 {
   margin-bottom:1rem;
   & > * {
     width: 100%;
+  }
+  output, label {
+    text-transform: capitalize;
   }
   .element {
     width:200px;

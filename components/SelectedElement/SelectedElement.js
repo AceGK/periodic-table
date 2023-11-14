@@ -30,81 +30,80 @@ export default function SelectedElement({ selectedElement }) {
       <ul data-type="element-data">
         <li>
           <label>Group</label>
-          <value>{selectedElement.category}</value>
+          <output>{selectedElement.category}</output>
         </li>
         <li>
           <label>Phase</label>
-          <value>{selectedElement.phase}</value>
+          <output>{selectedElement.phase}</output>
         </li>
         <li>
           <label>Appearance</label>
-          <value>{selectedElement.apperance}</value>
+          <output>{selectedElement.apperance}</output>
         </li>
         <li>
           <label>Atomic Mass</label>
-          <value>{selectedElement.atomic_mass}</value>
+          <output>{selectedElement.atomic_mass}</output>
         </li>
         <li>
-          <label>Melting point (k)</label>
-          <value>{selectedElement.melt}</value>
+          <label>Melting point</label>
+          <output>{selectedElement.melt} K</output>
         </li>
         <li>
-          <label>Boling point (k)</label>
-          <value>{selectedElement.boil}</value>
+          <label>Boling point</label>
+          <output>{selectedElement.boil} K</output> 
         </li>
         <li>
           <label>Discovered by</label>
-          <value>{selectedElement.discovered_by}</value>
+          <output>{selectedElement.discovered_by}</output>
         </li>
         <li>
           <label>Named by</label>
-          <value>{selectedElement.named}</value>
+          <output>{selectedElement.named_by}</output>
         </li>
-       </ul>
-       <ul data-type="element-data">
+<br/>
         <li>
           <label>Energy levels</label>
-          <value>...</value>
+          <output>...</output>
         </li>
         <li>
           <label>Electronegativity</label>
-          <value>{selectedElement.electronegativity_pauling}</value>
+          <output>{selectedElement.electronegativity_pauling}</output>
         </li>
         <li>
           <label>Electron Affinity</label>
-          <value>{selectedElement.electron_affinity}</value>
+          <output>{selectedElement.electron_affinity}</output>
         </li>
         <li>
           <label>Ionization Energies</label>
-          <value>{selectedElement.ionization_energies[0]}</value>
+          <output>{selectedElement.ionization_energies[0]}</output>
         </li>
         <li>
           <label>Radius</label>
-          <value>...</value>
+          <output>...</output>
         </li>
         <li>
           <label>Hardness</label>
-          <value>...</value>
+          <output>...</output>
         </li>
         <li>
           <label>Modulus</label>
-          <value>...</value>
+          <output>...</output>
         </li>
         <li>
           <label>Density</label>
-          <value>{selectedElement.density}</value>
+          <output>{selectedElement.density}</output>
         </li>
         <li>
           <label>Conductivity</label>
-          <value>...</value>
+          <output>...</output>
         </li>
         <li>
           <label>Heat</label>
-          <value>...</value>
+          <output>...</output>
         </li>
         <li>
           <label>Abundance</label>
-          <value>...</value>
+          <output>...</output>
         </li>
       </ul>
 

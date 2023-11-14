@@ -2,6 +2,7 @@
 
 import PeriodicTable from '@/lib/PeriodicTable.json'
 import { useState } from 'react';
+import SelectedElement from '@/components/SelectedElement/SelectedElement';
 
 export default function Home() {
   const [selectedElement, setSelectedElement] = useState(null);
@@ -12,6 +13,7 @@ export default function Home() {
 
   return (
     <main>
+      <SelectedElement selectedElement={selectedElement} />
       <div className="periodic-table">
         {PeriodicTable.elements.map((element) => (
           <div
@@ -30,29 +32,7 @@ export default function Home() {
         )
         )}
       </div>
-      {selectedElement && (
-        <div className="element-details">
-
-          <div
-            key={selectedElement.number}
-            className="element"
-            style={{
-              gridRow: selectedElement.ypos,
-              gridColumn: selectedElement.xpos,
-            }}
-            onClick={() => handleElementClick(element)}
-          >
-            <strong>{selectedElement.symbol}</strong>
-            <small className="number">{selectedElement.number}</small>
-            <small className="name">{selectedElement.name}</small>
-          </div>
-          <div>
-            <h1>{selectedElement.name}</h1>
-            <p>{selectedElement.summary}</p>
-          </div>
-        </div>
-      )}
-
+ 
     </main>
   )
 }

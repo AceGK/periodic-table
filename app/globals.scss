@@ -1,3 +1,6 @@
+@import "./variables";
+// @import "styles/mixins";
+
 body {
   background: rgb(15, 15, 15);
   color: rgb(230, 230, 230);
@@ -28,11 +31,8 @@ h1 {
   grid-template-rows: repeat(10, 64px);
   grid-gap: 4px;
   margin:3rem 0rem;
+  position: relative;
   // overflow-x:auto;
-  // position: absolute;
-  // top: 50%;
-  // left: 50%;
-  // transform: translate(-50%, -50%);
 }
 
 .element {
@@ -66,6 +66,7 @@ h1 {
   strong {
     padding-bottom:3px;
   }
+
 }
 
 .element-details {
@@ -108,34 +109,117 @@ ul[data-type="element-data"] {
   }
 }
 
+ul[data-type="legend"] {
+  list-style: none;
+  background: rgb(32, 32, 32);
+  // border: 1px solid #aaa;
+  display: flex;
+  flex-wrap:wrap;
+  gap:0.5rem;
+  align-items: center;
+  position:absolute;
+  top:0px;
+  left:164px;
+  width:610px;
+  margin:0;
+  padding:1rem;
+  label span {
+    text-transform: capitalize;
+    padding:2px 8px;
+    border-radius:3px;
+    // background-color: rgb(19, 19, 19);
+    // border:1px solid #444444;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none;
+    &:hover {
+      cursor:pointer;
+    }
+  }
+  input[type="checkbox"] {
+    display:none;
+  }
+}
+
 .noble-gas {
-  border-color: #ffbc42;
+  border-color: var(--clr-noble-gas);
+  span {
+    border: 1px solid var(--clr-noble-gas);
+  }
+  input:checked + span {
+    background: var(--clr-noble-gas);
+  }
 }
 
 .alkaline-earth-metal {
-  border-color: #ec674e;
+  border-color: var(--clr-alkaline-earth-metal);
+  span {
+    border: 1px solid var(--clr-alkaline-earth-metal);
+  }
+  input:checked + span {
+    background: var(--clr-alkaline-earth-metal);
+  }
 }
 
 .diatomic-nonmetal {
-  border-color: #d81159;
+  border-color: var(--clr-diatomic-nonmetal);
+  span {
+    border: 1px solid var(--clr-diatomic-nonmetal);
+  }
+  input:checked + span {
+    background: var(--clr-diatomic-nonmetal);
+  }
 }
 
 .alkali-metal {
-  border-color: #8f2d56;
+  border-color: var(--clr-alkali-metal);
+  span {
+    border: 1px solid var(--clr-alkali-metal);
+  }
+  input:checked + span {
+    background: var(--clr-alkali-metal);
+  }
 }
 
 .transition-metal {
-  border-color: #58586b;
+  border-color: var(--clr-transition-metal);
+  span {
+    border: 1px solid var(--clr-transition-metal);
+  }
+  input:checked + span {
+    background: var(--clr-transition-metal);
+  }
 }
 
 .post-transition-metal {
-  border-color: #218380;
+  border-color: var(--clr-post-transition-metal);
+  span {
+    border: 1px solid var(--clr-post-transition-metal);
+  }
+  input:checked + span {
+    background: var(--clr-post-transition-metal);
+  }
 }
 
 .lanthanide {
-  border-color: #4aabaf;
+  border-color: var(--clr-lanthanide);
+  span {
+    border: 1px solid var(--clr-lanthanide);
+  }
+  input:checked + span {
+    background: var(--clr-lanthanide);
+  }
 }
 
 .metalloid {
-  border-color: #73d2de;
+  border-color: var(--clr-metalloid);
+  span {
+    border: 1px solid var(--clr-metalloid);
+  }
+  input:checked + span {
+    background: var(--clr-metalloid);
+  }
 }

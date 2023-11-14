@@ -35,7 +35,7 @@
           "ionization_energies": [
               1312
           ],
-          "cpk-hex": "ffffff",
+          "cpkHex": "#ffffff",
           "image": {
               "title": "Vial of glowing ultrapure hydrogen, H2. Original size in cm: 1 x 5",
               "url": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Hydrogenglow.jpg",

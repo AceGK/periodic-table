@@ -1,36 +1,34 @@
 {
   "elementGroups": [
     {
-      "name": "alkali metals",
-      "groupNumber": 1
+      "name": "alkali metal"
     },
     {
-      "name": "alkaline earth metals",
-      "groupNumber": 2
+      "name": "alkaline earth metal"
     },
     {
-      "name": "transition metals",
-      "groupNumber": "3-12"
+      "name": "transition metal"
     },
     {
-      "name": "post-transition metals",
-      "groupNumber": "13-16"
+      "name": "post-transition metal"
     },
     {
-      "name": "metalloids",
-      "groupNumber": "13-16"
+      "name": "lanthanide"
     },
     {
-      "name": "diatomic nonmetals",
-      "groupNumber": "13-17"
+      "name": "actinide"
     },
     {
-      "name": "noble gases",
-      "groupNumber": 18
+      "name": "metalloid"
     },
     {
-      "name": "Lanthanides",
-      "groupNumber": "f-block"
+      "name": "diatomic nonmetal"
+    },
+    {
+      "name": "polyatomic nonmetal"
+    },
+    {
+      "name": "noble gas"
     }
   ]
 }

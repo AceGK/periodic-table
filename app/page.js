@@ -38,19 +38,23 @@ export default function Home() {
           {PeriodicTable.elements.map((element) => (
             <div
               key={element.number}
-              className={`element ${[
-                element.category.replace(/ /g, "-").toLowerCase(),
-              ]}`}
+              className='element'
               style={{
                 gridRow: element.ypos,
                 gridColumn: element.xpos,
-                backgroundColor: isGroupSelected(element.category) ? 'red' : 'transparent'
               }}
               onClick={() => handleElementClick(element)}
             >
-              <strong>{element.symbol}</strong>
-              <small className="number">{element.number}</small>
-              <small className="name">{element.name}</small>
+              <div 
+              className={`
+              ${element.category.replace(/ /g, "-").toLowerCase()}
+              ${isGroupSelected(element.category) ? 'active' : ''}
+              `}
+              >
+                <strong>{element.symbol}</strong>
+                <small className="number">{element.number}</small>
+                <small className="name">{element.name}</small>
+            </div>
             </div>
           ))}
 

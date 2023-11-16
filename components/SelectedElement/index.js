@@ -6,7 +6,7 @@ export default function SelectedElement({ selectedElement }) {
     <div id="element-details" className="element-details">
 
 
-      <div>
+      <div className="title">
         <div
           key={selectedElement.number}
           className={`element ${[
@@ -17,52 +17,45 @@ export default function SelectedElement({ selectedElement }) {
           <small className="number">{selectedElement.number}</small>
           {/* <small className="name">{selectedElement.name}</small> */}
         </div>
+        <div>
+          <h2 className="name">{selectedElement.name}</h2>
+          <div className="name">{selectedElement.category}{selectedElement.possible_category && ` | ${selectedElement.possible_category}`}</div>
+          <div>{selectedElement.phase}</div>
+        </div>
       </div>
+
+
       <div>
-        <h2 className="name">{selectedElement.name}</h2>
         <p>{selectedElement.summary}</p>
         <Link href={selectedElement.source}>Wiki</Link>
+        <ul data-type="element-data">
+          <li>
+            <label>Atomic Mass</label>
+            <output>{selectedElement.atomic_mass}</output>
+          </li>
+          <li>
+            <label>Melting point</label>
+            <output>{selectedElement.melt} K</output>
+          </li>
+          <li>
+            <label>Boling point</label>
+            <output>{selectedElement.boil} K</output>
+          </li>
+          <li>
+            <label>Discovered by</label>
+            <output>{selectedElement.discovered_by}</output>
+          </li>
+          <li>
+            <label>Named by</label>
+            <output>{selectedElement.named_by}</output>
+          </li>
+        </ul>
+
       </div>
 
-      <div>
-        Animation...
-      </div>
-
-      <ul data-type="element-data">
-        <li>
-          <label>Group</label>
-          <output>{selectedElement.category}</output>
-        </li>
-        <li>
-          <label>Phase</label>
-          <output>{selectedElement.phase}</output>
-        </li>
-        <li>
-          <label>Appearance</label>
-          <output>{selectedElement.apperance}</output>
-        </li>
-        <li>
-          <label>Atomic Mass</label>
-          <output>{selectedElement.atomic_mass}</output>
-        </li>
-        <li>
-          <label>Melting point</label>
-          <output>{selectedElement.melt} K</output>
-        </li>
-        <li>
-          <label>Boling point</label>
-          <output>{selectedElement.boil} K</output>
-        </li>
-        <li>
-          <label>Discovered by</label>
-          <output>{selectedElement.discovered_by}</output>
-        </li>
-        <li>
-          <label>Named by</label>
-          <output>{selectedElement.named_by}</output>
-        </li>
-        <br />
-        {/* <li>
+      {/* <ul data-type="element-data">
+       
+       <li>
           <label>Energy levels</label>
           <output>...</output>
         </li>
@@ -105,8 +98,8 @@ export default function SelectedElement({ selectedElement }) {
         <li>
           <label>Abundance</label>
           <output>...</output>
-        </li> */}
-      </ul>
+        </li> 
+      </ul> */}
 
     </div>
   );

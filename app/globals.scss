@@ -11,7 +11,7 @@ a {
 }
 
 .container {
-  max-width:1320px;
+  max-width:1420px;
   margin:auto;
 }
 
@@ -21,14 +21,17 @@ h1 {
 
 .table-wrapper {
   display:flex;
+  flex-direction: column;
   overflow-x:auto;
+  justify-content: center;
   padding-inline:1.5rem;
 }
 
 .periodic-table {
   display: grid;
-  grid-template-columns: repeat(18, 64px);
-  grid-template-rows: repeat(10, 64px);
+  justify-content: center;
+  grid-template-columns: repeat(18, clamp(54px, 4.75vw, 70px));
+  grid-template-rows: repeat(10, clamp(54px, 4.75vw, 70px));
   grid-gap: 4px;
   margin:3rem 0rem;
   position: relative;
@@ -76,7 +79,8 @@ h1 {
 }
 
 .element-details {
-  display: flex;
+  display: grid;
+  grid-template-columns:repeat( auto-fit, minmax(250px, 1fr) );
   gap:1rem;
   margin-bottom:1rem;
   & > * {
@@ -86,9 +90,10 @@ h1 {
     text-transform: capitalize;
   }
   .element {
-    width:200px;
-    height:200px;
+    aspect-ratio: 1 / 1;
+    height:250px;
     font-size:3rem;
+    border-width:3px;
     &:hover {
       transform: none;
       cursor:default;
@@ -117,36 +122,33 @@ ul[data-type="element-data"] {
 
 ul[data-type="legend"] {
   list-style: none;
-  background: rgb(32, 32, 32);
-  // border: 1px solid #aaa;
   display: flex;
-  flex-wrap:wrap;
-  gap:0.5rem;
+  justify-content: center;
   align-items: center;
-  position:absolute;
-  top:0px;
-  left:164px;
-  width:610px;
-  margin:0;
-  padding:1rem;
+  flex-wrap: wrap;
+  padding: 1rem 0;
+  gap: 0.75rem;
+
   label span {
+    display: inline-block;
     text-transform: capitalize;
-    padding:2px 8px;
-    border-radius:3px;
-    // background-color: rgb(19, 19, 19);
-    // border:1px solid #444444;
+    border-radius: 3px;
+    padding: 3px 15px;
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Old versions of Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none;
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
     &:hover {
       cursor:pointer;
     }
   }
   input[type="checkbox"] {
     display:none;
+  }
+  li {
+    border-radius: 50px;
   }
 }
 
@@ -167,13 +169,14 @@ ul[data-type="legend"] {
   .#{$name} {
     border: 1px solid $color;
     span {
-      border: 1px solid $color;
+      // border: 1px solid $color;
       &:hover {
         background: rgba($color, 0.2); 
       }
     }
     input:checked + span {
-      background: $color;
+      background: rgba($color, 0.7);
+      border-radius:50px;
     }
     &.active { 
       background: rgba($color, 0.5); 

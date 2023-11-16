@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function SelectedElement({ selectedElement }) {
   return (
     selectedElement &&
-    <div className="element-details">
+    <div id="element-details" className="element-details">
 
 
       <div>
@@ -15,12 +15,13 @@ export default function SelectedElement({ selectedElement }) {
         >
           <strong>{selectedElement.symbol}</strong>
           <small className="number">{selectedElement.number}</small>
-          <small className="name">{selectedElement.name}</small>
+          {/* <small className="name">{selectedElement.name}</small> */}
         </div>
-
-        {/* <h1>{selectedElement.name}</h1> */}
+      </div>
+      <div>
+        <h2 className="name">{selectedElement.name}</h2>
         <p>{selectedElement.summary}</p>
-   <Link href={selectedElement.source}>Wiki</Link>
+        <Link href={selectedElement.source}>Wiki</Link>
       </div>
 
       <div>
@@ -50,7 +51,7 @@ export default function SelectedElement({ selectedElement }) {
         </li>
         <li>
           <label>Boling point</label>
-          <output>{selectedElement.boil} K</output> 
+          <output>{selectedElement.boil} K</output>
         </li>
         <li>
           <label>Discovered by</label>
@@ -60,8 +61,8 @@ export default function SelectedElement({ selectedElement }) {
           <label>Named by</label>
           <output>{selectedElement.named_by}</output>
         </li>
-<br/>
-        <li>
+        <br />
+        {/* <li>
           <label>Energy levels</label>
           <output>...</output>
         </li>
@@ -104,7 +105,7 @@ export default function SelectedElement({ selectedElement }) {
         <li>
           <label>Abundance</label>
           <output>...</output>
-        </li>
+        </li> */}
       </ul>
 
     </div>

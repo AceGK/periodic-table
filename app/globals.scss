@@ -7,12 +7,16 @@ body {
 }
 
 a {
-  color:lightblue;
+  color: lightblue;
+}
+
+.capitalize {
+ text-transform: capitalize;
 }
 
 .container {
-  max-width:1420px;
-  margin:auto;
+  max-width: 1420px;
+  margin: auto;
 }
 
 h1 {
@@ -20,11 +24,11 @@ h1 {
 }
 
 .table-wrapper {
-  display:flex;
+  display: flex;
   flex-direction: column;
-  overflow-x:auto;
+  overflow-x: auto;
   justify-content: center;
-  padding-inline:1.5rem;
+  padding-inline: 1.5rem;
 }
 
 .periodic-table {
@@ -33,7 +37,7 @@ h1 {
   grid-template-columns: repeat(18, clamp(54px, 4.75vw, 70px));
   grid-template-rows: repeat(10, clamp(54px, 4.75vw, 70px));
   grid-gap: 4px;
-  margin:3rem 0rem;
+  margin: 3rem 0rem;
   position: relative;
   // overflow-x:auto;
 }
@@ -44,7 +48,7 @@ h1 {
   position: relative;
   align-items: center;
   justify-content: center;
-  color:rgb(250,250,250);
+  color: rgb(250, 250, 250);
   &:hover {
     transform: scale(1.75, 1.75);
     z-index: 2;
@@ -67,47 +71,58 @@ h1 {
     text-overflow: ellipsis;
   }
   strong {
-    padding-bottom:3px;
+    padding-bottom: 3px;
   }
- & > div {
+  & > div {
     width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-  
- }
+  }
 }
 
 .element-details {
-background:rgb(63, 54, 54);
-  gap:1rem;
-  margin-bottom:1rem;
-  & > * {
-    // width: 100%;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  display:flex;
+  flex-wrap:wrap;
+  div:first-of-type {
+    width:fit-content;
   }
-  output, label {
+  div:nth-of-type(2) {
+    flex:1;
+  }
+  output,
+  label {
     text-transform: capitalize;
   }
-  .title {
-    display:flex;
+  &__element {
+    display: flex;
+    flex-wrap:wrap;
+    gap:1rem;
+    .title {
+      font-size: 1.25rem;
+      margin-right: 1rem;
+    }
   }
+
   .element {
     aspect-ratio: 1 / 1;
-    height:250px;
-    font-size:3rem;
-    border-width:3px;
+    height: 250px;
+    font-size: 3rem;
+    border-width: 3px;
     &:hover {
       transform: none;
-      cursor:default;
+      cursor: default;
     }
     .name {
-      font-size:1.5rem;
+      font-size: 1.5rem;
       bottom: 5px;
       left: 10px;
     }
     .number {
-      font-size:1.5rem;
+      font-size: 1.5rem;
       top: 8px;
       left: 10px;
     }
@@ -117,11 +132,12 @@ background:rgb(63, 54, 54);
 ul[data-type="element-data"] {
   // background: rgb(32, 32, 32);
   // padding:1rem;
-  padding:0;
+  max-width:300px;
+  padding: 0;
   li {
-    display:flex;
+    display: flex;
     justify-content: space-between;
-    gap:2rem;
+    gap: 2rem;
   }
   output {
     text-align: right;
@@ -149,45 +165,47 @@ ul[data-type="legend"] {
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none;
     &:hover {
-      cursor:pointer;
+      cursor: pointer;
     }
   }
   input[type="checkbox"] {
-    display:none;
+    display: none;
   }
   li {
     border-radius: 50px;
   }
 }
 
-
-@each $name, $color in (
-  noble-gas: hsl(39, 100%, 63%),
-  alkaline-earth-metal: hsl(9, 81%, 62%),
-  diatomic-nonmetal: hsl(338, 85%, 46%),
-  alkali-metal: hsl(335, 52%, 37%),
-  transition-metal: hsl(240, 10%, 38%),
-  post-transition-metal: hsl(178, 60%, 32%),
-  lanthanide: hsl(182, 41%, 49%),
-  metalloid: hsl(187, 62%, 66%),
-  actinide: hsl(29, 100%, 47%),
-  polyatomic-nonmetal: hsl(304, 48%, 55%),
-  unknown: hsl(0, 0%, 33%)
-) {
+@each $name,
+  $color
+    in (
+      noble-gas: hsl(39, 100%, 63%),
+      alkaline-earth-metal: hsl(9, 81%, 62%),
+      diatomic-nonmetal: hsl(338, 85%, 46%),
+      alkali-metal: hsl(335, 52%, 37%),
+      transition-metal: hsl(240, 10%, 38%),
+      post-transition-metal: hsl(178, 60%, 32%),
+      lanthanide: hsl(182, 41%, 49%),
+      metalloid: hsl(187, 62%, 66%),
+      actinide: hsl(29, 100%, 47%),
+      polyatomic-nonmetal: hsl(304, 48%, 55%),
+      unknown: hsl(0, 0%, 33%)
+    )
+{
   .#{$name} {
     border: 1px solid $color;
     span {
       // border: 1px solid $color;
       &:hover {
-        background: rgba($color, 0.2); 
+        background: rgba($color, 0.2);
       }
     }
     input:checked + span {
       background: rgba($color, 0.7);
-      border-radius:50px;
+      border-radius: 50px;
     }
-    &.active { 
-      background: rgba($color, 0.5); 
+    &.active {
+      background: rgba($color, 0.5);
     }
   }
 }

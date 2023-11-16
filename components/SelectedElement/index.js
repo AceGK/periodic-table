@@ -6,7 +6,7 @@ export default function SelectedElement({ selectedElement }) {
     <div id="element-details" className="element-details">
 
 
-      <div className="title">
+      <div className="element-details__element">
         <div
           key={selectedElement.number}
           className={`element ${[
@@ -17,17 +17,20 @@ export default function SelectedElement({ selectedElement }) {
           <small className="number">{selectedElement.number}</small>
           {/* <small className="name">{selectedElement.name}</small> */}
         </div>
-        <div>
+
+        <div className="title">
           <h2 className="name">{selectedElement.name}</h2>
-          <div className="name">{selectedElement.category}{selectedElement.possible_category && ` | ${selectedElement.possible_category}`}</div>
+          <div className="name"><span className="capitalize">{selectedElement.category}</span>{selectedElement.possible_category && ` (${selectedElement.possible_category})`}</div>
           <div>{selectedElement.phase}</div>
         </div>
+
       </div>
 
 
       <div>
         <p>{selectedElement.summary}</p>
         <Link href={selectedElement.source}>Wiki</Link>
+
         <ul data-type="element-data">
           <li>
             <label>Atomic Mass</label>
@@ -50,7 +53,6 @@ export default function SelectedElement({ selectedElement }) {
             <output>{selectedElement.named_by}</output>
           </li>
         </ul>
-
       </div>
 
       {/* <ul data-type="element-data">

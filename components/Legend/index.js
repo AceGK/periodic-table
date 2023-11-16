@@ -1,5 +1,5 @@
 
-import elementGroups from "@/lib/ElementGroups.json";
+import elementGroups from "@/lib/ElementGroups.JSON";
 
 export default function Legend({ setSelectedGroups }) {
 

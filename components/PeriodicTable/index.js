@@ -1,21 +1,23 @@
 "use client";
 
 import data from "@/lib/PeriodicTable.json";
+import { useEffect } from "react";
 
-export default function PeriodicTable({ setSelectedElement, selectedGroups }) {
+export default function PeriodicTable({ setSelectedElement, selectedElement, selectedGroups }) {
 
   const handleElementClick = (element) => {
     setSelectedElement(element);
+  };
 
+  useEffect(() => {
     const targetSection = document.getElementById("element-details");
     if (targetSection) {
       targetSection.scrollIntoView({
-        behavior: 'smooth', // Smooth scroll
-        block: 'start'      // Aligns to the start of the viewport
+        behavior: 'smooth',
+        block: 'start'
       });
     }
-  };
-
+  }, [selectedElement]); // Dependency on selectedElement
 
   const isGroupSelected = (groupName) => selectedGroups.includes(groupName.replace(/ /g, "-").toLowerCase());
 

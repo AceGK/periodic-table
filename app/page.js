@@ -13,7 +13,7 @@ export default function Home() {
     <main className="container">
       <div className="pb-3">
       <h1>The Periodic Table of Elements</h1>
-      <p>Select an element to view it's details</p>
+      <p>Select an element to view its details</p>
       </div>
       <PeriodicTable selectedElement={selectedElement} setSelectedElement={setSelectedElement} selectedGroups={selectedGroups} setSelectedGroups={setSelectedGroups} />
       <div style={{padding:"0rem 1rem"}}>

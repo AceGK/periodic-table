@@ -1,4 +1,3 @@
-
 import PeriodicTable from "@/components/PeriodicTable";
 
 export default function Home() {
@@ -10,7 +9,7 @@ export default function Home() {
         <p>Select an element to view its details</p>
       </div>
       <PeriodicTable  />
-    
+      
     </main>
   );
 }

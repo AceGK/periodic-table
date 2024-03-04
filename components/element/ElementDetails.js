@@ -1,6 +1,11 @@
 import Link from "next/link";
 import Element from "./ElementCard";
 import styles from "./ElementDetails.module.scss";
+import dynamic from 'next/dynamic';
+
+const GLBViewerWithNoSSR = dynamic(() => import('../GLBViewer'), {
+  ssr: false,
+});
 
 export default function ElementDetails({ element }) {
   return (
@@ -11,6 +16,9 @@ export default function ElementDetails({ element }) {
       <div className={styles.element}>
         <Element element={element} />
       </div>
+
+ 
+     <GLBViewerWithNoSSR path={element.bohr_model_3d} />
 
 
       <div>

@@ -25,7 +25,7 @@ export default function ElementDetails({ element, setSelectedElement }) {
       <button onClick={()=>setSelectedElement(null)}>&#10006;</button>
       </div>
 
-      <GLBViewerWithNoSSR path={element.bohr_model_3d} />
+      {element.bohr_model_3d && <GLBViewerWithNoSSR path={element.bohr_model_3d} />}
 
 
       <div>

@@ -1,0 +1,59 @@
+$mediumScreenValue: 1440px;
+$smallScreenValue: 1120px;
+$largeTabletValue: 920px;
+$tabletValue: 920px;
+$smallTabletValue: 666px;
+$largeMobileValue: 560px;
+$mobileValue: 560px;
+$smallMobileValue: 375px;
+
+// You can add an offset to any of these
+// example: 
+// @include mediumScreen(30px) { ... }
+
+@mixin smallScreen($offset: 0px) {
+    @media (max-width: calc(#{$smallScreenValue} + #{$offset})) {
+        @content;
+    }
+}
+
+@mixin mediumScreen($offset: 0px) {
+    @media (max-width: calc(#{$mediumScreenValue} + #{$offset})) {
+        @content;
+    }
+}
+
+@mixin largeTablet($offset: 0px) {
+    @media (max-width: calc(#{$largeTabletValue} + #{$offset})) {
+        @content;
+    }
+}
+@mixin tablet($offset: 0px) {
+    @media (max-width: calc(#{$tabletValue} + #{$offset})) {
+        @content;
+    }
+}
+
+@mixin smallTablet($offset: 0px) {
+    @media (max-width: calc(#{$smallTabletValue} + #{$offset})) {
+        @content;
+    }
+}
+
+@mixin largeMobile($offset: 0px) {
+    @media (max-width: calc(#{$largeMobileValue} + #{$offset})) {
+        @content;
+    }
+}
+
+@mixin mobile($offset: 0px) {
+    @media (max-width: calc(#{$mobileValue} + #{$offset})) {
+        @content;
+    }
+}
+
+@mixin smallMobile($offset: 0px) {
+    @media (max-width: calc(#{$smallMobileValue} + #{$offset})) {
+        @content;
+    }
+}

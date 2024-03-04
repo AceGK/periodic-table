@@ -12,17 +12,10 @@ export default function ElementDetails({ element }) {
     element &&
     <div className={styles.elementDetails}>
 
-
-      <div>
-        <Element element={element} />
-      </div>
-
+      <Element element={element} />
 
       <GLBViewerWithNoSSR path={element.bohr_model_3d} />
 
-      <div className={styles.summary}>
-        <p>{element.summary}</p>
-        <Link href={element.source}>Wiki</Link></div>
 
       <div>
         <div className="name"><span className="capitalize">{element.category}</span>{element.possible_category && ` (${element.possible_category})`}</div>
@@ -50,6 +43,7 @@ export default function ElementDetails({ element }) {
           </li>
         </ul>
       </div>
+
 
       {/* <ul data-type="element-data">
        
@@ -99,6 +93,10 @@ export default function ElementDetails({ element }) {
         </li> 
       </ul> */}
 
+      <div className={styles.summary}>
+        <p>{element.summary}</p>
+        <Link href={element.source}>Wiki</Link>
+        </div>
     </div>
   );
 }

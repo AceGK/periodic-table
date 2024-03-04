@@ -55,9 +55,18 @@
   display:flex;
   gap:2rem;
   padding-bottom:5rem;
+
   .element {
+    aspect-ratio: 1/1;
     width:250px;
     height:250px;
+    border-top-width: 3px;
+    border-right-width: 3px;
+    border-bottom-width: 3px;
+    border-left-width:3px;
+    &:hover {
+      transform: none;
+    }
     .elementBody {
       padding:1rem;
     };

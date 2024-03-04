@@ -1,7 +1,7 @@
 "use client";
 
 import data from "@/lib/PeriodicTable.json";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Element from "../element/ElementCard";
 import Legend from "../Legend";
 import ElementDetails from "../element/ElementDetails";
@@ -17,9 +17,9 @@ export default function PeriodicTable({ }) {
 
   const isGroupSelected = (groupName) => selectedGroups.includes(groupName.replace(/ /g, "-").toLowerCase());
 
-  const handleCloseModal = () => setIsModalOpen(false);
   return (
     <>
+      <Legend setSelectedGroups={setSelectedGroups} />
       <div className="table-wrapper">
         <div className="periodic-table">
           {data.elements.map((element) => (
@@ -27,7 +27,6 @@ export default function PeriodicTable({ }) {
           ))}
         </div>
       </div>
-      <Legend setSelectedGroups={setSelectedGroups} />
       <ElementDetails element={selectedElement} />
     </>
   );

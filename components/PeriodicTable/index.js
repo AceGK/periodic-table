@@ -1,7 +1,7 @@
 "use client";
 
 import data from "@/lib/PeriodicTable.json";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Element from "../element/ElementCard";
 import Legend from "../Legend";
 import ElementDetails from "../element/ElementDetails";
@@ -17,17 +17,23 @@ export default function PeriodicTable({ }) {
 
   const isGroupSelected = (groupName) => selectedGroups.includes(groupName.replace(/ /g, "-").toLowerCase());
 
+
   return (
     <>
+
       <Legend setSelectedGroups={setSelectedGroups} />
+ 
+      <div className="table-container">
       <div className="table-wrapper">
-        <div className="periodic-table">
+        <div className="periodic-table"> 
           {data.elements.map((element) => (
             <Element key={element.number} element={element} handleElementClick={() => handleElementClick(element)} isGroupSelected={isGroupSelected} selectedElement={selectedElement} />
           ))}
         </div>
+        
       </div>
-      <ElementDetails element={selectedElement} />
+      <ElementDetails element={selectedElement} setSelectedElement={setSelectedElement} />
+      </div>
     </>
   );
 }

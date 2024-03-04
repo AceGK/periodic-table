@@ -7,19 +7,28 @@ const GLBViewerWithNoSSR = dynamic(() => import('../GLBViewer'), {
   ssr: false,
 });
 
-export default function ElementDetails({ element }) {
+export default function ElementDetails({ element, setSelectedElement }) {
   return (
     element &&
     <div className={styles.elementDetails}>
 
-      <Element element={element} />
+      <div className={styles.header}>
+        <Element element={element} />
+        <div>
+        <div className="name capitalize">{element.name}</div>
+        <div><span className="capitalize">{element.category}</span>{element.possible_category && ` (${element.possible_category})`}</div>
+        <div>{element.phase}</div>
+        </div>
+      </div>
+
+      <div className={styles.close}>
+      <button onClick={()=>setSelectedElement(null)}>&#10006;</button>
+      </div>
 
       <GLBViewerWithNoSSR path={element.bohr_model_3d} />
 
 
       <div>
-        <div className="name"><span className="capitalize">{element.category}</span>{element.possible_category && ` (${element.possible_category})`}</div>
-        <div>{element.phase}</div>
         <ul data-type="element-data">
           <li>
             <label>Atomic Mass</label>
@@ -96,7 +105,7 @@ export default function ElementDetails({ element }) {
       <div className={styles.summary}>
         <p>{element.summary}</p>
         <Link href={element.source}>Wiki</Link>
-        </div>
+      </div>
     </div>
   );
 }

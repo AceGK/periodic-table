@@ -28,17 +28,17 @@ h1 {
   padding:2rem 1.5rem;
   display: flex;
   flex-direction: row;
-  overflow-x:auto;
-  &:before, &:after {
-    content: '';
-    width: 100%;
-  }
+  // overflow-x:auto;
 }
 
 .periodic-table {
   display: grid;
-  grid-template-columns: repeat(18, clamp(54px, 4.75vw, 72px));
-  grid-template-rows: repeat(10, clamp(54px, 4.75vw, 72px));
+
+  // grid-template-columns: repeat(18, clamp(54px, 4.75vw, 60px));
+  // grid-template-rows: repeat(10, clamp(54px, 4.75vw, 60px));
+
+  grid-template-columns: repeat(18, clamp(54px, 2vw, 70px));
+  grid-template-rows: repeat(10, clamp(54px, 2vw, 70px));
   grid-gap: 4px;
   position: relative;
 }
@@ -139,4 +139,9 @@ ul[data-type="legend"] {
     }
   }
 
+}
+
+.table-container {
+  display:grid;
+  grid-template-columns:1fr auto;
 }

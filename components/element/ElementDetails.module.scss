@@ -1,0 +1,32 @@
+.elementDetails {
+  gap: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  
+  div:nth-of-type(2) {
+    flex: 1;
+  }
+  output,
+  label {
+    text-transform: capitalize;
+  }
+}
+
+.element {
+  *{
+    font-size:100%!important;
+    }
+  & > div {
+    width: 300px;
+    height: 300px;
+    &:hover {
+      transform:none;
+      cursor:default;
+      *{
+      font-size:100%!important;
+      }
+    }
+  }
+
+}

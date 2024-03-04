@@ -1,54 +1,34 @@
 "use client";
 
 import data from "@/lib/PeriodicTable.json";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import Element from "../element/ElementCard";
+import Legend from "../Legend";
+import ElementDetails from "../element/ElementDetails";
 
-export default function PeriodicTable({ setSelectedElement, selectedElement, selectedGroups }) {
+export default function PeriodicTable({ }) {
+
+  const [selectedElement, setSelectedElement] = useState(null);
+  const [selectedGroups, setSelectedGroups] = useState([]);
 
   const handleElementClick = (element) => {
     setSelectedElement(element);
   };
 
-  useEffect(() => {
-    const targetSection = document.getElementById("element-details");
-    if (targetSection) {
-      targetSection.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
-    }
-  }, [selectedElement]); // Dependency on selectedElement
-
   const isGroupSelected = (groupName) => selectedGroups.includes(groupName.replace(/ /g, "-").toLowerCase());
 
+  const handleCloseModal = () => setIsModalOpen(false);
   return (
-    <div className="table-wrapper">
-      <div className="periodic-table">
-        {data.elements.map((element) => (
-          <div
-            key={element.number}
-            className='element'
-            style={{
-              gridRow: element.ypos,
-              gridColumn: element.xpos,
-            }}
-            onClick={() => handleElementClick(element)}
-          >
-            <div
-              className={`
-              ${element.category.replace(/ /g, "-").toLowerCase()}
-              ${isGroupSelected(element.category) ? 'active' : ''}
-              `}
-            >
-              <strong>{element.symbol}</strong>
-              <small className="number">{element.number}</small>
-              <small className="name">{element.name}</small>
-            </div>
-          </div>
-        ))}
+    <>
+      <div className="table-wrapper">
+        <div className="periodic-table">
+          {data.elements.map((element) => (
+            <Element element={element} handleElementClick={() => handleElementClick(element)} isGroupSelected={isGroupSelected} selectedElement={selectedElement} />
+          ))}
+        </div>
       </div>
-      
-  
-    </div>
+      <Legend setSelectedGroups={setSelectedGroups} />
+      <ElementDetails element={selectedElement} />
+    </>
   );
 }

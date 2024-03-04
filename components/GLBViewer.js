@@ -1,10 +1,26 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, useGLTF } from '@react-three/drei';
+import { OrbitControls, useGLTF, useAnimations } from '@react-three/drei';
 
 const Model = ({ path }) => {
-  const { scene } = useGLTF(path);
-  return <primitive object={scene} dispose={null} />;
+  const group = useRef();
+  const { scene, animations } = useGLTF(path);
+  const { actions } = useAnimations(animations, group);
+  
+  useEffect(() => {
+    // Automatically play all animations
+    for (const action of Object.values(actions)) {
+      action.play();
+    }
+    // Optional: specify cleanup function to stop animations when component unmounts
+    return () => {
+      for (const action of Object.values(actions)) {
+        action.stop();
+      }
+    };
+  }, [actions]);
+
+  return <primitive ref={group} object={scene} dispose={null} />;
 };
 
 const GLBViewer = ({ path }) => {

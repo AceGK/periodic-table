@@ -23,7 +23,7 @@ export default function PeriodicTable({ }) {
       <div className="table-wrapper">
         <div className="periodic-table">
           {data.elements.map((element) => (
-            <Element element={element} handleElementClick={() => handleElementClick(element)} isGroupSelected={isGroupSelected} selectedElement={selectedElement} />
+            <Element key={element.number} element={element} handleElementClick={() => handleElementClick(element)} isGroupSelected={isGroupSelected} selectedElement={selectedElement} />
           ))}
         </div>
       </div>

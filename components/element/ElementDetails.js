@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Element from "./ElementCard";
-import styles from "./ElementDetails.module.scss";
+import styles from "./Element.module.scss";
 import dynamic from 'next/dynamic';
 
 const GLBViewerWithNoSSR = dynamic(() => import('../GLBViewer'), {
@@ -13,17 +13,18 @@ export default function ElementDetails({ element }) {
     <div className={styles.elementDetails}>
 
 
-      <div className={styles.element}>
+      <div>
         <Element element={element} />
       </div>
 
- 
-     <GLBViewerWithNoSSR path={element.bohr_model_3d} />
 
+      <GLBViewerWithNoSSR path={element.bohr_model_3d} />
+
+      <div className={styles.summary}>
+        <p>{element.summary}</p>
+        <Link href={element.source}>Wiki</Link></div>
 
       <div>
-        <p>{element.summary}</p>
-        <Link href={element.source}>Wiki</Link>
         <div className="name"><span className="capitalize">{element.category}</span>{element.possible_category && ` (${element.possible_category})`}</div>
         <div>{element.phase}</div>
         <ul data-type="element-data">

@@ -49,3 +49,28 @@
   }
 
 }
+
+
+.elementDetails {
+  display:flex;
+  gap:2rem;
+  padding-bottom:5rem;
+  .element {
+    width:250px;
+    height:250px;
+    .elementBody {
+      padding:1rem;
+    };
+    .name, .mass, .number{
+      font-size:1rem;
+    }
+    .symbol{
+      font-size:2rem;
+    }
+  }
+}
+
+.summary {
+  flex:1;
+  max-width:500px;
+}

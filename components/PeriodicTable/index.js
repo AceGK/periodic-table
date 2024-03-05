@@ -20,12 +20,10 @@ export default function PeriodicTable({ }) {
 
   return (
     <>
-
-      <Legend setSelectedGroups={setSelectedGroups} />
- 
       <div className="table-container">
       <div className="table-wrapper">
         <div className="periodic-table"> 
+        <Legend setSelectedGroups={setSelectedGroups} />
           {data.elements.map((element) => (
             <Element key={element.number} element={element} handleElementClick={() => handleElementClick(element)} isGroupSelected={isGroupSelected} selectedElement={selectedElement} />
           ))}

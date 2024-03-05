@@ -5,32 +5,57 @@ import { useState, useRef } from "react";
 import Element from "../element/ElementCard";
 import Legend from "../Legend";
 import ElementDetails from "../element/ElementDetails";
+import PeriodicTableIcon from "../../public/icons/minimal-periodic-table.svg";
+import { FaThList } from "react-icons/fa";
+import Tabs from "../tabs/Tabs";
+import Tab from "../tabs/Tab";
 
 export default function PeriodicTable({ }) {
 
   const [selectedElement, setSelectedElement] = useState(null);
-  const [selectedGroups, setSelectedGroups] = useState([]);
+  const [selectedGroup, setSelectedGroup] = useState([]);
+  const [table, setTable] = useState(true);
 
   const handleElementClick = (element) => {
     setSelectedElement(element);
   };
 
-  const isGroupSelected = (groupName) => selectedGroups.includes(groupName.replace(/ /g, "-").toLowerCase());
+  const isGroupSelected = (groupName) => selectedGroup.includes(groupName.replace(/ /g, "-").toLowerCase());
 
 
   return (
     <>
       <div className="table-container">
-      <div className="table-wrapper">
-        <div className="periodic-table"> 
-        <Legend setSelectedGroups={setSelectedGroups} />
-          {data.elements.map((element) => (
-            <Element key={element.number} element={element} handleElementClick={() => handleElementClick(element)} isGroupSelected={isGroupSelected} selectedElement={selectedElement} />
-          ))}
+        <div className="table-wrapper">
+          <div className={table ? "periodic-table" : "periodic-list"}>
+
+            {/* <button className="toggleView" onClick={() => setTable(!table)}>
+              {!table ? <PeriodicTableIcon /> : <FaThList />}
+            </button> */}
+
+            {table &&
+            <section className="tabs">
+            <Tabs>
+              <Tab label="Filters">
+              <Legend setSelectedGroup={setSelectedGroup} />
+              </Tab>
+              <Tab label="Temperature">
+              Coming soon...
+              </Tab>
+            </Tabs>
+            </section> }
+
+            {/* <div className="searchForm">
+              <input type="text" placeholder="Search" />
+            </div> */}
+
+            {data.elements.map((element) => (
+              <Element key={element.number} element={element} handleElementClick={() => handleElementClick(element)} isGroupSelected={isGroupSelected} selectedElement={selectedElement} />
+            ))}
+          </div>
+
         </div>
-        
-      </div>
-      <ElementDetails element={selectedElement} setSelectedElement={setSelectedElement} />
+        <ElementDetails element={selectedElement} setSelectedElement={setSelectedElement} />
       </div>
     </>
   );

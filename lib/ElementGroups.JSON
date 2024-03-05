@@ -1,37 +1,57 @@
 {
   "elementGroups": [
     {
-      "name": "alkali metal"
+      "name": "Metals",
+      "groups": [
+        {
+          "name": "alkali metal"
+        },
+        {
+          "name": "alkaline earth metal"
+        },
+        {
+          "name": "transition metal"
+        },
+        {
+          "name": "post-transition metal"
+        },
+        {
+          "name": "lanthanide"
+        },
+        {
+          "name": "actinide"
+        }
+      ]
     },
     {
-      "name": "alkaline earth metal"
+      "name": "Metalloids",
+      "groups": [
+        {
+          "name": "metalloid"
+        }
+      ]
     },
     {
-      "name": "transition metal"
+      "name": "Nonmetals",
+      "groups": [
+        {
+          "name": "diatomic nonmetal"
+        },
+        {
+          "name": "polyatomic nonmetal"
+        },
+        {
+          "name": "noble gas"
+        }
+      ]
     },
     {
-      "name": "post-transition metal"
-    },
-    {
-      "name": "lanthanide"
-    },
-    {
-      "name": "actinide"
-    },
-    {
-      "name": "metalloid"
-    },
-    {
-      "name": "diatomic nonmetal"
-    },
-    {
-      "name": "polyatomic nonmetal"
-    },
-    {
-      "name": "noble gas"
-    },
-    {
-      "name": "unknown"
+      "name": "Other",
+      "groups": [
+        {
+          "name": "unknown"
+        }
+      ]
     }
   ]
 }

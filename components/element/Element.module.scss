@@ -1,3 +1,4 @@
+@import "../../app/mixins";
 
 .element {
   background: rgb(32, 32, 32);
@@ -6,6 +7,7 @@
   align-items: center;
   justify-content: center;
   color: rgb(250, 250, 250);
+  border-radius:var(--border-radius);
   &:hover {
     transform: scale(1.75, 1.75);
     z-index: 2;
@@ -37,7 +39,6 @@
     overflow: hidden;
     text-overflow: ellipsis;
     padding-inline:5px;
-    opacity: 0.9;
   }
   .elementBody {
     width: 100%;
@@ -45,6 +46,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius:var(--border-radius);
   }
   .symbol{
     font-size:1rem;

@@ -1,5 +1,12 @@
 .nav {
   padding:0.5rem;
+  display:flex;
+  justify-content: space-between;
+  ul {
+    display: flex;
+    gap:1rem;
+    list-style-type: none;
+  }
 }
 .logo {
   width:300px;

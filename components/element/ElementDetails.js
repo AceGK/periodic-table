@@ -43,7 +43,7 @@ export default function ElementDetails({ element, setSelectedElement }) {
             <output>{element.boil} K</output>
           </li>
           <li>
-            <label>Discovered by</label>
+            <label>Discovered</label>
             <output>{element.discovered_by}</output>
           </li>
           <li>

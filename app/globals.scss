@@ -25,10 +25,10 @@ h1 {
 
 .table-wrapper {
   margin: 0 auto;
-  padding:2rem 1.5rem;
+  padding:0rem 1.5rem;
   display: flex;
   flex-direction: row;
-  // overflow-x:auto;
+  overflow-x:auto;
 }
 
 .periodic-table {
@@ -142,6 +142,5 @@ ul[data-type="legend"] {
 }
 
 .table-container {
-  display:grid;
-  grid-template-columns:1fr auto;
+  display:flex;
 }

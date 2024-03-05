@@ -11,7 +11,7 @@ a {
 }
 
 .capitalize {
- text-transform: capitalize;
+  text-transform: capitalize;
 }
 
 .container {
@@ -23,34 +23,33 @@ h1 {
   font-size: 3rem;
 }
 
-
 .table-container {
-  display:flex;
+  display: flex;
 }
 
 .table-wrapper {
   margin: 0 auto;
-  padding:1.5rem;
+  padding: 1.5rem;
   display: flex;
   flex-direction: row;
-  overflow-x:auto;
+  overflow-x: auto;
+  height: 100%;
 }
 
 .periodic-table {
   display: grid;
-
-  grid-template-columns: repeat(18, clamp(54px, 4.75vw, 60px));
-  grid-template-rows: repeat(10, clamp(54px, 4.75vw, 60px));
-
-  // grid-template-columns: repeat(18, minmax(54px, 70px));
-  // grid-template-rows: repeat(10, minmax(54px, 70px));
+  grid-template-columns: repeat(18, minmax(58px, 64px));
+  // grid-template-rows: repeat(10, minmax(54px, 64px));
   grid-gap: 4px;
   position: relative;
+  width: 100%;
+ > div {
+  aspect-ratio: 1 / 1;
+}
 }
 
-
 ul[data-type="element-data"] {
-  max-width:300px;
+  max-width: 300px;
   padding: 0;
   li {
     display: flex;
@@ -69,24 +68,24 @@ ul[data-type="legend"] {
   align-items: center;
   flex-wrap: wrap;
   gap: 0.75rem;
-  padding-inline-start:0rem;
+  padding-inline-start: 0rem;
 
-  @include mobile(){
+  @include mobile() {
     padding: 1rem;
     list-style-type: none;
     padding-inline-start: 0px;
-     display: grid;
-     gap: 1rem;
-     grid-auto-flow: column;
-     // grid-auto-columns: 45%;
-     justify-content: start;
-     overflow-x: scroll;
-     scroll-snap-type: x mandatory;
-     scroll-padding: 1rem;
-     text-wrap: nowrap;
-     & > * {
-       scroll-snap-align: start;
-     }
+    display: grid;
+    gap: 1rem;
+    grid-auto-flow: column;
+    // grid-auto-columns: 45%;
+    justify-content: start;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 1rem;
+    text-wrap: nowrap;
+    & > * {
+      scroll-snap-align: start;
+    }
   }
   label span {
     display: inline-block;
@@ -143,5 +142,4 @@ ul[data-type="legend"] {
       background: rgba($color, 0.5);
     }
   }
-
 }

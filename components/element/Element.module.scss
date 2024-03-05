@@ -30,13 +30,14 @@
   .name {
     font-size: 0.625rem;
     position: absolute;
-    bottom:3px;
+    bottom:4px;
     left: 0px;
     text-align: center;
     width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
     padding-inline:5px;
+    opacity: 0.9;
   }
   .elementBody {
     width: 100%;

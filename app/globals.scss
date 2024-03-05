@@ -120,7 +120,8 @@ ul[data-type="legend"] {
       transition-metal: hsl(240, 10%, 38%),
       post-transition-metal: hsl(178, 60%, 32%),
       lanthanide: hsl(182, 41%, 49%),
-      metalloid: hsl(187, 62%, 66%),
+      // metalloid: hsl(187, 62%, 66%),
+      metalloid: hsl(195, 100%, 68%),
       actinide: hsl(29, 100%, 47%),
       polyatomic-nonmetal: hsl(304, 48%, 55%),
       unknown: hsl(0, 0%, 33%)
@@ -128,6 +129,7 @@ ul[data-type="legend"] {
 {
   .#{$name} {
     border: 1px solid $color;
+    background:rgba($color, 0.1);
     span {
       // border: 1px solid $color;
       &:hover {
@@ -135,11 +137,11 @@ ul[data-type="legend"] {
       }
     }
     input:checked + span {
-      background: rgba($color, 0.7);
+      background: rgba($color, 0.8);
       border-radius: 50px;
     }
     &.active {
-      background: rgba($color, 0.5);
+      background: rgba($color, 0.8);
     }
   }
 }

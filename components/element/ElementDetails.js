@@ -31,23 +31,23 @@ export default function ElementDetails({ element, setSelectedElement }) {
       <div>
         <ul data-type="element-data">
           <li>
-            <label>Atomic Mass</label>
+            <label>Atomic Mass:</label>
             <output>{element.atomic_mass}</output>
           </li>
           <li>
-            <label>Melting point</label>
+            <label>Melting point:</label>
             <output>{element.melt} K</output>
           </li>
           <li>
-            <label>Boling point</label>
+            <label>Boling point:</label>
             <output>{element.boil} K</output>
           </li>
           <li>
-            <label>Discovered</label>
+            <label>Discovered by:</label>
             <output>{element.discovered_by}</output>
           </li>
           <li>
-            <label>Named by</label>
+            <label>Named by:</label>
             <output>{element.named_by}</output>
           </li>
         </ul>

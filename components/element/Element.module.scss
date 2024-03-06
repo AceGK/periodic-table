@@ -17,9 +17,13 @@
     }
   }
   
+  .symbol{
+    font-size:1.5rem;
+    line-height:1.25rem;
+  }
   .name, .number, .mass{
-    font-size: 0.5rem;
-    line-height:auto;
+    font-size: 0.5125rem;
+    // line-height: 0.5125rem;
     width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -38,10 +42,6 @@
     flex-direction: column;
     border-radius:var(--border-radius);
     padding:3px;
-  }
-  .symbol{
-    font-size:1.25rem;
-    line-height:1.25rem;
   }
 
 }

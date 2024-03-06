@@ -35,7 +35,7 @@ export default function ElementDetails({ element, setSelectedElement }) {
               <output>{element.phase}</output></li>
             <li>
               <label>Atomic Mass:</label>
-              <output>{element.atomic_mass}</output>
+              <output>{element.atomic_mass}u</output>
             </li>
             <li>
               <label>Energy levels</label>

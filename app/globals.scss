@@ -134,6 +134,12 @@ ul[data-type="legend"] {
   li {
     line-height:normal;
     font-size: 12px;
+    span {
+      &:hover {
+        text-decoration: underline;
+        text-underline-offset: 0.125em;
+      }
+    }
   }
   label span {
     display: inline-block;
@@ -177,15 +183,9 @@ ul[data-type="legend"] {
 {
   li.#{$name}{
     color: $color;
-    span {
-      &:hover {
-        text-decoration: underline;
-        text-underline-offset: 0.1em;
-      }
-    }
   }
   div.#{$name} {
-    border: 1px solid rgba($color, 0.75);
+    border: 1px solid rgba($color, 0);
     color: $color;
     background:rgba($color, 0.05);
     background: linear-gradient(
@@ -202,7 +202,11 @@ ul[data-type="legend"] {
       border: 1px solid rgba($color, 0.9);
     }
     &.active {
-      background: rgba($color, 1);
+      background: linear-gradient(
+        135deg,
+        rgba($color, 1),
+        rgba($color, 0.666)
+      );
       color:var(--clr-background);
       color:rgb(24,24,24);
     }

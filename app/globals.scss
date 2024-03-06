@@ -41,7 +41,7 @@ h1 {
 
 .periodic-table {
   display: grid;
-  grid-template-columns: repeat(18, clamp(58px, 5vmax, 74px));
+  grid-template-columns: repeat(18, clamp(62px, 5vmax, 74px));
   // grid-template-rows: repeat(10, minmax(54px, 64px));
   grid-gap: 3px;
   position: relative;
@@ -105,7 +105,11 @@ h1 {
     color: #fff;
   }
 }
-
+.subgroup-list {
+  li {
+    width:fit-content;
+  }
+}
 ul[data-type="element-data"] {
   display:flex;
   flex-direction:column;
@@ -195,6 +199,27 @@ ul[data-type="element-data"] {
       * {opacity:1;}
     }
     
+  }
+}
+
+
+.lanthanide-card{
+  grid-row:6/6;
+  grid-column:3/3;
+}
+.actinide-card {
+  grid-row:7/7;
+  grid-column:3/3;
+}
+
+.actinide-card, .lanthanide-card {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  border-radius:var(--border-radius);
+  font-weight:600;
+  &:hover {
+    cursor:pointer;
   }
 }
 

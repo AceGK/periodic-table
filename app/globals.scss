@@ -30,7 +30,7 @@ h1 {
 
 .table-wrapper {
   margin: 0 auto;
-  padding: 1.5rem;
+  padding: 1.25rem;
   display: flex;
   flex-direction: row;
   overflow-x: auto;
@@ -40,9 +40,9 @@ h1 {
 
 .periodic-table {
   display: grid;
-  grid-template-columns: repeat(18, minmax(58px, 68px));
+  grid-template-columns: repeat(18, minmax(62px, 78px));
   // grid-template-rows: repeat(10, minmax(54px, 64px));
-  grid-gap: 4px;
+  grid-gap: 3px;
   position: relative;
   width: 100%;
   > div {
@@ -111,7 +111,9 @@ ul[data-type="element-data"] {
   li {
     display: flex;
     justify-content: space-between;
+    text-wrap:nowrap;
     gap: 2rem;
+    padding:8px 16px;
   }
   output {
     text-align: right;
@@ -161,7 +163,6 @@ ul[data-type="legend"] {
 @each $name,
   $color
     in (
-      // metals
       alkali-metal: hsl(30, 100%, 50%),
       alkaline-earth-metal: hsl(49, 89%, 61%),
       transition-metal: hsl(229, 86%, 70%),
@@ -169,12 +170,10 @@ ul[data-type="legend"] {
       lanthanide: hsl(84, 79%, 58%),
       actinide: hsl(166, 53%, 55%),
       
-      // nonmetals
       diatomic-nonmetal: #ea4d5a,
       polyatomic-nonmetal: hsl(311, 86%, 62%),
       noble-gas: hsl(265, 100%, 70%),
       
-      // metalloid / unknown
       metalloid: hsl(183, 86%, 73%),
       unknown: hsl(0, 0%, 91%)
     )
@@ -209,6 +208,8 @@ ul[data-type="legend"] {
       );
       color:var(--clr-background);
       color:rgb(24,24,24);
+      // font-weight:bold;
+      * {opacity:1;}
     }
   }
 }

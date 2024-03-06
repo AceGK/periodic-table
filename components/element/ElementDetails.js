@@ -2,12 +2,24 @@ import Link from "next/link";
 import Element from "./ElementCard";
 import styles from "./Element.module.scss";
 import dynamic from 'next/dynamic';
+import { useState } from "react";
 
 const GLBViewerWithNoSSR = dynamic(() => import('../GLBViewer'), {
   ssr: false,
 });
 
 export default function ElementDetails({ element, setSelectedElement }) {
+
+   // State to keep track of the selected ionization energy index
+   const [selectedIonizationIndex, setSelectedIonizationIndex] = useState(0);
+
+  // Function to generate ordinal labels (1st, 2nd, 3rd, etc.)
+  const getOrdinalLabel = (n) => {
+    const s = ["th", "st", "nd", "rd"],
+      v = n % 100;
+    return n + (s[(v - 20) % 10] || s[v] || s[0]);
+  };
+
   return (
     element &&
     <div className={styles.elementDetails}>
@@ -15,7 +27,7 @@ export default function ElementDetails({ element, setSelectedElement }) {
       <Element element={element} />
 
       <div className={styles.details}>
-        <div style={{maxHeight:"220px"}}>
+        <div style={{ maxHeight: "220px" }}>
           {element.bohr_model_3d && <GLBViewerWithNoSSR path={element.bohr_model_3d} />}
         </div>
 
@@ -34,7 +46,7 @@ export default function ElementDetails({ element, setSelectedElement }) {
             <li><label>State</label>
               <output>{element.phase}</output></li>
             <li>
-              <label>Atomic Mass:</label>
+              <label>Atomic Mass</label>
               <output>{element.atomic_mass}u</output>
             </li>
             <li>
@@ -72,8 +84,21 @@ export default function ElementDetails({ element, setSelectedElement }) {
               <output>{element.electron_affinity} kJ/mol</output>
             </li>
             <li>
-              <label>Ionization Energies</label>
-              <output>{element.ionization_energies[0]} kJ/mol</output>
+              <label style={{display:"flex"}}>Ionization
+              <select
+                value={selectedIonizationIndex}
+                onChange={(e) => setSelectedIonizationIndex(e.target.value)}
+              >
+                {element.ionization_energies.map((energy, index) => (
+                  <option key={index} value={index}>
+                    {getOrdinalLabel(index + 1)}
+                  </option>
+                ))}
+              </select>
+              </label>
+              <output>
+                {element.ionization_energies[selectedIonizationIndex]} kJ/mol
+              </output>
             </li>
             <li>
               <label>Radius</label>

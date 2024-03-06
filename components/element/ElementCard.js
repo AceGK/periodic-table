@@ -19,13 +19,11 @@ export default function Element({ element, handleElementClick, isGroupSelected, 
       ${isGroupSelected && isGroupSelected(element.category) ? 'active' : ''}
       `}
       >
-        <div className={styles.numbers}>
-          <small className={styles.number}>{element.number}</small>
-          <small className={styles.mass}>{element.atomic_mass.toFixed(2)}</small>
-        </div>
 
+        <small className={styles.number}>{element.number}</small>
         <strong className={styles.symbol}>{element.symbol}</strong>
         <small className={styles.name}>{element.name}</small>
+        <small className={styles.mass}>{element.atomic_mass}</small>
       </div>
     </div>
   );

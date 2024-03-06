@@ -17,6 +17,7 @@ a {
 .container {
   max-width: 1420px;
   margin: auto;
+  padding:0px 1rem;
 }
 
 h1 {
@@ -24,7 +25,7 @@ h1 {
 }
 
 .table-container {
-  display: flex;
+  padding-top:2rem;
 }
 
 .table-wrapper {
@@ -39,7 +40,7 @@ h1 {
 
 .periodic-table {
   display: grid;
-  grid-template-columns: repeat(18, minmax(58px, 64px));
+  grid-template-columns: repeat(18, minmax(58px, 68px));
   // grid-template-rows: repeat(10, minmax(54px, 64px));
   grid-gap: 4px;
   position: relative;
@@ -154,62 +155,52 @@ ul[data-type="legend"] {
 @each $name,
   $color
     in (
-      diatomic-nonmetal: #FF5F7F,
-      alkali-metal: hsl(330, 100%, 66%),
-      polyatomic-nonmetal: hsl(255, 100%, 70%),
-      alkaline-earth-metal: hsl(217, 85%, 62%),
-      metalloid: hsl(183, 78%, 56%),
-      transition-metal: hsl(166, 53%, 55%),
+      // metals
+      alkali-metal: hsl(30, 100%, 50%),
+      alkaline-earth-metal: hsl(49, 89%, 61%),
+      transition-metal: hsl(229, 86%, 70%),
       post-transition-metal: hsl(105, 50%, 50%),
       lanthanide: hsl(84, 79%, 58%),
-      noble-gas: hsl(49, 89%, 61%),
-      actinide: hsl(30, 100%, 50%),
-      unknown: hsl(0, 0%, 70%)
+      actinide: hsl(166, 53%, 55%),
+      
+      // nonmetals
+      diatomic-nonmetal: #ea4d5a,
+      polyatomic-nonmetal: hsl(311, 86%, 62%),
+      noble-gas: hsl(265, 100%, 70%),
+      
+      // metalloid / unknown
+      metalloid: hsl(183, 86%, 73%),
+      unknown: hsl(0, 0%, 91%)
     )
-    // in (
-  //   noble-gas: hsl(39, 100%, 63%),
-  //   alkaline-earth-metal: hsl(9, 81%, 62%),
-  //   diatomic-nonmetal: hsl(338, 85%, 46%),
-  //   alkali-metal: hsl(335, 52%, 37%),
-  //   transition-metal: hsl(240, 10%, 38%),
-  //   post-transition-metal: hsl(178, 60%, 32%),
-  //   lanthanide: hsl(182, 41%, 49%),
-  //   metalloid: hsl(195, 100%, 68%),
-  //   actinide: hsl(29, 100%, 47%),
-  //   polyatomic-nonmetal: hsl(304, 48%, 55%),
-  //   unknown: hsl(0, 0%, 33%)
-  // )
+
 
 {
   li.#{$name}{
     color: $color;
     span {
-      opacity:0.99;
       &:hover {
-        opacity:1;
         text-decoration: underline;
         text-underline-offset: 0.1em;
       }
     }
-    input:checked + span {
-      // color:rgb(24,24,24);
-    }
   }
   div.#{$name} {
-    border: 1px solid rgba($color, 0.6);
+    border: 1px solid rgba($color, 0.125);
     color: $color;
-    // background:rgba($color, 0.1);
+    background:rgba($color, 0.05);
     background: linear-gradient(
-      -185deg,
-      rgba($color, 0.1),
-      rgba($color, 0.025)
+      135deg,
+      rgba($color, 0.07),
+      rgba($color, 0.015)
     );
-    background: linear-gradient(
-      -185deg,
-      rgba(40,40,40,1),
-      rgba(40,40,40, 0.025)
-    );
-    
+    // background: linear-gradient(
+    //   -185deg,
+    //   rgba(40,40,40,1),
+    //   rgba(40,40,40, 0.025)
+    // );
+    &:hover {
+      border: 1px solid rgba($color, 0.9);
+    }
     &.active {
       background: rgba($color, 1);
       color:var(--clr-background);

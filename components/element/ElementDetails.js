@@ -12,99 +12,118 @@ export default function ElementDetails({ element, setSelectedElement }) {
     element &&
     <div className={styles.elementDetails}>
 
-      <div className={styles.header}>
-        <Element element={element} />
+      <Element element={element} />
+
+      <div className={styles.details}>
         <div>
-        <div className="name capitalize">{element.name}</div>
-        <div><span className="capitalize">{element.category}</span>{element.possible_category && ` (${element.possible_category})`}</div>
-        <div>{element.phase}</div>
+          {element.bohr_model_3d && <GLBViewerWithNoSSR path={element.bohr_model_3d} />}
         </div>
-      </div>
 
-      <div className={styles.close}>
-      <button onClick={()=>setSelectedElement(null)}>&#10006;</button>
-      </div>
+        <div>
+          <ul data-type="element-data">
 
-      {element.bohr_model_3d && <GLBViewerWithNoSSR path={element.bohr_model_3d} />}
+            <li><label>Series</label>
+              <output><span className="capitalize">{element.category}</span>{element.possible_category && ` (${element.possible_category})`}</output></li>
 
+            <li>
+              <label>Description</label>
+              <output><Link href={element.source}>Wiki</Link></output>
+            </li>
 
-      <div>
-        <ul data-type="element-data">
-          <li>
-            <label>Atomic Mass:</label>
-            <output>{element.atomic_mass}</output>
-          </li>
-          <li>
-            <label>Melting point:</label>
-            <output>{element.melt} K</output>
-          </li>
-          <li>
-            <label>Boling point:</label>
-            <output>{element.boil} K</output>
-          </li>
-          <li>
-            <label>Discovered by:</label>
-            <output>{element.discovered_by}</output>
-          </li>
-          <li>
-            <label>Named by:</label>
-            <output>{element.named_by}</output>
-          </li>
-        </ul>
-      </div>
+            {/* TODO make state at:temp selector */}
+            <li><label>State</label>
+              <output>{element.phase}</output></li>
+            <li>
+              <label>Atomic Mass:</label>
+              <output>{element.atomic_mass}</output>
+            </li>
+            <li>
+              <label>Energy levels</label>
+              <output>
+                {element.shells.map((i, index) => {
+                  // Check if the current item is the last in the array
+                  const isLastItem = index === element.shells.length - 1;
+                  // If it's the last item, don't append a comma. Otherwise, append a comma.
+                  return isLastItem ? `${i}` : `${i}, `;
+                })}
+              </output>
 
+            </li>
+            <li>
+              <label>Electronegativity</label>
+              <output>{element.electronegativity_pauling}</output>
+            </li>
 
-      {/* <ul data-type="element-data">
-       
-       <li>
-          <label>Energy levels</label>
-          <output>...</output>
-        </li>
-        <li>
-          <label>Electronegativity</label>
-          <output>{element.electronegativity_pauling}</output>
-        </li>
-        <li>
-          <label>Electron Affinity</label>
-          <output>{element.electron_affinity}</output>
-        </li>
-        <li>
-          <label>Ionization Energies</label>
-          <output>{element.ionization_energies[0]}</output>
-        </li>
-        <li>
-          <label>Radius</label>
-          <output>...</output>
-        </li>
-        <li>
-          <label>Hardness</label>
-          <output>...</output>
-        </li>
-        <li>
-          <label>Modulus</label>
-          <output>...</output>
-        </li>
-        <li>
-          <label>Density</label>
-          <output>{element.density}</output>
-        </li>
-        <li>
-          <label>Conductivity</label>
-          <output>...</output>
-        </li>
-        <li>
-          <label>Heat</label>
-          <output>...</output>
-        </li>
-        <li>
-          <label>Abundance</label>
-          <output>...</output>
-        </li> 
-      </ul> */}
+          </ul>
+        </div>
 
-      <div className={styles.summary}>
+        <div>
+          <ul data-type="element-data">
+            <li>
+              <label>Melting point</label>
+              <output>{element.melt} K</output>
+            </li>
+            <li>
+              <label>Boling point</label>
+              <output>{element.boil} K</output>
+            </li>
+            <li>
+              <label>Electron Affinity</label>
+              <output>{element.electron_affinity} kJ/mol</output>
+            </li>
+            <li>
+              <label>Ionization Energies</label>
+              <output>{element.ionization_energies[0]} kJ/mol</output>
+            </li>
+            <li>
+              <label>Radius</label>
+              <output>...</output>
+            </li>
+            <li>
+              <label>Hardness</label>
+              <output>...</output>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <ul data-type="element-data">
+            <li>
+              <label>Modulus</label>
+              <output>...</output>
+            </li>
+            <li>
+              <label>Density</label>
+              <output>{element.density}</output>
+            </li>
+            <li>
+              <label>Conductivity</label>
+              <output>...</output>
+            </li>
+            <li>
+              <label>Heat</label>
+              <output>...</output>
+            </li>
+            <li>
+              <label>Abundance</label>
+              <output>...</output>
+            </li>
+            <li>
+              <label>Discovered</label>
+              <output>{element.discovered_by}</output>
+            </li>
+            <li>
+              <label>Named by:</label>
+              <output>{element.named_by}</output>
+            </li>
+          </ul>
+        </div>
+
+        {/* <div className={styles.summary}>
         <p>{element.summary}</p>
         <Link href={element.source}>Wiki</Link>
+      </div> */}
+
       </div>
     </div>
   );

@@ -12,7 +12,7 @@ import Tab from "../tabs/Tab";
 
 export default function PeriodicTable({ }) {
 
-  const [selectedElement, setSelectedElement] = useState(null);
+  const [selectedElement, setSelectedElement] = useState(data.elements[0]);
   const [selectedGroup, setSelectedGroup] = useState([]);
   const [table, setTable] = useState(true);
 
@@ -26,12 +26,13 @@ export default function PeriodicTable({ }) {
   return (
     <>
       <div className="table-container">
+      <ElementDetails element={selectedElement} setSelectedElement={setSelectedElement} />
         <div className="table-wrapper">
           <div className={table ? "periodic-table" : "periodic-list"}>
 
-            {/* <button className="toggleView" onClick={() => setTable(!table)}>
+            <button className="toggleView" onClick={() => setTable(!table)}>
               {!table ? <PeriodicTableIcon /> : <FaThList />}
-            </button> */}
+            </button>
 
             {table &&
             <section className="tabs">
@@ -39,15 +40,18 @@ export default function PeriodicTable({ }) {
               <Tab label="Filters">
               <Legend setSelectedGroup={setSelectedGroup} />
               </Tab>
+              <Tab label="Legend">
+              Coming soon...
+              </Tab>
               <Tab label="Temperature">
               Coming soon...
               </Tab>
             </Tabs>
             </section> }
 
-            {/* <div className="searchForm">
+            <div className="searchForm">
               <input type="text" placeholder="Search" />
-            </div> */}
+            </div>
 
             {data.elements.map((element) => (
               <Element key={element.number} element={element} handleElementClick={() => handleElementClick(element)} isGroupSelected={isGroupSelected} selectedElement={selectedElement} />
@@ -55,7 +59,6 @@ export default function PeriodicTable({ }) {
           </div>
 
         </div>
-        <ElementDetails element={selectedElement} setSelectedElement={setSelectedElement} />
       </div>
     </>
   );

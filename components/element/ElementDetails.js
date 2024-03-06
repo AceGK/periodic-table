@@ -3,12 +3,15 @@ import Element from "./ElementCard";
 import styles from "./Element.module.scss";
 import dynamic from "next/dynamic";
 import { useState } from "react";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
 const GLBViewerWithNoSSR = dynamic(() => import("../GLBViewer"), {
   ssr: false,
 });
 
 export default function ElementDetails({ element, setSelectedElement }) {
+  const [showDetails, setShowDetails] = useState(true);
+
   // State to keep track of the selected ionization energy index
   const [selectedIonizationIndex, setSelectedIonizationIndex] = useState(0);
 
@@ -21,7 +24,13 @@ export default function ElementDetails({ element, setSelectedElement }) {
 
   return (
     element && (
-      <div className={styles.elementDetails}>
+      <div>
+        <div className={styles.toggleDetails}>
+          {/* <button onClick={()=>setShowDetails(!showDetails)}>
+            {showDetails ? <FaChevronUp /> : <FaChevronDown />}
+            </button> */}
+          </div>
+      {showDetails && <div className={styles.elementDetails}>
         <Element element={element} />
 
         <div className={styles.details}>
@@ -162,6 +171,8 @@ export default function ElementDetails({ element, setSelectedElement }) {
         <Link href={element.source}>Wiki</Link>
       </div> */}
         </div>
+      </div>
+}
       </div>
     )
   );

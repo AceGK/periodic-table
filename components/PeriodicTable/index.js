@@ -25,7 +25,7 @@ export default function PeriodicTable({ }) {
 
   return (
     <>
-      <div className="table-container">
+      <div>
       <ElementDetails element={selectedElement} setSelectedElement={setSelectedElement} />
         <div className="table-wrapper">
           <div className={table ? "periodic-table" : "periodic-list"}>

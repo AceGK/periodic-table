@@ -24,10 +24,6 @@ h1 {
   font-size: 3rem;
 }
 
-.table-container {
-  padding-top:2rem;
-}
-
 .table-wrapper {
   margin: 0 auto;
   padding: 1.25rem;
@@ -180,7 +176,7 @@ ul[data-type="element-data"] {
         rgba($color, 0.666)
       );
       color:var(--clr-background);
-      color:rgb(24,24,24);
+      color:rgb(24,24,24)!important;
       // font-weight:bold;
       * {opacity:1;}
     }

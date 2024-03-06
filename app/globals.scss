@@ -29,14 +29,19 @@ h1 {
   padding: 1.25rem;
   display: flex;
   flex-direction: row;
-  overflow-x: auto;
+  overflow-x:scroll;
   height: 100%;
   width: 100%;
+  &:before,
+&:after {
+  content: '';
+  width: 100%;
+}
 }
 
 .periodic-table {
   display: grid;
-  grid-template-columns: repeat(18, minmax(62px, 78px));
+  grid-template-columns: repeat(18, clamp(62px, 5.25vmax, 80px));
   // grid-template-rows: repeat(10, minmax(54px, 64px));
   grid-gap: 3px;
   position: relative;
@@ -155,7 +160,7 @@ ul[data-type="element-data"] {
   div.#{$name} {
     border: 1px solid rgba($color, 0);
     color: $color;
-    background:rgba($color, 0.05);
+    // background:rgba($color, 0.05);
     background: linear-gradient(
       135deg,
       rgba($color, 0.07),
@@ -166,10 +171,19 @@ ul[data-type="element-data"] {
     //   rgba(40,40,40,1),
     //   rgba(40,40,40, 0.025)
     // );
+    &.hovered {
+      border: 1px solid rgba($color, 1);
+      background: linear-gradient(
+        135deg,
+        rgba($color, 0.1),
+        rgba($color, 0.02)
+      );
+    }
     &:hover {
-      border: 1px solid rgba($color, 0.9);
+      border: 1px solid rgba($color, 1);
     }
     &.active {
+      border: 1px solid rgba($color, 1);
       background: linear-gradient(
         135deg,
         rgba($color, 1),
@@ -180,9 +194,7 @@ ul[data-type="element-data"] {
       // font-weight:bold;
       * {opacity:1;}
     }
-    &.hovered {
-      border: 1px solid rgba($color, 0.9);
-    }
+    
   }
 }
 

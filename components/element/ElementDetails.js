@@ -68,15 +68,17 @@ export default function ElementDetails({ element, setSelectedElement }) {
                 <output>...</output>
               </li>
               <li>
-                <label>Discovered by</label>
+                <label>Discovered</label>
                 <output>
-                  {element.discovered_by} ({element.year_discovered})
+                  {element.discovered_by || 'n/a'}
+                  {element.discovered && `(${element.discovered})`}
                 </output>
               </li>
               <li>
-                <label>Named by</label>
+                <label>Named</label>
                 <output>
-                  {element.named_by} ({element.year_named})
+                  {element.named_by || "n/a"} 
+                 {element.year_named && element.year_named}
                 </output>
               </li>
             </ul>

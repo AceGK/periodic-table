@@ -25,8 +25,10 @@ export default function PeriodicTable({ }) {
 
   return (
     <>
-      <div>
+
+        <section className="container">
       <ElementDetails element={selectedElement} setSelectedElement={setSelectedElement} />
+      </section>
         <div className="table-wrapper">
           <div className={table ? "periodic-table" : "periodic-list"}>
 
@@ -62,7 +64,7 @@ export default function PeriodicTable({ }) {
           </div>
 
         </div>
-      </div>
+   
     </>
   );
 }

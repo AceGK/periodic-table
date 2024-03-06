@@ -185,7 +185,7 @@ ul[data-type="legend"] {
     }
   }
   div.#{$name} {
-    border: 1px solid rgba($color, 0.125);
+    border: 1px solid rgba($color, 0.75);
     color: $color;
     background:rgba($color, 0.05);
     background: linear-gradient(

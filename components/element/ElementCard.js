@@ -20,10 +20,12 @@ export default function Element({ element, handleElementClick, isGroupSelected, 
       `}
       >
 
-        <small className={styles.number}>{element.number}</small>
-        <strong className={styles.symbol}>{element.symbol}</strong>
-        <small className={styles.name}>{element.name}</small>
-        <small className={styles.mass}>{element.atomic_mass}</small>
+        <div className={styles.number}>{element.number}</div>
+        <div className={styles.symbol}>{element.symbol}</div>
+        <div>
+          <div className={styles.name}>{element.name}</div>
+          <div className={styles.mass}>{element.atomic_mass}</div>
+        </div>
       </div>
     </div>
   );

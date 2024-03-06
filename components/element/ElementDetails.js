@@ -15,7 +15,7 @@ export default function ElementDetails({ element, setSelectedElement }) {
       <Element element={element} />
 
       <div className={styles.details}>
-        <div>
+        <div style={{maxHeight:"220px"}}>
           {element.bohr_model_3d && <GLBViewerWithNoSSR path={element.bohr_model_3d} />}
         </div>
 

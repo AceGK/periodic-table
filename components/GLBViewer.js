@@ -25,8 +25,8 @@ const Model = ({ path }) => {
 
 const GLBViewer = ({ path }) => {
   return (
-    <div style={{ height: 150, width: 245 }}>
-      <Canvas camera={{ position: [0.2, 0.3, 0.4], fov: 60 }}>
+    <div style={{ height:"100%", width: "100%" }}>
+      <Canvas camera={{ position: [0.2, 0.3, 0.6], fov: 50 }}>
         <ambientLight intensity={1} />
         <spotLight position={[10, 10, 10]} angle={0.10} penumbra={1} />
         <pointLight position={[-10, -10, -10]} />

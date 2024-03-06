@@ -1,9 +1,9 @@
-import { Inter } from 'next/font/google'
+import { Nunito_Sans } from 'next/font/google'
 import './reset.scss'
 import './globals.scss'
 import Nav from '../components/nav/Nav'
 
-const inter = Inter({ subsets: ['latin'] })
+const Nunito = Nunito_Sans({ subsets: ['latin'] })
 
 export const metadata = {
   title: 'Periodic Table of Elements',
@@ -13,7 +13,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={Nunito.className}>
       <Nav />
       {children}
       </body>

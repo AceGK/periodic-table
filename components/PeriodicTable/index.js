@@ -30,13 +30,14 @@ export default function PeriodicTable({ }) {
         <div className="table-wrapper">
           <div className={table ? "periodic-table" : "periodic-list"}>
 
-            <button className="toggleView" onClick={() => setTable(!table)}>
+            {/* <button className="toggleView" onClick={() => setTable(!table)}>
               {!table ? <PeriodicTableIcon /> : <FaThList />}
-            </button>
+            </button> */}
 
             {table &&
-            <section className="tabs">
-            <Tabs>
+            <section className="tabs" style={{padding:'1rem'}}>
+              <Legend setSelectedGroup={setSelectedGroup} />
+            {/* <Tabs>
               <Tab label="Filters">
               <Legend setSelectedGroup={setSelectedGroup} />
               </Tab>
@@ -46,12 +47,12 @@ export default function PeriodicTable({ }) {
               <Tab label="Temperature">
               Coming soon...
               </Tab>
-            </Tabs>
+            </Tabs> */}
             </section> }
 
-            <div className="searchForm">
+            {/* <div className="searchForm">
               <input type="text" placeholder="Search" />
-            </div>
+            </div> */}
 
             {data.elements.map((element) => (
               <Element key={element.number} element={element} handleElementClick={() => handleElementClick(element)} isGroupSelected={isGroupSelected} selectedElement={selectedElement} />

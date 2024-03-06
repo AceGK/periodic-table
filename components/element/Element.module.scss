@@ -64,6 +64,7 @@
   display:flex;
   gap:1rem;
   position: relative;
+  overflow-x: auto;
   .details {
     display:flex;
     gap:1rem;

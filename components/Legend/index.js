@@ -31,7 +31,7 @@ export default function Legend({ setSelectedGroup, setHoveredGroup }) {
   return (
     <div className={styles.legend}>
       {elementGroups.elementGroups.map((group) => (
-        <div>
+        <div key={group.name}>
           <div 
             key={group.name} 
             className={`group-title ${group.name.replace(/ /g, "-").toLowerCase()}`}
@@ -52,7 +52,7 @@ export default function Legend({ setSelectedGroup, setHoveredGroup }) {
           <ul className="subgroup-list">
             {group.groups.map((subGroup) => (
               <li 
-                key={`${group.name}-${subGroup.name}`} 
+                key={subGroup.name} 
                 className={subGroup.name.replace(/ /g, "-").toLowerCase()}
                 onMouseEnter={() => setHoveredGroup(subGroup.name.replace(/ /g, "-").toLowerCase())}
                 onMouseLeave={() => setHoveredGroup(null)}

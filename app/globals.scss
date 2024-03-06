@@ -29,7 +29,7 @@ h1 {
   padding: 1.25rem;
   display: flex;
   flex-direction: row;
-  overflow-x:scroll;
+  overflow-x:auto;
   height: 100%;
   width: 100%;
   &:before,
@@ -41,7 +41,7 @@ h1 {
 
 .periodic-table {
   display: grid;
-  grid-template-columns: repeat(18, clamp(62px, 5.25vmax, 80px));
+  grid-template-columns: repeat(18, clamp(58px, 5vmax, 74px));
   // grid-template-rows: repeat(10, minmax(54px, 64px));
   grid-gap: 3px;
   position: relative;

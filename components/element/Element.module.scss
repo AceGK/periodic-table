@@ -19,19 +19,20 @@
   }
   
   .symbol{
-    font-size:1.2vmax;
-    line-height:1.2vmax;
+    font-size:clamp(12px, 1.25vmax, 21px);
+    line-height:clamp(13px, 1.4vmax, 22px);
     font-weight: 700;
   }
   .name, .number, .mass{
-    font-size:10px;
-    // line-height: 0.5125rem;
+    font-size:clamp(8px, 1vmax, 12px);
+    line-height:clamp(9px, 1.1vmax, 13px);
     width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
   }
   .name {
     font-weight:500;
+    padding-bottom:1px;
   }
   .mass {
     opacity:0.8;
@@ -91,7 +92,8 @@
       padding:0.875rem;
     };
     .name, .mass, .number{
-      font-size:1.5rem;
+      font-size:clamp(1rem, 1.25vmax, 24px);
+      line-height:clamp(1.2rem, 1.5vmax, 28px);
     }
     .name {
       bottom:9px;

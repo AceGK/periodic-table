@@ -106,12 +106,17 @@ h1 {
 }
 
 ul[data-type="element-data"] {
+  display:flex;
+  flex-direction:column;
+  height: 100%;
   li {
     display: flex;
+    align-items: center;
     justify-content: space-between;
     text-wrap:nowrap;
     gap: 2rem;
     padding:2px 12px;
+    height: 100%;
   }
   output {
     text-align: right;
@@ -143,7 +148,7 @@ ul[data-type="element-data"] {
       noble-gas: hsl(265, 100%, 70%),
       
       metalloid: hsl(183, 86%, 73%),
-      unknown: hsl(0, 0%, 91%)
+      unknown: hsl(0, 8%, 75%)
     )
 
 

@@ -54,6 +54,8 @@ export default function PeriodicTable({ }) {
               <input type="text" placeholder="Search" />
             </div> */}
 
+            <div className="f-block-separator"></div>
+
             {data.elements.map((element) => (
               <Element key={element.number} element={element} handleElementClick={() => handleElementClick(element)} isGroupSelected={isGroupSelected} selectedElement={selectedElement} hoveredGroup={hoveredGroup} />
             ))}

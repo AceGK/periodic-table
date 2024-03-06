@@ -190,3 +190,18 @@ ul[data-type="element-data"] {
   }
 }
 
+// .f-block-separator:before {
+//   content: '';
+//   position: absolute;
+//   /* Calculate starting point (top-left corner of the first item) */
+//   top: calc((1 / 1) * 100%); /* Adjust based on the row start */
+//   left: calc((2 / 5) * 100%); /* Adjust based on the column start */
+//   /* Calculate width and height based on grid positions */
+//   width: calc(((1 / 1) * 100%) - ((2 / 5) * 100%));
+//   height: calc(((8 / 10) * 100%) - ((5 / 10) * 100%));
+//   background-color: transparent;
+//   border-top: 2px solid red; /* Style the line */
+//   border-right: 2px solid black;
+//   transform: rotate(45deg); /* Adjust rotation based on your needs */
+//   transform-origin: top left;
+// }

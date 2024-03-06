@@ -14,6 +14,7 @@ export default function PeriodicTable({ }) {
 
   const [selectedElement, setSelectedElement] = useState(data.elements[0]);
   const [selectedGroup, setSelectedGroup] = useState([]);
+  const [hoveredGroup, setHoveredGroup] = useState(null);
   const [table, setTable] = useState(true);
 
   const handleElementClick = (element) => {
@@ -21,7 +22,6 @@ export default function PeriodicTable({ }) {
   };
 
   const isGroupSelected = (groupName) => selectedGroup.includes(groupName.replace(/ /g, "-").toLowerCase());
-
 
   return (
     <>
@@ -36,7 +36,7 @@ export default function PeriodicTable({ }) {
 
             {table &&
             <section className="tabs" style={{padding:'1rem'}}>
-              <Legend setSelectedGroup={setSelectedGroup} />
+              <Legend setSelectedGroup={setSelectedGroup} setHoveredGroup={setHoveredGroup} />
             {/* <Tabs>
               <Tab label="Filters">
               <Legend setSelectedGroup={setSelectedGroup} />
@@ -55,7 +55,7 @@ export default function PeriodicTable({ }) {
             </div> */}
 
             {data.elements.map((element) => (
-              <Element key={element.number} element={element} handleElementClick={() => handleElementClick(element)} isGroupSelected={isGroupSelected} selectedElement={selectedElement} />
+              <Element key={element.number} element={element} handleElementClick={() => handleElementClick(element)} isGroupSelected={isGroupSelected} selectedElement={selectedElement} hoveredGroup={hoveredGroup} />
             ))}
           </div>
 

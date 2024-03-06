@@ -1,0 +1,32 @@
+
+.legend {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 1rem;
+  padding-inline-start: 0rem;
+  font-size: 12px;
+
+    span {
+      &:hover {
+        text-decoration: underline;
+        text-underline-offset: 0.125em;
+      }
+    }
+  
+  label span {
+    display: inline-block;
+    text-transform: capitalize;
+    border-radius: var(--border-radius);
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  input {
+    display:none;
+  }
+  // ul {
+  //   padding-inline-start: 0px;
+  //   list-style-type: none;
+  // }
+}

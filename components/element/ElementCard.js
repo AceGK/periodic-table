@@ -1,6 +1,6 @@
 import styles from './Element.module.scss';
 
-export default function Element({ element, handleElementClick, isGroupSelected, selectedElement }) {
+export default function Element({ element, handleElementClick, isGroupSelected, selectedElement, hoveredGroup }) {
   return (
     <div
       key={element.number}
@@ -17,6 +17,7 @@ export default function Element({ element, handleElementClick, isGroupSelected, 
       ${selectedElement && selectedElement.number === element.number ? styles.selected : ''}
       ${element.category.replace(/ /g, "-").toLowerCase()}
       ${isGroupSelected && isGroupSelected(element.category) ? 'active' : ''}
+      ${hoveredGroup === element.category.replace(/ /g, "-").toLowerCase() ? 'hovered' : ''}
       `}
       >
 

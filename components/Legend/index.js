@@ -1,59 +1,67 @@
 import { useState } from 'react';
 import elementGroups from '@/lib/ElementGroups.JSON';
-
-export default function Legend({ setSelectedGroup }) {
+import styles from './Legend.module.scss';
+export default function Legend({ setSelectedGroup, setHoveredGroup }) {
   const [selected, setSelected] = useState(null);
 
   const handleGroupChange = (group) => {
-    const groupSubGroups = group.groups.map(subGroup => subGroup.name.replace(/ /g, "-").toLowerCase());
-
-    // Toggle functionality: deselect if already selected, else select
+    // Adjust logic to set or clear both group and its subgroups as selected
     if (selected === group.name) {
       setSelected(null);
       setSelectedGroup([]);
     } else {
       setSelected(group.name);
-      setSelectedGroup(groupSubGroups);
+      // Set group and all its subgroups as selected
+      const groupSubGroups = group.groups.map(subGroup => subGroup.name.replace(/ /g, "-").toLowerCase());
+      setSelectedGroup([group.name.replace(/ /g, "-").toLowerCase(), ...groupSubGroups]);
     }
   };
 
   const handleSubGroupChange = (groupName, subGroupName) => {
-    const selectedSubGroup = `${groupName}/${subGroupName}`;
-
-    // Toggle functionality: deselect if already selected, else select
-    if (selected === selectedSubGroup) {
+    const fullSubGroupName = `${groupName}/${subGroupName}`;
+    if (selected === fullSubGroupName) {
       setSelected(null);
       setSelectedGroup([]);
     } else {
-      setSelected(selectedSubGroup);
+      setSelected(fullSubGroupName);
       setSelectedGroup([subGroupName.replace(/ /g, "-").toLowerCase()]);
     }
   };
 
   return (
-    <ul data-type="legend">
+    <div className={styles.legend}>
       {elementGroups.elementGroups.map((group) => (
-        <li key={group.name} className={group.name.replace(/ /g, "-").toLowerCase()}>
-          <label htmlFor={`group-${group.name}`}>
-            <input
-              type="checkbox"
-              name="elementGroup"
-              id={`group-${group.name}`}
-              // Ensure `selected` is not null before calling `startsWith`
-              checked={selected === group.name || (selected && selected.startsWith(group.name + '/'))}
-              onChange={() => handleGroupChange(group)}
-            />
-            <span>{group.name}</span>
-          </label>
-          <ul>
+        <div>
+          <div 
+            key={group.name} 
+            className={`group-title ${group.name.replace(/ /g, "-").toLowerCase()}`}
+            onMouseEnter={() => setHoveredGroup(group.name.replace(/ /g, "-").toLowerCase())}
+            onMouseLeave={() => setHoveredGroup(null)}
+          >
+            <label htmlFor={`group-${group.name}`}>
+              <input
+                type="checkbox"
+                name="elementGroup"
+                id={`group-${group.name}`}
+                checked={selected === group.name}
+                onChange={() => handleGroupChange(group)}
+              />
+              <span>{group.name}</span>
+            </label>
+          </div>
+          <ul className="subgroup-list">
             {group.groups.map((subGroup) => (
-              <li key={subGroup.name} className={subGroup.name.replace(/ /g, "-").toLowerCase()}>
+              <li 
+                key={`${group.name}-${subGroup.name}`} 
+                className={subGroup.name.replace(/ /g, "-").toLowerCase()}
+                onMouseEnter={() => setHoveredGroup(subGroup.name.replace(/ /g, "-").toLowerCase())}
+                onMouseLeave={() => setHoveredGroup(null)}
+              >
                 <label htmlFor={`subgroup-${subGroup.name}`}>
                   <input
                     type="checkbox"
                     name="elementSubGroup"
                     id={`subgroup-${subGroup.name}`}
-                    // Use `checked` prop to reflect the current selection state accurately
                     checked={selected === `${group.name}/${subGroup.name}`}
                     onChange={() => handleSubGroupChange(group.name, subGroup.name)}
                   />
@@ -62,8 +70,8 @@ export default function Legend({ setSelectedGroup }) {
               </li>
             ))}
           </ul>
-        </li>
+        </div>
       ))}
-    </ul>
+    </div>
   );
 }

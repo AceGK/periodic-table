@@ -50,6 +50,34 @@ export default function ElementDetails({ element, setSelectedElement }) {
               <output>{element.atomic_mass}u</output>
             </li>
             <li>
+              <label>Melting point</label>
+              <output>{element.melt} K</output>
+            </li>
+            <li>
+              <label>Boling point</label>
+              <output>{element.boil} K</output>
+            </li>
+            <li>
+              <label>Abundance</label>
+              <output>...</output>
+            </li>
+            <li>
+              <label>Discovered by</label>
+              <output>{element.discovered_by} ({element.year_discovered})</output>
+            </li>
+            <li>
+              <label>Named by</label>
+              <output>{element.named_by} ({element.year_named})</output>
+            </li>
+
+           
+
+          </ul>
+        </div>
+
+        <div>
+          <ul data-type="element-data">
+          <li>
               <label>Energy levels</label>
               <output>
                 {element.shells.map((i, index) => {
@@ -59,25 +87,10 @@ export default function ElementDetails({ element, setSelectedElement }) {
                   return isLastItem ? `${i}` : `${i}, `;
                 })}
               </output>
-
             </li>
             <li>
               <label>Electronegativity</label>
               <output>{element.electronegativity_pauling}</output>
-            </li>
-
-          </ul>
-        </div>
-
-        <div>
-          <ul data-type="element-data">
-            <li>
-              <label>Melting point</label>
-              <output>{element.melt} K</output>
-            </li>
-            <li>
-              <label>Boling point</label>
-              <output>{element.boil} K</output>
             </li>
             <li>
               <label>Electron Affinity</label>
@@ -108,11 +121,6 @@ export default function ElementDetails({ element, setSelectedElement }) {
               <label>Hardness</label>
               <output>...</output>
             </li>
-          </ul>
-        </div>
-
-        <div>
-          <ul data-type="element-data">
             <li>
               <label>Modulus</label>
               <output>...</output>
@@ -129,18 +137,7 @@ export default function ElementDetails({ element, setSelectedElement }) {
               <label>Heat</label>
               <output>...</output>
             </li>
-            <li>
-              <label>Abundance</label>
-              <output>...</output>
-            </li>
-            <li>
-              <label>Discovered</label>
-              <output>{element.discovered_by}</output>
-            </li>
-            <li>
-              <label>Named by:</label>
-              <output>{element.named_by}</output>
-            </li>
+     
           </ul>
         </div>
 

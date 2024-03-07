@@ -44,6 +44,7 @@ export default function ElementDetails({ element, setSelectedElement }) {
 function Details({ element }) {
   // State to keep track of the selected ionization energy index
   const [selectedIonizationIndex, setSelectedIonizationIndex] = useState(0);
+  const [selectedRadiusIndex, setSelectedRadiusIndex] = useState(0);
 
   // Function to generate ordinal labels (1st, 2nd, 3rd, etc.)
   const getOrdinalLabel = (n) => {
@@ -51,6 +52,17 @@ function Details({ element }) {
       v = n % 100;
     return n + (s[(v - 20) % 10] || s[v] || s[0]);
   };
+  
+  // Function to generate select options from the radius object
+  const generateSelectOptions = () => {
+    return Object.keys(element.radius).map((key) => {
+      if (element.radius[key] !== null) {
+        return <option key={key} value={key}>{key}</option>;
+      }
+    });
+  };
+
+  console.log(element.radius)
 
   return (
     <>
@@ -106,15 +118,7 @@ function Details({ element }) {
         <ul data-type="element-data">
           <li>
             <label>Atomic Mass</label>
-            <output>{element.atomic_mass}u</output>
-          </li>
-          <li>
-            <label>Melting point</label>
-            <output>{element.melt} K</output>
-          </li>
-          <li>
-            <label>Boling point</label>
-            <output>{element.boil} K</output>
+            <output>{element.atomic_mass} u</output>
           </li>
           <li>
             <label>Energy levels</label>
@@ -153,16 +157,35 @@ function Details({ element }) {
               {element.ionization_energies[selectedIonizationIndex]} kJ/mol
             </output>
           </li>
+          <li>
+            <label>Melting point</label>
+            <output>{element.melt} K</output>
+          </li>
+          <li>
+            <label>Boling point</label>
+            <output>{element.boil} K</output>
+          </li>
         </ul>
       </div>
 
       <div>
         <ul data-type="element-data">
 
-          <li>
-            <label>Radius</label>
-            <output>...</output>
-          </li>
+        {/* <li>
+            <label style={{ display: "flex" }}>
+              Radius
+              <select
+                value={selectedRadiusIndex}
+                onChange={(e) => setSelectedRadiusIndex(e.target.value)}
+              >
+                {generateSelectOptions()}
+
+              </select>
+            </label>
+            <output>
+              {element.radius[selectedRadiusIndex]}
+            </output>
+          </li> */}
           <li>
             <label>Hardness</label>
             <output>...</output>
@@ -173,7 +196,7 @@ function Details({ element }) {
           </li>
           <li>
             <label>Density</label>
-            <output>{element.density}</output>
+            <output>{element.density} kg/m3</output>
           </li>
           <li>
             <label>Conductivity</label>

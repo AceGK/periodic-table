@@ -56,6 +56,8 @@ export default function PeriodicTable({ }) {
               <input type="text" placeholder="Search" />
             </div> */}
 
+  
+
           <div
             className="lanthanide-card lanthanide"
             onClick={() => setSelectedGroup(
@@ -82,9 +84,16 @@ export default function PeriodicTable({ }) {
             89-103
           </div>
 
+          <div className="pnictogen-tag">Pnictogens</div>
+          <div className="chalcogen-tag">Chalcogens</div>
+          <div className="halogen-tag">Halogens</div>
+
+         
+
           {data.elements.map((element) => (
             <Element key={element.number} element={element} handleElementClick={() => handleElementClick(element)} isGroupSelected={isGroupSelected} selectedElement={selectedElement} hoveredGroup={hoveredGroup} />
           ))}
+            
         </div>
 
       </div>

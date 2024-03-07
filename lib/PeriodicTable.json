@@ -4,6 +4,41 @@
           "name": "Hydrogen",
           "appearance": "colorless gas",
           "atomic_mass": 1.008,
+          "abundance": {
+                "universe": "75%",
+                "sun": "75%",
+                "meteor": "2.4%",
+                "crust": "0.15%",
+                "ocean": "11%",
+                "human": "10%"
+            },
+        "radius":{
+            "empirical": "25",
+            "calculated": "53",
+            "covalent-single-bond": "32",
+            "covalent-triple-bond": null,
+            "van-der-waals": "120",
+            "metallic": null
+  },
+        "hardness": {
+            "brinell": null,
+            "mohs": null,
+            "vickers": null
+        },
+        "modulus": {
+            "bulk": null,
+            "shear": null,
+            "young": null
+        },
+        "conductivity": {
+            "thermal": "0.1805 W/(m K)",
+            "electrical": null
+        },
+        "heat" : {
+            "specific": "14,300 J/(kg K)",
+            "vaporization": "0.44936 kJ/mol",
+            "fusion": "0.05868 kJ/mol"
+        },
           "boil": 20.271,
           "category": "diatomic nonmetal",
           "density": 0.08988,
@@ -48,6 +83,14 @@
           "name": "Helium",
           "appearance": "colorless gas, exhibiting a red-orange glow when placed in a high-voltage electric field",
           "atomic_mass": 4.0026022,
+          "radius": {
+            "empirical": "120",
+            "calculated": "31",
+            "van-der-waals": "140",
+            "covalent-single-bond": "46",
+            "covalent-triple-bond": null,
+            "metallic": null
+        },
           "boil": 4.222,
           "category": "noble gas",
           "density": 0.1786,
@@ -92,6 +135,14 @@
       {
           "name": "Lithium",
           "appearance": "silvery-white",
+          "radius": {
+            "empirical": "145",
+            "calculated": "167",
+            "van-der-waals": "182",
+            "covalent-single-bond": "133",
+            "covalent-triple-bond": null,
+            "metallic": "152"
+        },
           "atomic_mass": 6.94,
           "boil": 1603,
           "category": "alkali metal",
@@ -140,6 +191,14 @@
           "name": "Beryllium",
           "appearance": "white-gray metallic",
           "atomic_mass": 9.01218315,
+          "radius": {
+            "empirical": "105",
+            "calculated": "112",
+            "van-der-waals": "153",
+            "covalent-single-bond": "102",
+            "covalent-triple-bond": "85",
+            "metallic": "112"
+        },
           "boil": 2742,
           "category": "alkaline earth metal",
           "density": 1.85,
@@ -188,6 +247,14 @@
           "name": "Boron",
           "appearance": "black-brown",
           "atomic_mass": 10.81,
+          "radius": {
+            "empirical": "85",
+            "calculated": "87",
+            "van-der-waals": "192",
+            "covalent-single-bond": "85",
+            "covalent-triple-bond": "73",
+            "metallic": null
+        },
           "boil": 4200,
           "category": "metalloid",
           "density": 2.08,
@@ -237,6 +304,14 @@
           "name": "Carbon",
           "appearance": null,
           "atomic_mass": 12.011,
+          "radius": {
+            "empirical": "70",
+            "calculated": "67",
+            "van-der-waals": "170",
+            "covalent-single-bond": "75",
+            "covalent-triple-bond": "60",
+            "metallic": null
+        },
           "boil": null,
           "category": "polyatomic nonmetal",
           "density": 1.821,
@@ -286,6 +361,14 @@
       {
           "name": "Nitrogen",
           "appearance": "colorless gas, liquid or solid",
+          "radius": {
+            "empirical": "65",
+            "calculated": "56",
+            "van-der-waals": "155",
+            "covalent-single-bond": "71",
+            "covalent-triple-bond": "54",
+            "metallic": null
+        },
           "atomic_mass": 14.007,
           "boil": 77.355,
           "category": "diatomic nonmetal",
@@ -338,6 +421,14 @@
           "name": "Oxygen",
           "appearance": null,
           "atomic_mass": 15.999,
+          "radius": {
+            "empirical": "60",
+            "calculated": "48",
+            "van-der-waals": "152",
+            "covalent-single-bond": "63",
+            "covalent-triple-bond": "53",
+            "metallic": null
+        },
           "boil": 90.188,
           "category": "diatomic nonmetal",
           "density": 1.429,
@@ -391,6 +482,14 @@
           "name": "Fluorine",
           "appearance": null,
           "atomic_mass": 18.9984031636,
+          "radius": {
+            "empirical": "50",
+            "calculated": "42",
+            "van-der-waals": "147",
+            "covalent-single-bond": "64",
+            "covalent-triple-bond": "53",
+            "metallic": null
+        },
           "boil": 85.03,
           "category": "diatomic nonmetal",
           "density": 1.696,
@@ -444,6 +543,14 @@
           "name": "Neon",
           "appearance": "colorless gas exhibiting an orange-red glow when placed in a high voltage electric field",
           "atomic_mass": 20.17976,
+          "radius": {
+            "empirical": "160",
+            "calculated": "38",
+            "van-der-waals": "154",
+            "covalent-single-bond": "67",
+            "covalent-triple-bond": null,
+            "metallic": null
+        },
           "boil": 27.104,
           "category": "noble gas",
           "density": 0.9002,

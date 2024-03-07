@@ -13,3 +13,7 @@
 
 
 https://react-icons.github.io/
+
+https://periodictable.com/Properties/A/OceanAbundance.an.log.html
+
+https://www.wikiwand.com/en/Atomic_radii_of_the_elements_(data_page)

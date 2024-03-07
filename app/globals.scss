@@ -161,7 +161,7 @@ ul[data-type="element-data"] {
   li.#{$name}{
     color: $color;
   }
-  div.#{$name} {
+  div.#{$name} > div {
     border: 1px solid rgba($color, 0);
     color: $color;
     // background:rgba($color, 0.05);
@@ -199,10 +199,40 @@ ul[data-type="element-data"] {
       }
       
     }
-    
   }
+  .halogen-tag:hover ~ .group-17.#{$name} {
+    border: 1px solid rgba($color, 1);
+    }
+  .chalcogen-tag:hover ~ .group-16.#{$name} {
+    border: 1px solid rgba($color, 1);
+    }
+  .pnictogen-tag:hover ~ .group-15.#{$name} {
+    border: 1px solid rgba($color, 1);
+    }
 }
 
+.halogen-tag {
+  grid-column:17/17;
+  grid-row:1/1;
+}
+.chalcogen-tag {
+  grid-column:16/16;
+  grid-row:1/1;
+}
+.pnictogen-tag {
+  grid-column:15/15;
+  grid-row:1/1;
+}
+.halogen-tag, .chalcogen-tag, .pnictogen-tag {
+  font-size:0.75rem;
+  display:flex;
+  justify-content: center;
+  align-items: flex-end;
+  opacity: 0.9;
+  &:hover {
+    cursor:default;
+  }
+}
 
 .lanthanide-card{
   grid-row:6/6;
@@ -239,3 +269,4 @@ ul[data-type="element-data"] {
 //   transform: rotate(45deg); /* Adjust rotation based on your needs */
 //   transform-origin: top left;
 // }
+

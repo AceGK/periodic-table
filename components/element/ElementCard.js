@@ -4,7 +4,12 @@ export default function Element({ element, handleElementClick, isGroupSelected, 
   return (
     <div
       key={element.number}
-      className={styles.element}
+      className={`
+        ${styles.element}
+        ${element.block + '-block'}
+        ${'group-' + element.group}
+        ${element.category.replace(/ /g, "-").toLowerCase()}
+      `}
       style={{
         gridRow: element.ypos,
         gridColumn: element.xpos,
@@ -15,7 +20,7 @@ export default function Element({ element, handleElementClick, isGroupSelected, 
         className={`
       ${styles.elementBody}
       ${selectedElement && selectedElement.number === element.number ? styles.selected : ''}
-      ${element.category.replace(/ /g, "-").toLowerCase()}
+ 
       ${isGroupSelected && isGroupSelected(element.category) ? 'active' : ''}
       ${hoveredGroup === element.category.replace(/ /g, "-").toLowerCase() ? 'hovered' : ''}
       `}

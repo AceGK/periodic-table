@@ -32,7 +32,7 @@ export default function ElementDetails({ selectedElement, setSelectedElement, ho
 
         <Details element={elementToShow} />
 
-        <div style={{position:'relative'}}>
+        <div style={{ position: 'relative' }}>
           <select className={styles.mediaSelect} value={displayOption} onChange={e => setDisplayOption(e.target.value)}>
             <option value="bohrModel3D">Bohr Model 3D</option>
             <option value="image">Image</option>
@@ -64,7 +64,6 @@ function Details({ element }) {
 
   // State to keep track of the selected ionization energy index
   const [selectedIonizationIndex, setSelectedIonizationIndex] = useState(0);
-  const [selectedRadiusIndex, setSelectedRadiusIndex] = useState(0);
 
   // Function to generate ordinal labels (1st, 2nd, 3rd, etc.)
   const getOrdinalLabel = (n) => {
@@ -73,17 +72,6 @@ function Details({ element }) {
     return n + (s[(v - 20) % 10] || s[v] || s[0]);
   };
 
-  // Function to generate select options from the radius object
-  const generateSelectOptions = () => {
-    return Object.keys(element.radius).map((key) => {
-      if (element.radius[key] !== null) {
-        return <option key={key} value={key}>{key}</option>;
-      }
-    });
-  };
-
-  console.log(element.radius)
-
   return (
     <>
       {/* <div className={styles.summary}>
@@ -91,9 +79,9 @@ function Details({ element }) {
         <Link href={element.source}>Wiki</Link>
       </div> */}
       <div>
-   
+
         <ul data-type="element-data">
-        <li>
+          <li>
             <label>{element.name}</label>
             <output>
               <a href={element.source} target="_blank" aria-label={`Wikipedia link for ${element.name}`}>wiki <MdOpenInNew /></a>
@@ -191,25 +179,8 @@ function Details({ element }) {
       <div>
         <ul data-type="element-data">
 
-          {/* <li>
-            <label style={{ display: "flex" }}>
-              Radius
-              <select
-                value={selectedRadiusIndex}
-                onChange={(e) => setSelectedRadiusIndex(e.target.value)}
-              >
-                {generateSelectOptions()}
-
-              </select>
-            </label>
-            <output>
-              {element.radius[selectedRadiusIndex]}
-            </output>
-          </li> */}
-          <li>
-            <label>Hardness</label>
-            <output>...</output>
-          </li>
+          <Radius element={element} />
+          <Hardness element={element} />
           <li>
             <label>Modulus</label>
             <output>...</output>
@@ -229,5 +200,71 @@ function Details({ element }) {
         </ul>
       </div>
     </>
+  )
+}
+
+function Radius({element}) {
+  const [selectedRadiusIndex, setSelectedRadiusIndex] = useState(0);
+
+    // // Function to generate select options from the radius object
+    // // this doesn't seem like a great approach since the user would likely want to toggle a single attribute and not have it switch when selecting a different element that doesn't contain that attribute
+    // const generateSelectOptions = () => {
+    //   return Object.keys(element.radius).map((key) => {
+    //     if (element.radius[key] !== null) {
+    //       return <option key={key} value={key}>{key}</option>;
+    //     }
+    //   });
+    // };
+
+    if (!element.radius) {
+      return null; 
+    }
+    
+    return  (
+    <li>
+      <label style={{ display: "flex" }}>
+        Radius
+        <select
+          value={selectedRadiusIndex}
+          onChange={(e) => setSelectedRadiusIndex(e.target.value)}
+        >
+          <option value="calculated">Atomic</option>
+          <option value="covalent-single-bond">Covalent Single Bond</option>
+          <option value="covalent-triple-bond">Covalent Triple Bond</option>
+          <option value="van-der-waals">Van der Waals</option>
+          <option value="metallic">Metallic</option>
+        </select>
+      </label>
+      <output>
+        {element.radius[selectedRadiusIndex] ? element.radius[selectedRadiusIndex] : "n/a"}
+      </output>
+    </li>
+  )
+}
+
+function Hardness({element}) {
+  const [selectedHardness, setSelectedHardness] = useState(0);
+
+  if (!element.hardness) {
+    return null;
+  }
+  return (
+    <li>
+      <label style={{ display: "flex" }}>
+        hardness
+        <select
+          value={selectedHardness}
+          onChange={(e) => setSelectedHardness(e.target.value)}
+        >
+          <option value="brinell">brinell</option>
+          <option value="mohs">mohs</option>
+          <option value="vickers">vickers</option>
+
+        </select>
+      </label>
+      <output>
+        {element.hardness[selectedHardness] ? element.hardness[selectedHardness] : "n/a"}
+      </output>
+    </li>
   )
 }

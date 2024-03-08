@@ -1,6 +1,6 @@
 import styles from './Element.module.scss';
 
-export default function Element({ element, handleElementClick, isGroupSelected, selectedElement, hoveredGroup }) {
+export default function Element({ element, handleElementClick, isGroupSelected, selectedElement, hoveredGroup, setHoveredElement}) {
   return (
     <div
       key={element.number}
@@ -9,12 +9,15 @@ export default function Element({ element, handleElementClick, isGroupSelected, 
         ${element.block + '-block'}
         ${'group-' + element.group}
         ${element.category.replace(/ /g, "-").toLowerCase()}
+        ${selectedElement == element ? 'selected-element': ''}
       `}
       style={{
         gridRow: element.ypos,
         gridColumn: element.xpos,
       }}
       onClick={(e) => handleElementClick(element, e)}
+      onMouseEnter={() => setHoveredElement(element)}
+      // onMouseLeave={() => setHoveredElement(null)}
     >
       <div
         className={`

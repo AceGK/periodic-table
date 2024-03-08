@@ -12,13 +12,18 @@ import Tab from "../tabs/Tab";
 
 export default function PeriodicTable({ }) {
 
-  const [selectedElement, setSelectedElement] = useState(data.elements[0]);
+  const [selectedElement, setSelectedElement] = useState();
+  const [hoveredElement, setHoveredElement] = useState(data.elements[0]);
   const [selectedGroup, setSelectedGroup] = useState([]);
   const [hoveredGroup, setHoveredGroup] = useState(null);
   const [table, setTable] = useState(true);
 
   const handleElementClick = (element) => {
+    if (selectedElement && element.number === selectedElement.number) {
+      setSelectedElement(null);
+    } else {
     setSelectedElement(element);
+    }
   };
 
   const isGroupSelected = (groupName) => selectedGroup.includes(groupName.replace(/ /g, "-").toLowerCase());
@@ -27,7 +32,7 @@ export default function PeriodicTable({ }) {
     <>
 
       <section className="container">
-        <ElementDetails element={selectedElement} setSelectedElement={setSelectedElement} />
+        <ElementDetails selectedElement={selectedElement} setSelectedElement={setSelectedElement} hoveredElement={hoveredElement} />
       </section>
       <div className="table-wrapper">
         <div className={table ? "periodic-table" : "periodic-list"}>
@@ -96,7 +101,13 @@ export default function PeriodicTable({ }) {
          
 
           {data.elements.map((element) => (
-            <Element key={element.number} element={element} handleElementClick={() => handleElementClick(element)} isGroupSelected={isGroupSelected} selectedElement={selectedElement} hoveredGroup={hoveredGroup} />
+            <Element 
+            key={element.number} 
+            element={element} 
+            handleElementClick={() => handleElementClick(element)} isGroupSelected={isGroupSelected} 
+            selectedElement={selectedElement} 
+            setHoveredElement={setHoveredElement}
+            hoveredGroup={hoveredGroup} />
           ))}
             
         </div>

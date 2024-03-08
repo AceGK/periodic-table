@@ -9,39 +9,41 @@ const GLBViewerWithNoSSR = dynamic(() => import("../GLBViewer"), {
   ssr: false,
 });
 
-export default function ElementDetails({ element, setSelectedElement }) {
+export default function ElementDetails({ selectedElement, setSelectedElement, hoveredElement }) {
   const [showDetails, setShowDetails] = useState(true);
 
+  // Determine which element to use: selectedElement or hoveredElement
+  const elementToShow = selectedElement || hoveredElement;
+
+  // Proceed only if there is an element to show
+  if (!elementToShow) return null;
+
   return (
-    element && (
-      <div>
-        <div className={styles.toggleDetails}>
-          {/* <button onClick={()=>setShowDetails(!showDetails)}>
-            {showDetails ? <FaChevronUp /> : <FaChevronDown />}
-            </button> */}
-        </div>
-        {showDetails && <div className={styles.elementDetails}>
-          <Element element={element} />
+    <div>
+      <div className={styles.toggleDetails}>
+        {/* Toggle button logic here */}
+      </div>
+      {showDetails && (
+        <div className={styles.elementDetails}>
+          <Element element={elementToShow} />
 
           <div className={styles.details}>
-
-
-            <Details element={element} />
+            <Details element={elementToShow} />
             <div style={{ maxHeight: "220px", maxWidth: "220px" }}>
-              {element.bohr_model_3d && (
-                <GLBViewerWithNoSSR path={element.bohr_model_3d} />
+              {elementToShow.bohr_model_3d && (
+                <GLBViewerWithNoSSR path={elementToShow.bohr_model_3d} />
               )}
             </div>
-
           </div>
         </div>
-        }
-      </div>
-    )
+      )}
+    </div>
   );
 }
 
+
 function Details({ element }) {
+  
   // State to keep track of the selected ionization energy index
   const [selectedIonizationIndex, setSelectedIonizationIndex] = useState(0);
   const [selectedRadiusIndex, setSelectedRadiusIndex] = useState(0);
@@ -84,7 +86,7 @@ function Details({ element }) {
           <li>
             <label>Description</label>
             <output>
-              <Link href={element.source}>Wiki</Link>
+              <Link href={element.source}>{element.name}</Link>
             </output>
           </li>
 

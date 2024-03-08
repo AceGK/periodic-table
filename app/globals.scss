@@ -180,27 +180,18 @@ ul[data-type="element-data"] {
     // );
     &.hovered {
       border: 1px solid rgba($color, 1);
-      background: linear-gradient(
-        135deg,
-        rgba($color, 0.1),
-        rgba($color, 0.1)
-      );
+      background: rgba($color, 0.1);
     }
     &:hover {
       border: 1px solid rgba($color, 1);
     }
     &.active {
       border: 1px solid rgba($color, 1);
-      background: linear-gradient(
-        135deg,
-        rgba($color, 1),
-        rgba($color, 1)
-      );
+      background: rgba($color, 1);
       * {
         opacity:1;
         color:rgb(24,24,24)!important;
       }
-      
     }
   }
   .halogen-tag:hover ~ .group-17.#{$name} > div {
@@ -212,6 +203,10 @@ ul[data-type="element-data"] {
   .pnictogen-tag:hover ~ .group-15.#{$name} > div  {
     border: 1px solid rgba($color, 1);
     }
+  .#{$name}.selected-element > div {
+    border: 1px solid rgb(227, 227, 227)!important;
+    // background-color: rgba($color, 0.1);
+  }
 }
 
 .halogen-tag {

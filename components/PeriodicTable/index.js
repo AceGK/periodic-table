@@ -68,9 +68,12 @@ export default function PeriodicTable({ }) {
             onMouseEnter={() => setHoveredGroup("lanthanide")}
             onMouseLeave={() => setHoveredGroup(null)}
           >
+            <div>
             57-71
           </div>
+          </div>
 
+          
           <div
             className="actinide-card actinide"
             onClick={() => setSelectedGroup(
@@ -81,7 +84,9 @@ export default function PeriodicTable({ }) {
             onMouseEnter={() => setHoveredGroup("actinide")}
             onMouseLeave={() => setHoveredGroup(null)}
           >
+            <div>
             89-103
+            </div>
           </div>
 
           <div className="pnictogen-tag">Pnictogens</div>

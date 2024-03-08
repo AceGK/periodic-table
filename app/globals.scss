@@ -43,7 +43,7 @@ h1 {
   display: grid;
   grid-template-columns: repeat(18, clamp(62px, 5vmax, 74px));
   // grid-template-rows: repeat(10, minmax(54px, 64px));
-  grid-gap: 3px;
+  grid-gap: 2px;
   position: relative;
   width: 100%;
   > div {
@@ -161,6 +161,9 @@ ul[data-type="element-data"] {
   li.#{$name}{
     color: $color;
   }
+  div.#{$name} {
+    // border: 1px solid rgba($color, 0);
+  }
   div.#{$name} > div {
     border: 1px solid rgba($color, 0);
     color: $color;
@@ -180,7 +183,7 @@ ul[data-type="element-data"] {
       background: linear-gradient(
         135deg,
         rgba($color, 0.1),
-        rgba($color, 0.02)
+        rgba($color, 0.1)
       );
     }
     &:hover {
@@ -191,7 +194,7 @@ ul[data-type="element-data"] {
       background: linear-gradient(
         135deg,
         rgba($color, 1),
-        rgba($color, 0.666)
+        rgba($color, 1)
       );
       * {
         opacity:1;
@@ -200,13 +203,13 @@ ul[data-type="element-data"] {
       
     }
   }
-  .halogen-tag:hover ~ .group-17.#{$name} {
+  .halogen-tag:hover ~ .group-17.#{$name} > div {
     border: 1px solid rgba($color, 1);
     }
-  .chalcogen-tag:hover ~ .group-16.#{$name} {
+  .chalcogen-tag:hover ~ .group-16.#{$name} > div  {
     border: 1px solid rgba($color, 1);
     }
-  .pnictogen-tag:hover ~ .group-15.#{$name} {
+  .pnictogen-tag:hover ~ .group-15.#{$name} > div  {
     border: 1px solid rgba($color, 1);
     }
 }
@@ -244,29 +247,16 @@ ul[data-type="element-data"] {
 }
 
 .actinide-card, .lanthanide-card {
-  display:flex;
-  justify-content: center;
-  align-items: center;
   border-radius:var(--border-radius);
   font-weight:600;
+  >  div {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height:100%;
+    width: 100%;
+  }
   &:hover {
     cursor:pointer;
   }
 }
-
-// .f-block-separator:before {
-//   content: '';
-//   position: absolute;
-//   /* Calculate starting point (top-left corner of the first item) */
-//   top: calc((1 / 1) * 100%); /* Adjust based on the row start */
-//   left: calc((2 / 5) * 100%); /* Adjust based on the column start */
-//   /* Calculate width and height based on grid positions */
-//   width: calc(((1 / 1) * 100%) - ((2 / 5) * 100%));
-//   height: calc(((8 / 10) * 100%) - ((5 / 10) * 100%));
-//   background-color: transparent;
-//   border-top: 2px solid red; /* Style the line */
-//   border-right: 2px solid black;
-//   transform: rotate(45deg); /* Adjust rotation based on your needs */
-//   transform-origin: top left;
-// }
-

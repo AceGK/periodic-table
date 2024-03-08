@@ -4,6 +4,7 @@ import styles from "./Element.module.scss";
 import dynamic from "next/dynamic";
 import { useState } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import Image from "next/image";
 
 const GLBViewerWithNoSSR = dynamic(() => import("../GLBViewer"), {
   ssr: false,
@@ -17,18 +18,40 @@ export default function ElementDetails({ selectedElement, setSelectedElement, ho
   // Proceed only if there is an element to show
   if (!elementToShow) return null;
 
+  // State to track the selected display option
+  const [displayOption, setDisplayOption] = useState('bohrModel3D');
+
+
   return (
 
     <div className={styles.elementDetails}>
       <Element element={elementToShow} />
 
       <div className={styles.details}>
+
         <Details element={elementToShow} />
-        <div style={{ maxHeight: "220px", maxWidth: "220px" }}>
-          {elementToShow.bohr_model_3d && (
-            <GLBViewerWithNoSSR path={elementToShow.bohr_model_3d} />
-          )}
+
+        <div style={{position:'relative'}}>
+          <select className={styles.mediaSelect} value={displayOption} onChange={e => setDisplayOption(e.target.value)}>
+            <option value="bohrModel3D">Bohr Model 3D</option>
+            <option value="image">Image</option>
+          </select>
+
+          <div style={{ width: "100%", height: "100%", maxHeight: "220px", position: 'relative' }}>
+            {displayOption === 'bohrModel3D' && elementToShow.bohr_model_3d && (
+              <GLBViewerWithNoSSR path={elementToShow.bohr_model_3d} />
+            )}
+            {displayOption === 'image' && elementToShow.image?.url && (
+              <Image
+                src={elementToShow.image.url}
+                alt="Element"
+                layout="fill"
+                objectFit="cover"
+              />
+            )}
+          </div>
         </div>
+
       </div>
     </div>
 

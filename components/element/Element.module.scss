@@ -120,7 +120,12 @@
     margin-left:5px;
   }
   output {
-    text-wrap:wrap;
+    text-wrap:nowrap;
+    a {
+      display:flex;
+      align-items: center;
+      gap:3px;
+    }
   }
 }
 

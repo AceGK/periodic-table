@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import { useState } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import Image from "next/image";
+import { MdOpenInNew } from "react-icons/md";
 
 const GLBViewerWithNoSSR = dynamic(() => import("../GLBViewer"), {
   ssr: false,
@@ -90,20 +91,20 @@ function Details({ element }) {
         <Link href={element.source}>Wiki</Link>
       </div> */}
       <div>
+   
         <ul data-type="element-data">
+        <li>
+            <label>{element.name}</label>
+            <output>
+              <a href={element.source} target="_blank" aria-label={`Wikipedia link for ${element.name}`}>wiki <MdOpenInNew /></a>
+            </output>
+          </li>
           <li>
             <label>Series</label>
             <output>
               <span className="capitalize">{element.category}</span>
               {element.possible_category &&
                 ` (${element.possible_category})`}
-            </output>
-          </li>
-
-          <li>
-            <label>Description</label>
-            <output>
-              <Link href={element.source}>{element.name}</Link>
             </output>
           </li>
 

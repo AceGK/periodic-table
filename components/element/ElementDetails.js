@@ -10,7 +10,6 @@ const GLBViewerWithNoSSR = dynamic(() => import("../GLBViewer"), {
 });
 
 export default function ElementDetails({ selectedElement, setSelectedElement, hoveredElement }) {
-  const [showDetails, setShowDetails] = useState(true);
 
   // Determine which element to use: selectedElement or hoveredElement
   const elementToShow = selectedElement || hoveredElement;
@@ -19,31 +18,26 @@ export default function ElementDetails({ selectedElement, setSelectedElement, ho
   if (!elementToShow) return null;
 
   return (
-    <div>
-      <div className={styles.toggleDetails}>
-        {/* Toggle button logic here */}
-      </div>
-      {showDetails && (
-        <div className={styles.elementDetails}>
-          <Element element={elementToShow} />
 
-          <div className={styles.details}>
-            <Details element={elementToShow} />
-            <div style={{ maxHeight: "220px", maxWidth: "220px" }}>
-              {elementToShow.bohr_model_3d && (
-                <GLBViewerWithNoSSR path={elementToShow.bohr_model_3d} />
-              )}
-            </div>
-          </div>
+    <div className={styles.elementDetails}>
+      <Element element={elementToShow} />
+
+      <div className={styles.details}>
+        <Details element={elementToShow} />
+        <div style={{ maxHeight: "220px", maxWidth: "220px" }}>
+          {elementToShow.bohr_model_3d && (
+            <GLBViewerWithNoSSR path={elementToShow.bohr_model_3d} />
+          )}
         </div>
-      )}
+      </div>
     </div>
+
   );
 }
 
 
 function Details({ element }) {
-  
+
   // State to keep track of the selected ionization energy index
   const [selectedIonizationIndex, setSelectedIonizationIndex] = useState(0);
   const [selectedRadiusIndex, setSelectedRadiusIndex] = useState(0);
@@ -54,7 +48,7 @@ function Details({ element }) {
       v = n % 100;
     return n + (s[(v - 20) % 10] || s[v] || s[0]);
   };
-  
+
   // Function to generate select options from the radius object
   const generateSelectOptions = () => {
     return Object.keys(element.radius).map((key) => {
@@ -173,7 +167,7 @@ function Details({ element }) {
       <div>
         <ul data-type="element-data">
 
-        {/* <li>
+          {/* <li>
             <label style={{ display: "flex" }}>
               Radius
               <select

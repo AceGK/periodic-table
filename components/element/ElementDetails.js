@@ -16,11 +16,12 @@ export default function ElementDetails({ selectedElement, setSelectedElement, ho
   // Determine which element to use: selectedElement or hoveredElement
   const elementToShow = selectedElement || hoveredElement;
 
+    // State to track the selected display option
+    const [displayOption, setDisplayOption] = useState('bohrModel3D');
+
+
   // Proceed only if there is an element to show
   if (!elementToShow) return null;
-
-  // State to track the selected display option
-  const [displayOption, setDisplayOption] = useState('bohrModel3D');
 
 
   return (
@@ -201,26 +202,19 @@ function Details({ element }) {
       </div>
     </>
   )
+
+
 }
 
-function Radius({element}) {
+  
+function Radius({ element }) {
   const [selectedRadiusIndex, setSelectedRadiusIndex] = useState(0);
 
-    // // Function to generate select options from the radius object
-    // // this doesn't seem like a great approach since the user would likely want to toggle a single attribute and not have it switch when selecting a different element that doesn't contain that attribute
-    // const generateSelectOptions = () => {
-    //   return Object.keys(element.radius).map((key) => {
-    //     if (element.radius[key] !== null) {
-    //       return <option key={key} value={key}>{key}</option>;
-    //     }
-    //   });
-    // };
+  if (!element.radius) {
+    return null;
+  }
 
-    if (!element.radius) {
-      return null; 
-    }
-    
-    return  (
+  return (
     <li>
       <label style={{ display: "flex" }}>
         Radius
@@ -239,32 +233,32 @@ function Radius({element}) {
         {element.radius[selectedRadiusIndex] ? element.radius[selectedRadiusIndex] : "n/a"}
       </output>
     </li>
-  )
+  );
 }
 
-function Hardness({element}) {
+function Hardness({ element }) {
   const [selectedHardness, setSelectedHardness] = useState(0);
 
   if (!element.hardness) {
     return null;
   }
+
   return (
     <li>
       <label style={{ display: "flex" }}>
-        hardness
+        Hardness
         <select
           value={selectedHardness}
           onChange={(e) => setSelectedHardness(e.target.value)}
         >
-          <option value="brinell">brinell</option>
-          <option value="mohs">mohs</option>
-          <option value="vickers">vickers</option>
-
+          <option value="brinell">Brinell</option>
+          <option value="mohs">Mohs</option>
+          <option value="vickers">Vickers</option>
         </select>
       </label>
       <output>
         {element.hardness[selectedHardness] ? element.hardness[selectedHardness] : "n/a"}
       </output>
     </li>
-  )
+  );
 }

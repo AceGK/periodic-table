@@ -16,9 +16,8 @@ export default function ElementDetails({ selectedElement, setSelectedElement, ho
   // Determine which element to use: selectedElement or hoveredElement
   const elementToShow = selectedElement || hoveredElement;
 
-    // State to track the selected display option
-    const [displayOption, setDisplayOption] = useState('bohrModel3D');
-
+  // State to track the selected display option
+  const [displayOption, setDisplayOption] = useState('bohrModel3D');
 
   // Proceed only if there is an element to show
   if (!elementToShow) return null;
@@ -206,7 +205,7 @@ function Details({ element }) {
 
 }
 
-  
+
 function Radius({ element }) {
   const [selectedRadiusIndex, setSelectedRadiusIndex] = useState(0);
 

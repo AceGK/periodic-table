@@ -1,26 +1,26 @@
-import { Suspense, useEffect, useRef } from 'react';
+import { Suspense, useEffect, useRef, useMemo } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useGLTF, useAnimations } from '@react-three/drei';
+import { clone as skeletonClone } from 'three/examples/jsm/utils/SkeletonUtils.js';
 
 const Model = ({ path }) => {
   const group = useRef();
   const { scene, animations } = useGLTF(path);
+  const clonedScene = useMemo(() => skeletonClone(scene), [scene]);
   const { actions } = useAnimations(animations, group);
 
   useEffect(() => {
-    // Automatically play all animations
     for (const action of Object.values(actions)) {
-      action.play();
+      action?.play();
     }
-    // Optional: specify cleanup function to stop animations when component unmounts
     return () => {
       for (const action of Object.values(actions)) {
-        action.stop();
+        action?.stop();
       }
     };
   }, [actions]);
 
-  return <primitive ref={group} object={scene} dispose={null} />;
+  return <primitive ref={group} object={clonedScene} dispose={null} />;
 };
 
 const GLBViewer = ({ path }) => {

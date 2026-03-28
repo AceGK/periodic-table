@@ -31,7 +31,7 @@ export default function ElementDetails({ selectedElement, hoveredElement, compac
       <Tabs defaultValue="properties">
         <TabsList>
           <TabsTrigger value="properties">Properties</TabsTrigger>
-          <TabsTrigger value="summary">Summary</TabsTrigger>
+          <TabsTrigger value="summary">Description</TabsTrigger>
           <TabsTrigger value="electrons">Electrons</TabsTrigger>
           <TabsTrigger value="isotopes">Isotopes</TabsTrigger>
           <TabsTrigger value="compounds">Compounds</TabsTrigger>
@@ -64,11 +64,7 @@ export default function ElementDetails({ selectedElement, hoveredElement, compac
             </div>
 
             {elementToShow.image?.url && (
-              <div
-                style={{ position: 'relative', minWidth: '200px', flex: '0 0 auto', height: '100%', cursor: 'pointer' }}
-                onClick={() => setImageModalOpen(true)}
-                title="Click to enlarge"
-              >
+              <div style={{ position: 'relative', minWidth: '200px', flex: '0 0 auto', height: '100%' }}>
                 <Image
                   src={elementToShow.image.url}
                   alt={elementToShow.name}
@@ -76,6 +72,18 @@ export default function ElementDetails({ selectedElement, hoveredElement, compac
                   objectFit="cover"
                   style={{ borderRadius: 'var(--border-radius)' }}
                 />
+                <button
+                  className={styles.expandBtn}
+                  onClick={() => setImageModalOpen(true)}
+                  aria-label="Expand image"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="15 3 21 3 21 9" />
+                    <polyline points="9 21 3 21 3 15" />
+                    <line x1="21" y1="3" x2="14" y2="10" />
+                    <line x1="3" y1="21" x2="10" y2="14" />
+                  </svg>
+                </button>
               </div>
             )}
           </div>
@@ -132,16 +140,26 @@ export default function ElementDetails({ selectedElement, hoveredElement, compac
               </ul>
             </div>
 
-            <div
-              style={{ position: 'relative', cursor: elementToShow.bohr_model_3d ? 'pointer' : 'default' }}
-              onClick={() => elementToShow.bohr_model_3d && setBohrModalOpen(true)}
-              title={elementToShow.bohr_model_3d ? 'Click to enlarge' : undefined}
-            >
+            <div style={{ position: 'relative' }}>
               <div style={{ width: "100%", height: "100%", maxHeight: "220px", position: 'relative' }}>
                 {elementToShow.bohr_model_3d && (
                   <GLBViewerWithNoSSR path={elementToShow.bohr_model_3d} />
                 )}
               </div>
+              {elementToShow.bohr_model_3d && (
+                <button
+                  className={styles.expandBtn}
+                  onClick={() => setBohrModalOpen(true)}
+                  aria-label="Expand Bohr model"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="15 3 21 3 21 9" />
+                    <polyline points="9 21 3 21 3 15" />
+                    <line x1="21" y1="3" x2="14" y2="10" />
+                    <line x1="3" y1="21" x2="10" y2="14" />
+                  </svg>
+                </button>
+              )}
             </div>
           </div>
 
@@ -152,7 +170,7 @@ export default function ElementDetails({ selectedElement, hoveredElement, compac
             title={`${elementToShow.name} — Bohr Model`}
             bodyClassName={styles.galleryBody}
           >
-            {elementToShow.bohr_model_3d && (
+            {bohrModalOpen && elementToShow.bohr_model_3d && (
               <div style={{ width: '100%', height: '100%' }}>
                 <GLBViewerWithNoSSR path={elementToShow.bohr_model_3d} />
               </div>

@@ -115,7 +115,7 @@ export default function ElementsPage() {
   const [filterCategory, setFilterCategory] = useState('');
   const [filterPhase, setFilterPhase] = useState('');
   const [filterBlock, setFilterBlock] = useState('');
-  const [temperature, setTemperature] = useState(293);
+  const [temperature, setTemperature] = useState(273);
 
   const toggle = (number) => {
     setExpandedNumber(expandedNumber === number ? null : number);

@@ -151,10 +151,21 @@
   }
 }
 
-// ─── Hamburger button ──────────────────────────────────────
+// ─── Mobile actions (icons + hamburger) ─────────────────────
+
+.mobileActions {
+  display: none;
+  align-items: center;
+  gap: 0.25rem;
+  flex-shrink: 0;
+
+  @include tablet {
+    display: flex;
+  }
+}
 
 .hamburger {
-  display: none;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 5px;
@@ -165,14 +176,9 @@
   border: none;
   border-radius: var(--border-radius);
   cursor: pointer;
-  z-index: 60;
 
   &:hover {
     background-color: var(--clr-surface-hover);
-  }
-
-  @include tablet {
-    display: flex;
   }
 }
 
@@ -198,92 +204,34 @@
   }
 }
 
-// ─── Mobile overlay ────────────────────────────────────────
+// ─── Mobile fullscreen menu ───────────────────────────────
 
-.mobileOverlay {
+.mobileMenu {
+  display: none;
   position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  z-index: 40;
-  animation: overlayIn 0.2s ease;
-}
-
-@keyframes overlayIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-// ─── Mobile sheet ──────────────────────────────────────────
-
-.mobileSheet {
-  position: fixed;
-  top: 0;
+  top: 49px;
+  left: 0;
   right: 0;
   bottom: 0;
-  width: 320px;
-  max-width: 85vw;
-  background-color: var(--clr-bg-primary);
-  border-left: 1px solid var(--clr-border);
-  z-index: 50;
-  transform: translateX(100%);
-  transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
-  overflow-y: auto;
-  display: flex;
+  z-index: 29;
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(12px);
   flex-direction: column;
-
-  &.mobileSheetOpen {
-    transform: translateX(0);
-  }
-}
-
-// ─── Sheet header ──────────────────────────────────────────
-
-.mobileSheetHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem 1.25rem;
-  border-bottom: 1px solid var(--clr-border);
-  flex-shrink: 0;
-}
-
-.mobileSheetLogo {
-  display: flex;
-  align-items: center;
-  width: 140px;
-
-  img {
-    width: 100%;
-    height: auto;
-  }
-}
-
-.mobileClose {
-  display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
-  background: transparent;
-  border: none;
-  border-radius: var(--border-radius);
-  color: var(--clr-text-muted);
-  cursor: pointer;
-  transition: background-color 0.15s, color 0.15s;
+  gap: 0.25rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
 
-  &:hover {
-    background-color: var(--clr-surface-hover);
-    color: var(--clr-text-primary);
+  @include tablet {
+    display: flex;
   }
-}
 
-// ─── Sheet body ────────────────────────────────────────────
-
-.mobileSheetBody {
-  display: flex;
-  flex-direction: column;
-  padding: 0.5rem 1.25rem 1.5rem;
-  flex: 1;
+  &.mobileMenuOpen {
+    opacity: 1;
+    pointer-events: auto;
+  }
 }
 
 // ─── Mobile links ──────────────────────────────────────────
@@ -291,12 +239,12 @@
 .mobileLink {
   display: flex;
   align-items: center;
-  padding: 0.75rem 0;
-  font-size: 0.9375rem;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.25rem;
   font-weight: 500;
   color: var(--clr-text-primary);
   text-decoration: none;
-  border-bottom: 1px solid var(--clr-border-subtle);
   transition: color 0.15s;
 
   &:hover {
@@ -307,22 +255,23 @@
 // ─── Mobile accordion ─────────────────────────────────────
 
 .mobileAccordion {
-  border-bottom: 1px solid var(--clr-border-subtle);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .mobileAccordionTrigger {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  padding: 0.75rem 0;
-  font-size: 0.9375rem;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.25rem;
   font-weight: 500;
   color: var(--clr-text-primary);
   background: transparent;
   border: none;
   cursor: pointer;
-  text-align: left;
   transition: color 0.15s;
 
   &:hover {
@@ -358,28 +307,16 @@
 .mobileSubLink {
   display: flex;
   align-items: center;
-  padding: 0.5rem 0.75rem;
-  margin-left: 0.5rem;
+  justify-content: center;
+  padding: 0.375rem 0.75rem;
   border-radius: var(--border-radius);
   color: var(--clr-text-secondary);
   text-decoration: none;
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: 400;
-  transition: background-color 0.15s, color 0.15s;
+  transition: color 0.15s;
 
   &:hover {
-    background-color: var(--clr-surface-hover);
     color: var(--clr-text-primary);
   }
-}
-
-// ─── Mobile sheet footer ──────────────────────────────────
-
-.mobileSheetFooter {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 1rem 1.25rem;
-  border-top: 1px solid var(--clr-border-subtle);
-  margin-top: auto;
 }

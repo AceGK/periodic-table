@@ -148,115 +148,91 @@ export default function Nav() {
         </Link>
       </div>
 
-      {/* Mobile hamburger button */}
-      <button
-        className={styles.hamburger}
-        onClick={() => setMobileOpen(!mobileOpen)}
-        aria-label="Toggle menu"
-        aria-expanded={mobileOpen}
-      >
-        <span className={`${styles.hamburgerLine} ${mobileOpen ? styles.open : ''}`} />
-        <span className={`${styles.hamburgerLine} ${mobileOpen ? styles.open : ''}`} />
-        <span className={`${styles.hamburgerLine} ${mobileOpen ? styles.open : ''}`} />
-      </button>
+      {/* Mobile actions + hamburger */}
+      <div className={styles.mobileActions}>
+        <button
+          className={styles.iconBtn}
+          onClick={() => setDarkMode(!darkMode)}
+          aria-label="Toggle theme"
+        >
+          {darkMode ? <SunIcon /> : <MoonIcon />}
+        </button>
+        <button className={styles.iconBtn} aria-label="Settings">
+          <SettingsIcon />
+        </button>
+        <button
+          className={styles.hamburger}
+          onClick={() => setMobileOpen(!mobileOpen)}
+          aria-label="Toggle menu"
+          aria-expanded={mobileOpen}
+        >
+          <span className={`${styles.hamburgerLine} ${mobileOpen ? styles.open : ''}`} />
+          <span className={`${styles.hamburgerLine} ${mobileOpen ? styles.open : ''}`} />
+          <span className={`${styles.hamburgerLine} ${mobileOpen ? styles.open : ''}`} />
+        </button>
+      </div>
 
-      {/* Mobile overlay */}
-      {mobileOpen && (
-        <div className={styles.mobileOverlay} onClick={closeMobile} />
-      )}
+      {/* Mobile dropdown menu */}
+      <div className={`${styles.mobileMenu} ${mobileOpen ? styles.mobileMenuOpen : ''}`}>
+        <Link href="/table" className={styles.mobileLink} onClick={closeMobile}>
+          Table
+        </Link>
 
-      {/* Mobile sheet */}
-      <div className={`${styles.mobileSheet} ${mobileOpen ? styles.mobileSheetOpen : ''}`}>
-        {/* Sheet header */}
-        <div className={styles.mobileSheetHeader}>
-          <Link href="/" className={styles.mobileSheetLogo} onClick={closeMobile}>
-            <img src="/elementable-logo.svg" alt="Elementable" />
-          </Link>
-          <button className={styles.mobileClose} onClick={closeMobile} aria-label="Close menu">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-              <path d="M3 3L13 13M13 3L3 13" />
+        <Link href="/elements" className={styles.mobileLink} onClick={closeMobile}>
+          Elements
+        </Link>
+
+        {/* Learn accordion */}
+        <div className={styles.mobileAccordion}>
+          <button
+            className={styles.mobileAccordionTrigger}
+            onClick={() => toggleAccordion('learn')}
+            aria-expanded={mobileAccordion === 'learn'}
+          >
+            Learn
+            <svg
+              className={`${styles.mobileChevron} ${mobileAccordion === 'learn' ? styles.mobileChevronOpen : ''}`}
+              width="14" height="14" viewBox="0 0 10 10"
+            >
+              <path d="M2 3.5L5 6.5L8 3.5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
             </svg>
           </button>
+          <div className={`${styles.mobileAccordionContent} ${mobileAccordion === 'learn' ? styles.mobileAccordionOpen : ''}`}>
+            {learnLinks.map((link) => (
+              <Link key={link.href} href={link.href} className={styles.mobileSubLink} onClick={closeMobile}>
+                {link.title}
+              </Link>
+            ))}
+          </div>
         </div>
 
-        {/* Sheet body */}
-        <div className={styles.mobileSheetBody}>
-
-          <Link href="/table" className={styles.mobileLink} onClick={closeMobile}>
-            Table
-          </Link>
-
-          <Link href="/elements" className={styles.mobileLink} onClick={closeMobile}>
-            Elements
-          </Link>
-
-          {/* Learn accordion */}
-          <div className={styles.mobileAccordion}>
-            <button
-              className={styles.mobileAccordionTrigger}
-              onClick={() => toggleAccordion('learn')}
-              aria-expanded={mobileAccordion === 'learn'}
-            >
-              Learn
-              <svg
-                className={`${styles.mobileChevron} ${mobileAccordion === 'learn' ? styles.mobileChevronOpen : ''}`}
-                width="14" height="14" viewBox="0 0 10 10"
-              >
-                <path d="M2 3.5L5 6.5L8 3.5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-              </svg>
-            </button>
-            <div className={`${styles.mobileAccordionContent} ${mobileAccordion === 'learn' ? styles.mobileAccordionOpen : ''}`}>
-              {learnLinks.map((link) => (
-                <Link key={link.href} href={link.href} className={styles.mobileSubLink} onClick={closeMobile}>
-                  {link.title}
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          {/* Resources accordion */}
-          <div className={styles.mobileAccordion}>
-            <button
-              className={styles.mobileAccordionTrigger}
-              onClick={() => toggleAccordion('resources')}
-              aria-expanded={mobileAccordion === 'resources'}
-            >
-              Resources
-              <svg
-                className={`${styles.mobileChevron} ${mobileAccordion === 'resources' ? styles.mobileChevronOpen : ''}`}
-                width="14" height="14" viewBox="0 0 10 10"
-              >
-                <path d="M2 3.5L5 6.5L8 3.5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-              </svg>
-            </button>
-            <div className={`${styles.mobileAccordionContent} ${mobileAccordion === 'resources' ? styles.mobileAccordionOpen : ''}`}>
-              {resourceLinks.map((link) => (
-                <Link key={link.title} href={link.href} className={styles.mobileSubLink} onClick={closeMobile}>
-                  {link.title}
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          <Link href="/support" className={styles.mobileLink} onClick={closeMobile}>
-            Support
-          </Link>
-
-        </div>
-
-        {/* Sheet footer actions */}
-        <div className={styles.mobileSheetFooter}>
+        {/* Resources accordion */}
+        <div className={styles.mobileAccordion}>
           <button
-            className={styles.iconBtn}
-            onClick={() => setDarkMode(!darkMode)}
-            aria-label="Toggle theme"
+            className={styles.mobileAccordionTrigger}
+            onClick={() => toggleAccordion('resources')}
+            aria-expanded={mobileAccordion === 'resources'}
           >
-            {darkMode ? <SunIcon /> : <MoonIcon />}
+            Resources
+            <svg
+              className={`${styles.mobileChevron} ${mobileAccordion === 'resources' ? styles.mobileChevronOpen : ''}`}
+              width="14" height="14" viewBox="0 0 10 10"
+            >
+              <path d="M2 3.5L5 6.5L8 3.5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
           </button>
-          <button className={styles.iconBtn} aria-label="Settings">
-            <SettingsIcon />
-          </button>
+          <div className={`${styles.mobileAccordionContent} ${mobileAccordion === 'resources' ? styles.mobileAccordionOpen : ''}`}>
+            {resourceLinks.map((link) => (
+              <Link key={link.title} href={link.href} className={styles.mobileSubLink} onClick={closeMobile}>
+                {link.title}
+              </Link>
+            ))}
+          </div>
         </div>
+
+        <Link href="/support" className={styles.mobileLink} onClick={closeMobile}>
+          Support
+        </Link>
       </div>
     </nav>
   );

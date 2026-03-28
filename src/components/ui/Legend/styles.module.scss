@@ -1,0 +1,154 @@
+.legend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  font-size: 0.75rem;
+  height: 100%;
+}
+
+// ─── Phase indicators ───────────────────────────────────────
+
+.phaseGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+
+.phaseItem {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--border-radius);
+  border: 1px solid transparent;
+  transition: background-color 0.15s, border-color 0.15s;
+
+  &:hover {
+    background: var(--clr-surface-hover);
+    border-color: var(--clr-border);
+  }
+
+  &.phaseItemActive {
+    background: linear-gradient(135deg, rgba(from currentColor r g b / 0.12), rgba(from currentColor r g b / 0.03));
+    border: 1px solid currentColor;
+  }
+}
+
+.phaseIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.phaseLabel {
+  white-space: nowrap;
+  font-weight: 500;
+  color: var(--clr-text-secondary);
+}
+
+.phaseItemActive .phaseLabel {
+  color: var(--clr-text-primary);
+}
+
+// ─── Category groups ────────────────────────────────────────
+
+.categoryGroups {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 0 1rem;
+}
+
+.middleColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.groupBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.groupHeader {
+  padding: 0.25rem 0.5rem;
+  font-weight: 600;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--clr-text-secondary);
+  cursor: pointer;
+  white-space: nowrap;
+  border-radius: var(--border-radius);
+
+  &:hover {
+    color: var(--clr-text-primary);
+  }
+
+  &.groupHeaderActive {
+    color: var(--clr-text-primary);
+    background: var(--clr-surface-active);
+  }
+}
+
+.subGroups {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  &.twoCol {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.subGroupItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s;
+  border-radius: var(--border-radius);
+  border: 1px solid transparent;
+
+  &:hover {
+    background: var(--clr-surface-hover);
+    border-color: var(--clr-border);
+  }
+
+  &.subGroupItemActive {
+    background: linear-gradient(135deg, rgba(from currentColor r g b / 0.12), rgba(from currentColor r g b / 0.03));
+    border: 1px solid currentColor;
+
+    .subGroupLabel {
+      color: var(--clr-text-primary);
+    }
+  }
+}
+
+.subGroupSwatch {
+  width: 4px;
+  height: 100%;
+  min-height: 1rem;
+  border-radius: 2px;
+  background: currentColor;
+  opacity: 0.8;
+  flex-shrink: 0;
+}
+
+.subGroupLabel {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  text-transform: capitalize;
+  color: var(--clr-text-secondary);
+  white-space: nowrap;
+}

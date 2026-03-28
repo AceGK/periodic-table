@@ -1,0 +1,46 @@
+.tabs {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.tabsList {
+  display: flex;
+  gap: 2px;
+  border-bottom: 1px solid var(--clr-border);
+  padding: 0 0.5rem;
+}
+
+.tabsTrigger {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--clr-text-secondary);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+  white-space: nowrap;
+
+  &:hover {
+    color: var(--clr-text-primary);
+  }
+
+  &.active {
+    color: var(--clr-text-primary);
+    border-bottom-color: var(--clr-accent);
+  }
+}
+
+.tabsContent {
+  width: 100%;
+  padding-top: 1rem;
+  flex: 1;
+  min-height: 0;
+  max-height: 264px;
+  overflow-x: auto;
+  display: flex;
+  flex-direction: column;
+}

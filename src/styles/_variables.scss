@@ -1,0 +1,63 @@
+
+:root {
+  // ─── Base palette (warm dark with subtle navy tint) ───
+  --clr-bg-primary: #19191B;
+  --clr-bg-secondary: #1E1E22;
+  --clr-bg-tertiary: #252528;
+  --clr-bg-elevated: #2A2A2F;
+
+  // ─── Surface / card backgrounds ───
+  --clr-surface: #202024;
+  --clr-surface-hover: rgba(255, 255, 255, 0.05);
+  --clr-surface-active: rgba(255, 255, 255, 0.08);
+
+  // ─── Borders ───
+  --clr-border: rgba(255, 255, 255, 0.08);
+  --clr-border-subtle: rgba(255, 255, 255, 0.05);
+  --clr-border-strong: rgba(255, 255, 255, 0.15);
+
+  // ─── Text ───
+  --clr-text-primary: #EDEDEF;
+  --clr-text-secondary: #9A9AA0;
+  --clr-text-muted: #5C5C66;
+  --clr-text-accent: #4AE3B5;
+
+  // ─── Accent ───
+  --clr-accent: #4AE3B5;
+  --clr-accent-dim: rgba(74, 227, 181, 0.15);
+
+  // ─── Link ───
+  --clr-link: #7CC4FA;
+
+  // ─── Shadow ───
+  --clr-shadow: rgba(0, 0, 0, 0.5);
+
+  // ─── Element category colors ───
+  --clr-alkali-metal: hsl(25, 100%, 55%);
+  --clr-alkaline-earth-metal: hsl(45, 90%, 58%);
+  --clr-transition-metal: hsl(220, 80%, 65%);
+  --clr-post-transition-metal: hsl(150, 55%, 50%);
+  --clr-lanthanide: hsl(80, 75%, 55%);
+  --clr-actinide: hsl(166, 60%, 50%);
+  --clr-diatomic-nonmetal: hsl(355, 80%, 60%);
+  --clr-polyatomic-nonmetal: hsl(310, 75%, 60%);
+  --clr-noble-gas: hsl(265, 90%, 68%);
+  --clr-metalloid: hsl(183, 80%, 65%);
+  --clr-unknown: hsl(220, 10%, 55%);
+
+  // ─── Misc ───
+  --border-radius: 0.2em;
+
+  // ─── Slate scale (kept for compatibility) ───
+  --clr-slate-50: #f8fafc;
+  --clr-slate-100: #f1f5f9;
+  --clr-slate-200: #e2e8f0;
+  --clr-slate-300: #cbd5e1;
+  --clr-slate-400: #94a3b8;
+  --clr-slate-500: #64748b;
+  --clr-slate-600: #475569;
+  --clr-slate-700: #334155;
+  --clr-slate-800: #1e293b;
+  --clr-slate-900: #0f172a;
+  --clr-slate-950: #020617;
+}

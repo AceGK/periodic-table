@@ -1,0 +1,276 @@
+.noPadding {
+  padding: 0 !important;
+}
+
+.trigger {
+  color: var(--clr-link);
+  cursor: pointer;
+  text-decoration: none;
+  display: inline;
+
+  &:hover {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--clr-text-muted);
+  padding: 1rem 0;
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--clr-border);
+  border-top-color: var(--clr-accent);
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.error {
+  color: #e85d75;
+  padding: 1rem 0;
+}
+
+// ─── Summary view ──────────────────────────────────────────
+
+.article {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.thumbnail {
+  float: right;
+  margin: 0 0 0.75rem 1rem;
+  max-width: 200px;
+  border-radius: 0.375rem;
+  border: 1px solid var(--clr-border);
+}
+
+.description {
+  color: var(--clr-text-muted);
+  font-size: 0.8125rem;
+  font-style: italic;
+  text-transform: capitalize;
+  margin: 0;
+}
+
+.extract {
+  color: var(--clr-text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.7;
+
+  b, strong {
+    color: var(--clr-text-primary);
+    font-weight: 600;
+  }
+}
+
+// ─── Back button ────────────────────────────────────────────
+
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--border-radius);
+  color: var(--clr-text-secondary);
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-right: 0.5rem;
+  transition: background-color 0.15s, color 0.15s;
+
+  &:hover {
+    background-color: var(--clr-surface-hover);
+    color: var(--clr-text-primary);
+  }
+}
+
+// ─── Full article iframe ────────────────────────────────────
+
+.wikiFrame {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  border: none;
+  border-radius: var(--border-radius);
+  background: var(--clr-bg-secondary);
+}
+
+// ─── Full article view (unused, kept for fallback) ─────────
+
+.wikiArticle {
+  color: var(--clr-text-secondary);
+  font-size: 0.875rem;
+  line-height: 1.65;
+}
+
+.wikiContent {
+  // Text
+  color: var(--clr-text-secondary);
+
+  p {
+    margin: 0.5rem 0;
+  }
+
+  b, strong {
+    color: var(--clr-text-primary);
+  }
+
+  a {
+    color: var(--clr-link);
+  }
+
+  // Headings
+  h2, h3, h4, h5 {
+    color: var(--clr-text-primary);
+    margin: 1.25rem 0 0.5rem;
+    padding-bottom: 0.25rem;
+    border-bottom: 1px solid var(--clr-border-subtle);
+    font-size: 1.1rem;
+  }
+
+  h3 { font-size: 1rem; border: none; }
+  h4, h5 { font-size: 0.9rem; border: none; }
+
+  // Lists
+  ul, ol {
+    padding-left: 1.5rem;
+    margin: 0.5rem 0;
+  }
+
+  li {
+    margin: 0.25rem 0;
+  }
+
+  // Images
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--border-radius);
+  }
+
+  // Figures / thumbnails
+  figure,
+  .thumb {
+    margin: 0.75rem 0;
+
+    &.tright,
+    &[style*="float:right"] {
+      float: right;
+      margin: 0 0 0.75rem 1rem;
+      max-width: 250px;
+    }
+
+    &.tleft,
+    &[style*="float:left"] {
+      float: left;
+      margin: 0 1rem 0.75rem 0;
+      max-width: 250px;
+    }
+  }
+
+  figcaption,
+  .thumbcaption {
+    font-size: 0.75rem;
+    color: var(--clr-text-muted);
+    padding: 0.25rem 0;
+  }
+
+  // Tables
+  table {
+    border-collapse: collapse;
+    margin: 0.75rem 0;
+    font-size: 0.8125rem;
+    max-width: 100%;
+    overflow-x: auto;
+    display: block;
+
+    th, td {
+      padding: 0.375rem 0.5rem;
+      border: 1px solid var(--clr-border);
+      text-align: left;
+    }
+
+    th {
+      background: var(--clr-bg-tertiary);
+      color: var(--clr-text-primary);
+      font-weight: 500;
+    }
+  }
+
+  // Infobox
+  .infobox {
+    float: right;
+    margin: 0 0 1rem 1rem;
+    max-width: 300px;
+    background: var(--clr-bg-tertiary);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--clr-border);
+    font-size: 0.8125rem;
+
+    th, td {
+      background: transparent;
+    }
+
+    caption {
+      color: var(--clr-text-primary);
+      font-weight: 600;
+      padding: 0.5rem;
+    }
+  }
+
+  // Hide Wikipedia UI elements
+  :global {
+    .mw-editsection,
+    .reference,
+    .reflist,
+    .refbegin,
+    .navbox,
+    .navbox-container,
+    .sistersitebox,
+    .noprint,
+    .mw-empty-elt,
+    .metadata,
+    .ambox,
+    .portal,
+    .authority-control,
+    .catlinks,
+    .mw-jump-link,
+    .shortdescription,
+    .hatnote,
+    [role="navigation"] {
+      display: none !important;
+    }
+  }
+}
+
+// ─── Footer ────────────────────────────────────────────────
+
+.footer {
+  padding-top: 0.75rem;
+  margin-top: 0.75rem;
+  border-top: 1px solid var(--clr-border);
+  flex-shrink: 0;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.8125rem;
+    color: var(--clr-link);
+  }
+}

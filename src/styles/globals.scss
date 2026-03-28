@@ -213,9 +213,6 @@ ul[data-type="element-data"] {
         opacity:1;
         color: var(--clr-bg-primary) !important;
       }
-      span {
-        color: white !important;
-      }
     }
   }
   .halogen-tag:hover ~ .group-17.#{$name} > div {
@@ -235,9 +232,6 @@ ul[data-type="element-data"] {
     background: rgba($color, 0.15) !important;
     * {
       color: var(--clr-text-primary) !important;
-    }
-    span {
-      color: white !important;
     }
   }
 }

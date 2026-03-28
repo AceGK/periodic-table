@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import elementGroups from '@/lib/ElementGroups.JSON';
+import elementGroups from '@/lib/ElementGroups.json';
 import styles from './styles.module.scss';
 import { IoIosCube } from "react-icons/io";
 import { TbDropletFilled } from "react-icons/tb";

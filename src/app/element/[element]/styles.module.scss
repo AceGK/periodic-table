@@ -1,0 +1,162 @@
+@import "../../../styles/mixins";
+
+// ─── Hero ─────────────────────────────────────────────────
+
+.hero {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  margin-bottom: 2.5rem;
+
+  @include tablet {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.25rem;
+  }
+}
+
+.heroCard {
+  flex-shrink: 0;
+}
+
+.heroInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.heroNumber {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.heroName {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--clr-text-primary);
+  margin: 0;
+  line-height: 1.2;
+
+  @include tablet {
+    font-size: 1.75rem;
+  }
+}
+
+.heroMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--clr-text-secondary);
+  flex-wrap: wrap;
+
+  @include tablet(){
+    justify-content: center;
+  }
+}
+
+.heroSummary {
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: var(--clr-text-secondary);
+  margin: 0.5rem 0 0;
+  max-width: 640px;
+}
+
+.heroLinks {
+  margin-top: 0.5rem;
+  font-size: 0.8125rem;
+}
+
+// ─── Content grid ─────────────────────────────────────────
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem 2.5rem;
+  margin-bottom: 2.5rem;
+
+  @include tablet {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+// ─── Section media (image & model) ────────────────────────
+
+.sectionImage,
+.sectionModel {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  border: 1px solid var(--clr-border);
+  margin-bottom: 0.5rem;
+}
+
+// ─── Prev / Next navigation ──────────────────────────────
+
+.elementNav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--clr-border-subtle);
+}
+
+.elementNavLink {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: var(--clr-text-secondary);
+  transition: color 0.15s;
+
+  &:hover {
+    color: var(--clr-text-primary);
+  }
+}
+
+.elementNavRight {
+  margin-left: auto;
+}
+
+.elementNavCard {
+  width: 90px;
+  flex-shrink: 0;
+
+  > div {
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    pointer-events: none;
+  }
+}
+
+.elementNavText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.elementNavLabel {
+  font-size: 0.6875rem;
+  color: var(--clr-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.elementNavName {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+

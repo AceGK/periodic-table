@@ -125,7 +125,7 @@ export default function ElementsPage() {
         />
 
         <select value={filterCategory} onChange={(e) => setFilterCategory(e.target.value)} className={styles.filterSelect}>
-          <option value="">All Series</option>
+          <option value="">All Categories</option>
           {categories.map((cat) => (
             <option key={cat} value={cat}>{cat}</option>
           ))}
@@ -207,7 +207,7 @@ export default function ElementsPage() {
             </div>
 
             <div className={styles.legendSection}>
-              <span className={styles.legendSectionTitle}>Series</span>
+              <span className={styles.legendSectionTitle}>Category</span>
               <div className={styles.legendSwatches}>
                 {Object.entries(categoryVarMap)
                   .filter(([key]) => !key.startsWith('unknown,'))

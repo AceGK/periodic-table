@@ -130,8 +130,8 @@
   // Radix provides these CSS custom properties
   height: var(--radix-navigation-menu-viewport-height);
   width: var(--radix-navigation-menu-viewport-width);
+  transition: width 0s, height 0s;
 
-  transition: width 0.2s ease, height 0.2s ease;
 
   &[data-state="open"] {
     animation: viewportIn 0.15s ease-out;

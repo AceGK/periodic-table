@@ -54,7 +54,7 @@ export default function FullDetails({ element: el }) {
         {/* Identity */}
         <div className={styles.detailRow}><span>Name</span><span>{el.name}</span></div>
         <div className={styles.detailRow}><span>Symbol</span><span>{el.symbol}</span></div>
-        <div className={styles.detailRow}><span>Series</span><span style={{ color: getCategoryColor(el.category), textTransform: "capitalize" }}>{el.category}</span></div>
+        <div className={styles.detailRow}><span>Category</span><span style={{ color: getCategoryColor(el.category), textTransform: "capitalize" }}>{el.category}</span></div>
         <div className={styles.detailRow}><span>Phase</span><span style={{ color: getPhaseColor(el.phase), display: "flex", alignItems: "center", gap: "0.375rem" }}><PhaseIcon phase={el.phase} /> {el.phase}</span></div>
         <div className={styles.detailRow}><span>Block</span><span>{el.block}</span></div>
         <div className={styles.detailRow}><span>Weight</span><span>{el.atomic_mass} u</span></div>

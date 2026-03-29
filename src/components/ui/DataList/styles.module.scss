@@ -1,0 +1,33 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 0;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--clr-border-subtle);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.label {
+  font-size: 0.8125rem;
+  color: var(--clr-text-muted);
+  flex-shrink: 0;
+  margin-right: 1rem;
+}
+
+.value {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--clr-text-primary);
+  text-align: right;
+  margin: 0;
+}

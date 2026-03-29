@@ -2,11 +2,11 @@
 
 import data from "@/lib/Elements.json";
 import { useState, useMemo } from "react";
-import { IoIosCube } from "react-icons/io";
-import { TbDropletFilled } from "react-icons/tb";
-import { AiOutlineQuestionCircle } from "react-icons/ai";
 import ElementDetails from "@/components/modules/ElementDetails";
 import TemperatureSlider from "@/components/ui/TemperatureSlider";
+import PhaseIcon from "@/components/ui/PhaseIcon";
+import { SolidIcon, LiquidIcon, GasIcon, UnknownIcon } from "@/components/ui/PhaseIcon";
+import { getCategoryColor, categoryVarMap, getPhaseKeyColor } from "@/lib/elementColors";
 import styles from "./styles.module.scss";
 
 // Unique categories from data
@@ -43,26 +43,6 @@ function sortElements(elements, sortKey) {
   });
 }
 
-const HeatIcon = ({ size = "1em" }) => (
-  <svg width={size} height={size} viewBox="0 0 640 640" fill="currentColor">
-    <path d="M272 96C289.7 96 304 110.3 304 128L304 208C304 242.6 315.2 276.3 336 304L355.2 329.6C384.3 368.4 400 415.5 400 464L400 512C400 529.7 385.7 544 368 544C350.3 544 336 529.7 336 512L336 464C336 429.4 324.8 395.7 304 368L284.8 342.4C255.7 303.6 240 256.5 240 208L240 128C240 110.3 254.3 96 272 96zM128 160C145.7 160 160 174.3 160 192L160 224C160 258.6 171.2 292.3 192 320L211.2 345.6C240.3 384.4 256 431.5 256 480L256 512C256 529.7 241.7 544 224 544C206.3 544 192 529.7 192 512L192 480C192 445.4 180.8 411.7 160 384L140.8 358.4C111.7 319.6 96 272.5 96 224L96 192C96 174.3 110.3 160 128 160zM448 192L448 224C448 258.6 459.2 292.3 480 320L499.2 345.6C528.3 384.4 544 431.5 544 480L544 512C544 529.7 529.7 544 512 544C494.3 544 480 529.7 480 512L480 480C480 445.4 468.8 411.7 448 384L428.8 358.4C399.7 319.6 384 272.5 384 224L384 192C384 174.3 398.3 160 416 160C433.7 160 448 174.3 448 192z" />
-  </svg>
-);
-
-const phaseColors = {
-  'phase-solid': '#e85d75',
-  'phase-liquid': '#5EBBFF',
-  'phase-gas': '#4AE3B5',
-  'phase-unknown': 'var(--clr-text-secondary)',
-};
-
-const phaseIconMap = {
-  'phase-solid': IoIosCube,
-  'phase-liquid': TbDropletFilled,
-  'phase-gas': HeatIcon,
-  'phase-unknown': AiOutlineQuestionCircle,
-};
-
 function getPhaseKey(phase) {
   if (!phase) return 'phase-unknown';
   const lower = phase.toLowerCase();
@@ -82,30 +62,6 @@ function getPhaseAtTemp(element, temperature) {
   if (melt !== null) return 'phase-liquid';
   if (boil !== null) return number === 2 ? 'phase-liquid' : 'phase-solid';
   return 'phase-unknown';
-}
-
-const categoryVarMap = {
-  'alkali metal': '--clr-alkali-metal',
-  'alkaline earth metal': '--clr-alkaline-earth-metal',
-  'transition metal': '--clr-transition-metal',
-  'post-transition metal': '--clr-post-transition-metal',
-  'lanthanide': '--clr-lanthanide',
-  'actinide': '--clr-actinide',
-  'diatomic nonmetal': '--clr-diatomic-nonmetal',
-  'polyatomic nonmetal': '--clr-polyatomic-nonmetal',
-  'noble gas': '--clr-noble-gas',
-  'metalloid': '--clr-metalloid',
-  'unknown, probably transition metal': '--clr-unknown',
-  'unknown, probably post-transition metal': '--clr-unknown',
-  'unknown, probably metalloid': '--clr-unknown',
-  'unknown, predicted to be noble gas': '--clr-unknown',
-  'unknown': '--clr-unknown',
-};
-
-function getCategoryColor(category) {
-  const key = category?.toLowerCase() || 'unknown';
-  const cssVar = categoryVarMap[key] || '--clr-unknown';
-  return `var(${cssVar})`;
 }
 
 export default function ElementsPage() {
@@ -217,7 +173,7 @@ export default function ElementsPage() {
               <span className={styles.legendLabel}>Atomic #</span>
             </span>
             <span className={styles.legendItem}>
-              <span className={styles.legendValue} style={{ color: '#e85d75' }}><IoIosCube size="1.25em" /></span>
+              <span className={styles.legendValue} style={{ color: 'var(--clr-phase-solid)' }}><SolidIcon size="1.25em" /></span>
               <span className={styles.legendLabel}>State</span>
             </span>
             <span className={styles.legendItem}>
@@ -243,10 +199,10 @@ export default function ElementsPage() {
             <div className={styles.legendSection}>
               <span className={styles.legendSectionTitle}>Phase</span>
               <div className={styles.legendSwatches}>
-                <span className={styles.legendSwatch} style={{ color: '#e85d75' }}><IoIosCube size="1em" /> Solid</span>
-                <span className={styles.legendSwatch} style={{ color: '#5EBBFF' }}><TbDropletFilled size="1em" /> Liquid</span>
-                <span className={styles.legendSwatch} style={{ color: '#4AE3B5' }}><HeatIcon size="1em" /> Gas</span>
-                <span className={styles.legendSwatch} style={{ color: 'var(--clr-text-secondary)' }}><AiOutlineQuestionCircle size="1em" /> Unknown</span>
+                <span className={styles.legendSwatch} style={{ color: 'var(--clr-phase-solid)' }}><SolidIcon size="1em" /> Solid</span>
+                <span className={styles.legendSwatch} style={{ color: 'var(--clr-phase-liquid)' }}><LiquidIcon size="1em" /> Liquid</span>
+                <span className={styles.legendSwatch} style={{ color: 'var(--clr-phase-gas)' }}><GasIcon size="1em" /> Gas</span>
+                <span className={styles.legendSwatch} style={{ color: 'var(--clr-phase-unknown)' }}><UnknownIcon size="1em" /> Unknown</span>
               </div>
             </div>
 
@@ -277,8 +233,7 @@ export default function ElementsPage() {
       <div className={styles.list}>
         {filtered.map((el) => {
           const phaseKey = getPhaseAtTemp(el, temperature) || getPhaseKey(el.phase);
-          const PhaseIconComp = phaseIconMap[phaseKey] || phaseIconMap['phase-unknown'];
-          const phaseColor = phaseColors[phaseKey] || phaseColors['phase-unknown'];
+          const phaseColor = getPhaseKeyColor(phaseKey);
           const catColor = getCategoryColor(el.category);
           const isOpen = expandedNumber === el.number;
 
@@ -291,7 +246,7 @@ export default function ElementsPage() {
               >
                 <span className={styles.number} style={{ color: catColor }}>{el.number}</span>
                 <span className={styles.phase} style={{ color: phaseColor }}>
-                  <PhaseIconComp size="1.25em" />
+                  <PhaseIcon phaseKey={phaseKey} size="1.25em" />
                 </span>
                 <span className={styles.symbol}>{el.symbol}</span>
                 <span className={styles.info}>

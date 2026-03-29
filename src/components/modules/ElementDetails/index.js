@@ -314,7 +314,7 @@ function Details({ element, temperature, setTemperature }) {
             </output>
           </li>
           <li>
-            <label>Series</label>
+            <label>Category</label>
             <output>
               <WikiModal title={element.category.replace(/ /g, '_')} displayText={element.category}>
                 <span className="capitalize">{element.category}</span>

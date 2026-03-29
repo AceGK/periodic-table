@@ -15,8 +15,8 @@ import {
 } from '@/components/ui/NavigationMenu';
 
 const learnLinks = [
-  { href: '/learn/quizzes', title: 'Quizzes', desc: 'Test your knowledge of the elements' },
   { href: '/learn/flash-cards', title: 'Flash Cards', desc: 'Memorize elements with flip cards' },
+  { href: '/learn/quizzes', title: 'Quizzes', desc: 'Test your knowledge of the elements' },
 ];
 
 const resourceLinks = [
@@ -66,110 +66,112 @@ export default function Nav() {
 
   return (
     <nav className={styles.nav}>
-      <Link href="/" className={styles.logo}>
-        <img src="/elementable-logo.svg" alt="Elementable" />
-      </Link>
-
-      {/* Desktop navigation — centered */}
-      <div className={styles.desktopNav}>
-        <NavigationMenu>
-          <NavigationMenuList>
-
-            <NavigationMenuItem>
-              <Link href="/table" legacyBehavior passHref>
-                <NavigationMenuLink className={navLinkClass('/table')}>
-                  Table
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-
-            <NavigationMenuItem>
-              <Link href="/elements" legacyBehavior passHref>
-                <NavigationMenuLink className={navLinkClass('/elements')}>
-                  Elements
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-
-            <NavigationMenuItem>
-              <NavigationMenuTrigger>Learn</NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <ul className={styles.dropdownList}>
-                  {learnLinks.map((link) => (
-                    <li key={link.href}>
-                      <NavigationMenuLink asChild>
-                        <Link href={link.href} className={styles.dropdownLink}>
-                          <strong>{link.title}</strong>
-                          <small>{link.desc}</small>
-                        </Link>
-                      </NavigationMenuLink>
-                    </li>
-                  ))}
-                </ul>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-
-            <NavigationMenuItem>
-              <NavigationMenuTrigger>Resources</NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <ul className={styles.dropdownList}>
-                  {resourceLinks.map((link) => (
-                    <li key={link.title}>
-                      <NavigationMenuLink asChild>
-                        <Link href={link.href} className={styles.dropdownLink}>
-                          <strong>{link.title}</strong>
-                          <small>{link.desc}</small>
-                        </Link>
-                      </NavigationMenuLink>
-                    </li>
-                  ))}
-                </ul>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-
-          </NavigationMenuList>
-        </NavigationMenu>
-      </div>
-
-      {/* Right-side actions */}
-      <div className={styles.navActions}>
-        <button
-          className={styles.iconBtn}
-          onClick={() => setDarkMode(!darkMode)}
-          aria-label="Toggle theme"
-        >
-          {darkMode ? <SunIcon /> : <MoonIcon />}
-        </button>
-        <button className={styles.iconBtn} aria-label="Settings">
-          <SettingsIcon />
-        </button>
-        <Link href="/support" className={styles.ctaBtn}>
-          Support
+      <div className={`container ${styles.navInner}`}>
+        <Link href="/" className={styles.logo}>
+          <img src="/elementable-logo.svg" alt="Elementable" />
         </Link>
-      </div>
 
-      {/* Mobile actions + hamburger */}
-      <div className={styles.mobileActions}>
-        <button
-          className={styles.iconBtn}
-          onClick={() => setDarkMode(!darkMode)}
-          aria-label="Toggle theme"
-        >
-          {darkMode ? <SunIcon /> : <MoonIcon />}
-        </button>
-        <button className={styles.iconBtn} aria-label="Settings">
-          <SettingsIcon />
-        </button>
-        <button
-          className={styles.hamburger}
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle menu"
-          aria-expanded={mobileOpen}
-        >
-          <span className={`${styles.hamburgerLine} ${mobileOpen ? styles.open : ''}`} />
-          <span className={`${styles.hamburgerLine} ${mobileOpen ? styles.open : ''}`} />
-          <span className={`${styles.hamburgerLine} ${mobileOpen ? styles.open : ''}`} />
-        </button>
+        {/* Desktop navigation — centered */}
+        <div className={styles.desktopNav}>
+          <NavigationMenu>
+            <NavigationMenuList>
+
+              <NavigationMenuItem>
+                <Link href="/table" legacyBehavior passHref>
+                  <NavigationMenuLink className={navLinkClass('/table')}>
+                    Table
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+
+              <NavigationMenuItem>
+                <Link href="/elements" legacyBehavior passHref>
+                  <NavigationMenuLink className={navLinkClass('/elements')}>
+                    Elements
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+
+              <NavigationMenuItem>
+                <NavigationMenuTrigger>Learn</NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className={styles.dropdownList}>
+                    {learnLinks.map((link) => (
+                      <li key={link.href}>
+                        <NavigationMenuLink asChild>
+                          <Link href={link.href} className={styles.dropdownLink}>
+                            <strong>{link.title}</strong>
+                            <small>{link.desc}</small>
+                          </Link>
+                        </NavigationMenuLink>
+                      </li>
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+
+              <NavigationMenuItem>
+                <NavigationMenuTrigger>Resources</NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className={styles.dropdownList}>
+                    {resourceLinks.map((link) => (
+                      <li key={link.title}>
+                        <NavigationMenuLink asChild>
+                          <Link href={link.href} className={styles.dropdownLink}>
+                            <strong>{link.title}</strong>
+                            <small>{link.desc}</small>
+                          </Link>
+                        </NavigationMenuLink>
+                      </li>
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+
+            </NavigationMenuList>
+          </NavigationMenu>
+        </div>
+
+        {/* Right-side actions */}
+        <div className={styles.navActions}>
+          <button
+            className={styles.iconBtn}
+            onClick={() => setDarkMode(!darkMode)}
+            aria-label="Toggle theme"
+          >
+            {darkMode ? <SunIcon /> : <MoonIcon />}
+          </button>
+          <button className={styles.iconBtn} aria-label="Settings">
+            <SettingsIcon />
+          </button>
+          <Link href="/support" className={styles.ctaBtn}>
+            Support
+          </Link>
+        </div>
+
+        {/* Mobile actions + hamburger */}
+        <div className={styles.mobileActions}>
+          <button
+            className={styles.iconBtn}
+            onClick={() => setDarkMode(!darkMode)}
+            aria-label="Toggle theme"
+          >
+            {darkMode ? <SunIcon /> : <MoonIcon />}
+          </button>
+          <button className={styles.iconBtn} aria-label="Settings">
+            <SettingsIcon />
+          </button>
+          <button
+            className={styles.hamburger}
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle menu"
+            aria-expanded={mobileOpen}
+          >
+            <span className={`${styles.hamburgerLine} ${mobileOpen ? styles.open : ''}`} />
+            <span className={`${styles.hamburgerLine} ${mobileOpen ? styles.open : ''}`} />
+            <span className={`${styles.hamburgerLine} ${mobileOpen ? styles.open : ''}`} />
+          </button>
+        </div>
       </div>
 
       {/* Mobile dropdown menu */}

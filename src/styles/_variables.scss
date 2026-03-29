@@ -19,7 +19,7 @@
   // ─── Text ───
   --clr-text-primary: #EDEDEF;
   --clr-text-secondary: #9A9AA0;
-  --clr-text-muted: #5C5C66;
+  --clr-text-muted: #7C7C86;
   --clr-text-accent: #4AE3B5;
 
   // ─── Accent ───
@@ -44,6 +44,12 @@
   --clr-noble-gas: hsl(265, 90%, 68%);
   --clr-metalloid: hsl(183, 80%, 65%);
   --clr-unknown: hsl(220, 10%, 55%);
+
+  // ─── Phase (state) colors ───
+  --clr-phase-solid: #e85d75;
+  --clr-phase-liquid: #5EBBFF;
+  --clr-phase-gas: #4AE3B5;
+  --clr-phase-unknown: var(--clr-text-secondary);
 
   // ─── Misc ───
   --border-radius: 0.2em;

@@ -4,22 +4,28 @@
       "name": "Metals",
       "groups": [
         {
-          "name": "alkali metal"
+          "name": "alkali metal",
+          "description": "Soft, highly reactive metals in Group 1 that readily lose their single valence electron. They have low melting points and react vigorously with water to form alkaline hydroxides."
         },
         {
-          "name": "alkaline earth metal"
+          "name": "alkaline earth metal",
+          "description": "Reactive metals in Group 2 with two valence electrons. They are harder and denser than alkali metals, with higher melting points, and form oxides that are basic (alkaline)."
         },
         {
-          "name": "transition metal"
+          "name": "transition metal",
+          "description": "Metals in Groups 3–12 with partially filled d-orbitals. They exhibit multiple oxidation states, form colored compounds, and are generally hard, dense, and good conductors."
         },
         {
-          "name": "post-transition metal"
+          "name": "post-transition metal",
+          "description": "Metals located between transition metals and metalloids. They are softer and have lower melting points than transition metals, with poor mechanical properties."
         },
         {
-          "name": "lanthanide"
+          "name": "lanthanide",
+          "description": "The 15 elements from lanthanum to lutetium (57–71) with partially filled 4f orbitals. They are silvery metals with similar chemical properties, used in magnets, lasers, and electronics."
         },
         {
-          "name": "actinide"
+          "name": "actinide",
+          "description": "The 15 elements from actinium to lawrencium (89–103) with partially filled 5f orbitals. All are radioactive; uranium and plutonium are used in nuclear energy and weapons."
         }
       ]
     },
@@ -27,7 +33,8 @@
       "name": "Metalloids",
       "groups": [
         {
-          "name": "metalloid"
+          "name": "metalloid",
+          "description": "Elements with properties intermediate between metals and nonmetals, found along the staircase line on the periodic table. They are semiconductors, making them essential for electronics."
         }
       ]
     },
@@ -35,13 +42,16 @@
       "name": "Nonmetals",
       "groups": [
         {
-          "name": "diatomic nonmetal"
+          "name": "diatomic nonmetal",
+          "description": "Nonmetals that naturally exist as diatomic molecules (H₂, N₂, O₂, F₂, Cl₂). They are essential for life and chemical reactions, with high electronegativities."
         },
         {
-          "name": "polyatomic nonmetal"
+          "name": "polyatomic nonmetal",
+          "description": "Nonmetals that form molecules or network structures with more than two atoms, such as carbon, sulfur, selenium, and phosphorus. They exhibit diverse allotropic forms."
         },
         {
-          "name": "noble gas"
+          "name": "noble gas",
+          "description": "Extremely stable, unreactive gases in Group 18 with full valence electron shells. They have very low boiling points and are used in lighting, welding, and cryogenics."
         }
       ]
     },
@@ -49,7 +59,8 @@
       "name": "Other",
       "groups": [
         {
-          "name": "unknown"
+          "name": "unknown",
+          "description": "Recently synthesized or hypothetical elements whose chemical properties have not been confirmed experimentally due to their extreme instability and short half-lives."
         }
       ]
     }

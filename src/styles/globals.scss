@@ -166,24 +166,8 @@ ul[data-type="element-data"] {
 }
 
 
-// SCSS rgba() requires raw color values — can't use CSS var() here
-@each $name,
-  $color
-    in (
-      alkali-metal: hsl(25, 100%, 55%),
-      alkaline-earth-metal: hsl(45, 90%, 58%),
-      transition-metal: hsl(220, 80%, 65%),
-      post-transition-metal: hsl(150, 55%, 50%),
-      lanthanide: hsl(80, 75%, 55%),
-      actinide: hsl(166, 60%, 50%),
-
-      diatomic-nonmetal: hsl(355, 80%, 60%),
-      polyatomic-nonmetal: hsl(310, 75%, 60%),
-      noble-gas: hsl(265, 90%, 68%),
-
-      metalloid: hsl(183, 80%, 65%),
-      unknown: hsl(220, 10%, 55%)
-    )
+// Uses $element-colors from _variables.scss (single source of truth)
+@each $name, $color in $element-colors
 
 
 {

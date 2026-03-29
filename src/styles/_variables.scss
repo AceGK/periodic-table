@@ -1,3 +1,19 @@
+// ─── SCSS element category colors (single source of truth) ───
+// Used by both CSS custom properties below AND the @each loop in globals.scss
+
+$element-colors: (
+  alkali-metal:          hsl(355, 80%, 60%),
+  alkaline-earth-metal:  hsl(25, 100%, 55%),
+  transition-metal:      hsl(45, 90%, 58%),
+  post-transition-metal: hsl(150, 55%, 50%),
+  metalloid:             hsl(183, 80%, 65%),
+  diatomic-nonmetal:     hsl(220, 80%, 65%),
+  polyatomic-nonmetal:   hsl(310, 75%, 60%),
+  noble-gas:             hsl(265, 90%, 68%),
+  lanthanide:            hsl(166, 60%, 50%),
+  actinide:              hsl(80, 75%, 55%),
+  unknown:               hsl(220, 10%, 55%),
+);
 
 :root {
   // ─── Base palette (warm dark with subtle navy tint) ───
@@ -32,18 +48,10 @@
   // ─── Shadow ───
   --clr-shadow: rgba(0, 0, 0, 0.5);
 
-  // ─── Element category colors ───
-  --clr-alkali-metal: hsl(25, 100%, 55%);
-  --clr-alkaline-earth-metal: hsl(45, 90%, 58%);
-  --clr-transition-metal: hsl(220, 80%, 65%);
-  --clr-post-transition-metal: hsl(150, 55%, 50%);
-  --clr-lanthanide: hsl(80, 75%, 55%);
-  --clr-actinide: hsl(166, 60%, 50%);
-  --clr-diatomic-nonmetal: hsl(355, 80%, 60%);
-  --clr-polyatomic-nonmetal: hsl(310, 75%, 60%);
-  --clr-noble-gas: hsl(265, 90%, 68%);
-  --clr-metalloid: hsl(183, 80%, 65%);
-  --clr-unknown: hsl(220, 10%, 55%);
+  // ─── Element category colors (generated from $element-colors) ───
+  @each $name, $color in $element-colors {
+    --clr-#{$name}: #{$color};
+  }
 
   // ─── Phase (state) colors ───
   --clr-phase-solid: #e85d75;

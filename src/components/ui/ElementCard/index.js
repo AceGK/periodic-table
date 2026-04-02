@@ -78,7 +78,9 @@ export default function Element({ element, handleElementClick, isGroupSelected, 
         <div className={styles.symbol} title="Symbol">{element.symbol}</div>
         <div>
           <div className={styles.name} title="Name">{element.name}</div>
-          <div className={styles.mass} title="Atomic Weight">{element.atomic_mass}</div>
+          <div className={styles.mass} title="Atomic Weight">
+            {Number.isInteger(element.atomic_mass) ? `(${element.atomic_mass})` : element.atomic_mass}
+          </div>
           {showShells && element.shells && (
             <div className={styles.shells} title="Electron Shells">
               {element.shells.map((count, i) => (

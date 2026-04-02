@@ -1,19 +1,28 @@
 "use client";
 
-import Link from 'next/link';
-import { useState, useRef, useCallback, useEffect } from 'react';
-import data from '@/lib/Elements.json';
+import Link from "next/link";
+import { useState, useRef, useCallback, useEffect } from "react";
+import data from "@/lib/Elements.json";
 import { getCategoryColor } from "@/lib/elementColors";
-import styles from './styles.module.scss';
+import styles from "./styles.module.scss";
 
 // ─── Icons ────────────────────────────────────────────────
 
 import MinimalPeriodicTable from "@/assets/icons/minimal-periodic-table.svg";
-import { HiListBullet, HiSun, HiMoon, HiCog6Tooth, HiDocumentText } from "react-icons/hi2";
+import {
+  HiListBullet,
+  HiSun,
+  HiMoon,
+  HiCog6Tooth,
+  HiDocumentText,
+} from "react-icons/hi2";
 import { PiCardsFill } from "react-icons/pi";
 import { MdQuiz } from "react-icons/md";
 import { BsInfoCircleFill, BsQuestionCircleFill } from "react-icons/bs";
 import { GoGitCompare } from "react-icons/go";
+import { TbBookFilled } from "react-icons/tb";
+import { BiCategoryAlt } from "react-icons/bi";
+import { TbColumns3 } from "react-icons/tb";
 import { IoChevronDown } from "react-icons/io5";
 
 // ─── Nav item config ──────────────────────────────────────
@@ -27,24 +36,93 @@ const NAV_ITEMS = [
     label: "Elements",
     elementSearch: true,
     links: [
-      { href: '/table', title: 'Periodic Table', desc: 'Interactive periodic table of elements', icon: <MinimalPeriodicTable width="1em" height="1em" />, color: 'var(--clr-phase-gas)' },
-      { href: '/elements', title: 'Element List', desc: 'Browse all elements in a sortable list', icon: <HiListBullet />, color: 'var(--clr-phase-liquid)' },
-      { href: '/compare', title: 'Compare', desc: 'Compare properties side by side', icon: <GoGitCompare />, color: 'var(--clr-phase-solid)' },
+      {
+        href: "/table",
+        title: "Periodic Table",
+        desc: "Interactive periodic table of elements",
+        icon: <MinimalPeriodicTable width="1em" height="1em" />,
+        color: "var(--clr-phase-gas)",
+      },
+      {
+        href: "/elements",
+        title: "Element List",
+        desc: "Browse all elements in a sortable list",
+        icon: <HiListBullet />,
+        color: "var(--clr-phase-liquid)",
+      },
+      {
+        href: "/categories",
+        title: "Categories",
+        desc: "Metals, nonmetals, metalloids, and their subcategories",
+        icon: <BiCategoryAlt />,
+        color: "var(--clr-phase-solid)",
+      },
+      {
+        href: "/groups",
+        title: "Groups",
+        desc: "Browse the 18 periodic table groups",
+        icon: <TbColumns3 />,
+        color: "var(--clr-noble-gas)",
+      },
+      {
+        href: "/compare",
+        title: "Compare",
+        desc: "Compare properties side by side",
+        icon: <GoGitCompare />,
+        color: "var(--clr-alkaline-earth-metal)",
+      },
     ],
   },
   {
     label: "Learn",
     links: [
-      { href: '/learn/flash-cards', title: 'Flash Cards', desc: 'Memorize elements with flip cards', icon: <PiCardsFill />, color: 'var(--clr-transition-metal)' },
-      { href: '/learn/quizzes', title: 'Quizzes', desc: 'Test your knowledge of the elements', icon: <MdQuiz />, color: 'var(--clr-polyatomic-nonmetal)' },
+      {
+        href: "/learn/flash-cards",
+        title: "Flash Cards",
+        desc: "Memorize elements with flip cards",
+        icon: <PiCardsFill />,
+        color: "var(--clr-transition-metal)",
+      },
+      {
+        href: "/learn/quizzes",
+        title: "Quizzes",
+        desc: "Test your knowledge of the elements",
+        icon: <MdQuiz />,
+        color: "var(--clr-polyatomic-nonmetal)",
+      },
+      {
+        href: "/learn/dictionary",
+        title: "Dictionary",
+        desc: "Chemistry terms and definitions",
+        icon: <TbBookFilled />,
+        color: "var(--clr-lanthanide)",
+      },
     ],
   },
   {
     label: "Resources",
     links: [
-      { href: '/about', title: 'About', desc: 'About this project', icon: <BsInfoCircleFill />, color: 'var(--clr-metalloid)' },
-      { href: '/printable-pdfs', title: 'Printable PDFs', desc: 'Download a printable periodic table', icon: <HiDocumentText />, color: 'var(--clr-alkaline-earth-metal)' },
-      { href: '/faq', title: 'FAQ', desc: 'Frequently asked questions', icon: <BsQuestionCircleFill />, color: 'var(--clr-noble-gas)' },
+      {
+        href: "/printable-pdfs",
+        title: "Printable PDFs",
+        desc: "Download a printable periodic table",
+        icon: <HiDocumentText />,
+        color: "var(--clr-alkaline-earth-metal)",
+      },
+      {
+        href: "/faq",
+        title: "FAQ",
+        desc: "Frequently asked questions",
+        icon: <BsQuestionCircleFill />,
+        color: "var(--clr-noble-gas)",
+      },
+      {
+        href: "/about",
+        title: "About",
+        desc: "About this project",
+        icon: <BsInfoCircleFill />,
+        color: "var(--clr-metalloid)",
+      },
     ],
   },
   {
@@ -61,12 +139,16 @@ export default function Nav() {
   const [activeIndex, setActiveIndex] = useState(null);
   const [prevIndex, setPrevIndex] = useState(null);
   const [indicatorStyle, setIndicatorStyle] = useState({ opacity: 0 });
-  const [viewportSize, setViewportSize] = useState({ width: 0, height: 0, left: 0 });
+  const [viewportSize, setViewportSize] = useState({
+    width: 0,
+    height: 0,
+    left: 0,
+  });
   const [highlightStyle, setHighlightStyle] = useState({ opacity: 0 });
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileAccordion, setMobileAccordion] = useState(null);
   const [darkMode, setDarkMode] = useState(true);
-  const [elementSearch, setElementSearch] = useState('');
+  const [elementSearch, setElementSearch] = useState("");
 
   const closeTimer = useRef(null);
   const triggerRefs = useRef([]);
@@ -80,9 +162,13 @@ export default function Nav() {
 
   const filteredElements = elementSearch
     ? data.elements.filter((el) => {
-        const q = elementSearch.toLowerCase();
-        return el.name.toLowerCase().includes(q) || el.symbol.toLowerCase().includes(q) || String(el.number).includes(q);
-      })
+      const q = elementSearch.toLowerCase();
+      return (
+        el.name.toLowerCase().includes(q) ||
+        el.symbol.toLowerCase().includes(q) ||
+        String(el.number).includes(q)
+      );
+    })
     : data.elements;
 
   // ─── Dropdown logic ───────────────────────────────────
@@ -118,12 +204,15 @@ export default function Nav() {
     });
   }, []);
 
-  const open = useCallback((index) => {
-    clearTimeout(closeTimer.current);
-    setPrevIndex(activeIndex);
-    setActiveIndex(index);
-    updateIndicator(index);
-  }, [activeIndex, updateIndicator]);
+  const open = useCallback(
+    (index) => {
+      clearTimeout(closeTimer.current);
+      setPrevIndex(activeIndex);
+      setActiveIndex(index);
+      updateIndicator(index);
+    },
+    [activeIndex, updateIndicator],
+  );
 
   const startClose = useCallback(() => {
     closeTimer.current = setTimeout(() => {
@@ -182,15 +271,25 @@ export default function Nav() {
     setIndicatorStyle((s) => ({ ...s, opacity: 0 }));
   }, []);
 
-  const toggleAccordion = (name) => setMobileAccordion(mobileAccordion === name ? null : name);
-  const closeMobile = () => { setMobileOpen(false); setMobileAccordion(null); };
+  const toggleAccordion = (name) =>
+    setMobileAccordion(mobileAccordion === name ? null : name);
+  const closeMobile = () => {
+    setMobileOpen(false);
+    setMobileAccordion(null);
+  };
 
   // ─── Render helpers ───────────────────────────────────
 
   const renderDropdownLink = (link) => (
     <li key={link.href + link.title}>
-      <Link href={link.href} className={styles.dropdownLink} onClick={closeDropdown}>
-        <span className={styles.dropdownIcon} style={{ color: link.color }}>{link.icon}</span>
+      <Link
+        href={link.href}
+        className={styles.dropdownLink}
+        onClick={closeDropdown}
+      >
+        <span className={styles.dropdownIcon} style={{ color: link.color }}>
+          {link.icon}
+        </span>
         <div>
           <strong>{link.title}</strong>
           <small>{link.desc}</small>
@@ -207,10 +306,9 @@ export default function Nav() {
             {item.links.map(renderDropdownLink)}
           </ul>
           <div className={styles.elementsList}>
-            <span className={styles.elementsListHeading}>Elements</span>
             <input
               type="text"
-              placeholder="Search"
+              placeholder="Search Elements..."
               value={elementSearch}
               onChange={(e) => setElementSearch(e.target.value)}
               className={styles.elementsSearch}
@@ -218,7 +316,13 @@ export default function Nav() {
             />
             <div className={styles.elementsScroll}>
               {filteredElements.map((el) => (
-                <Link key={el.number} href={`/element/${el.name.toLowerCase()}`} className={styles.elementItem} style={{ '--_cat-color': getCategoryColor(el.category) }} onClick={closeDropdown}>
+                <Link
+                  key={el.number}
+                  href={`/element/${el.name.toLowerCase()}`}
+                  className={styles.elementItem}
+                  style={{ "--_cat-color": getCategoryColor(el.category) }}
+                  onClick={closeDropdown}
+                >
                   <span className={styles.elementItemNumber}>{el.number}</span>
                   <span className={styles.elementItemSymbol}>{el.symbol}</span>
                   <span className={styles.elementItemName}>{el.name}</span>
@@ -241,13 +345,27 @@ export default function Nav() {
     const isAccordionOpen = mobileAccordion === key;
     return (
       <div key={item.label} className={styles.mobileAccordion}>
-        <button className={styles.mobileAccordionTrigger} onClick={() => toggleAccordion(key)} aria-expanded={isAccordionOpen}>
+        <button
+          className={styles.mobileAccordionTrigger}
+          onClick={() => toggleAccordion(key)}
+          aria-expanded={isAccordionOpen}
+        >
           {item.label}
-          <IoChevronDown className={`${styles.mobileChevron} ${isAccordionOpen ? styles.mobileChevronOpen : ''}`} size={14} />
+          <IoChevronDown
+            className={`${styles.mobileChevron} ${isAccordionOpen ? styles.mobileChevronOpen : ""}`}
+            size={14}
+          />
         </button>
-        <div className={`${styles.mobileAccordionContent} ${isAccordionOpen ? styles.mobileAccordionOpen : ''}`}>
+        <div
+          className={`${styles.mobileAccordionContent} ${isAccordionOpen ? styles.mobileAccordionOpen : ""}`}
+        >
           {item.links.map((link) => (
-            <Link key={link.href + link.title} href={link.href} className={styles.mobileSubLink} onClick={closeMobile}>
+            <Link
+              key={link.href + link.title}
+              href={link.href}
+              className={styles.mobileSubLink}
+              onClick={closeMobile}
+            >
               {link.title}
             </Link>
           ))}
@@ -264,7 +382,11 @@ export default function Nav() {
         </Link>
 
         {/* Desktop menu */}
-        <ul className={styles.menuList} ref={menuListRef} onMouseLeave={hideHighlight}>
+        <ul
+          className={styles.menuList}
+          ref={menuListRef}
+          onMouseLeave={hideHighlight}
+        >
           <div
             className={styles.highlight}
             style={{
@@ -281,8 +403,17 @@ export default function Nav() {
             // Direct link (no dropdown)
             if (item.href) {
               return (
-                <li key={item.label} onMouseEnter={(e) => { updateHighlight(e); startClose(); }} onMouseLeave={hideHighlight}>
-                  <Link href={item.href} className={styles.navLink}>{item.label}</Link>
+                <li
+                  key={item.label}
+                  onMouseEnter={(e) => {
+                    updateHighlight(e);
+                    startClose();
+                  }}
+                  onMouseLeave={hideHighlight}
+                >
+                  <Link href={item.href} className={styles.navLink}>
+                    {item.label}
+                  </Link>
                 </li>
               );
             }
@@ -291,7 +422,10 @@ export default function Nav() {
             return (
               <li
                 key={item.label}
-                onMouseEnter={(e) => { updateHighlight(e); open(dropdownIndex); }}
+                onMouseEnter={(e) => {
+                  updateHighlight(e);
+                  open(dropdownIndex);
+                }}
                 onMouseLeave={startClose}
               >
                 <button
@@ -299,7 +433,11 @@ export default function Nav() {
                   ref={(el) => (triggerRefs.current[dropdownIndex] = el)}
                   data-state={activeIndex === dropdownIndex ? "open" : "closed"}
                   aria-expanded={activeIndex === dropdownIndex}
-                  onClick={() => activeIndex === dropdownIndex ? startClose() : open(dropdownIndex)}
+                  onClick={() =>
+                    activeIndex === dropdownIndex
+                      ? startClose()
+                      : open(dropdownIndex)
+                  }
                 >
                   {item.label}
                   <IoChevronDown className={styles.chevron} size={12} />
@@ -311,7 +449,11 @@ export default function Nav() {
 
         {/* Right-side actions */}
         <div className={styles.navActions}>
-          <button className={styles.iconBtn} onClick={() => setDarkMode(!darkMode)} aria-label="Toggle theme">
+          <button
+            className={styles.iconBtn}
+            onClick={() => setDarkMode(!darkMode)}
+            aria-label="Toggle theme"
+          >
             {darkMode ? <HiSun size={18} /> : <HiMoon size={18} />}
           </button>
           <button className={styles.iconBtn} aria-label="Settings">
@@ -321,16 +463,31 @@ export default function Nav() {
 
         {/* Mobile actions + hamburger */}
         <div className={styles.mobileActions}>
-          <button className={styles.iconBtn} onClick={() => setDarkMode(!darkMode)} aria-label="Toggle theme">
+          <button
+            className={styles.iconBtn}
+            onClick={() => setDarkMode(!darkMode)}
+            aria-label="Toggle theme"
+          >
             {darkMode ? <HiSun size={18} /> : <HiMoon size={18} />}
           </button>
           <button className={styles.iconBtn} aria-label="Settings">
             <HiCog6Tooth size={18} />
           </button>
-          <button className={styles.hamburger} onClick={() => setMobileOpen(!mobileOpen)} aria-label="Toggle menu" aria-expanded={mobileOpen}>
-            <span className={`${styles.hamburgerLine} ${mobileOpen ? styles.open : ''}`} />
-            <span className={`${styles.hamburgerLine} ${mobileOpen ? styles.open : ''}`} />
-            <span className={`${styles.hamburgerLine} ${mobileOpen ? styles.open : ''}`} />
+          <button
+            className={styles.hamburger}
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle menu"
+            aria-expanded={mobileOpen}
+          >
+            <span
+              className={`${styles.hamburgerLine} ${mobileOpen ? styles.open : ""}`}
+            />
+            <span
+              className={`${styles.hamburgerLine} ${mobileOpen ? styles.open : ""}`}
+            />
+            <span
+              className={`${styles.hamburgerLine} ${mobileOpen ? styles.open : ""}`}
+            />
           </button>
         </div>
       </div>
@@ -340,7 +497,8 @@ export default function Nav() {
         className={styles.indicator}
         style={{
           ...indicatorStyle,
-          transition: "transform 250ms ease, width 250ms ease, opacity 200ms ease",
+          transition:
+            "transform 250ms ease, width 250ms ease, opacity 200ms ease",
         }}
       >
         <div className={styles.arrow} />
@@ -380,11 +538,18 @@ export default function Nav() {
       </div>
 
       {/* Mobile menu */}
-      <div className={`${styles.mobileMenu} ${mobileOpen ? styles.mobileMenuOpen : ''}`}>
+      <div
+        className={`${styles.mobileMenu} ${mobileOpen ? styles.mobileMenuOpen : ""}`}
+      >
         {NAV_ITEMS.map((item) => {
           if (item.href) {
             return (
-              <Link key={item.label} href={item.href} className={styles.mobileLink} onClick={closeMobile}>
+              <Link
+                key={item.label}
+                href={item.href}
+                className={styles.mobileLink}
+                onClick={closeMobile}
+              >
                 {item.label}
               </Link>
             );

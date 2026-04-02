@@ -258,12 +258,20 @@
 // ─── Dropdown content ─────────────────────────────────────
 
 .elementsDropdown {
+  position: relative;
   display: flex;
   gap: 0;
 
   > .dropdownList {
     width: 300px;
     flex-shrink: 0;
+  }
+
+  > .elementsList {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 300px;
   }
 }
 
@@ -358,12 +366,14 @@
   padding: 0.5rem;
   border-left: 1px solid var(--clr-border-subtle);
   min-width: 225px;
+  overflow: hidden;
 }
 
 .elementsScroll {
   display: flex;
   flex-direction: column;
-  max-height: 260px;
+  flex: 1;
+  min-height: 0;
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--clr-border) transparent;

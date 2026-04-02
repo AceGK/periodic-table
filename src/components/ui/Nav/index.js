@@ -42,9 +42,9 @@ const NAV_ITEMS = [
   {
     label: "Resources",
     links: [
-      { href: '/', title: 'About', desc: 'About this project', icon: <BsInfoCircleFill />, color: 'var(--clr-metalloid)' },
-      { href: '/', title: 'Printable PDF', desc: 'Download a printable periodic table', icon: <HiDocumentText />, color: 'var(--clr-alkaline-earth-metal)' },
-      { href: '/', title: 'FAQ', desc: 'Frequently asked questions', icon: <BsQuestionCircleFill />, color: 'var(--clr-noble-gas)' },
+      { href: '/about', title: 'About', desc: 'About this project', icon: <BsInfoCircleFill />, color: 'var(--clr-metalloid)' },
+      { href: '/printable-pdfs', title: 'Printable PDFs', desc: 'Download a printable periodic table', icon: <HiDocumentText />, color: 'var(--clr-alkaline-earth-metal)' },
+      { href: '/faq', title: 'FAQ', desc: 'Frequently asked questions', icon: <BsQuestionCircleFill />, color: 'var(--clr-noble-gas)' },
     ],
   },
   {

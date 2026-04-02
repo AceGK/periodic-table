@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useCallback } from "react";
+import { IoClose } from "react-icons/io5";
 import styles from "./styles.module.scss";
 
 export function Modal({ open, onClose, title, children, className, bodyClassName }) {
@@ -38,9 +39,7 @@ export function Modal({ open, onClose, title, children, className, bodyClassName
         <div className={styles.header}>
           {title && <h2 className={styles.title}>{title}</h2>}
           <button className={styles.close} onClick={handleClose} aria-label="Close">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-              <path d="M3 3L13 13M13 3L3 13" />
-            </svg>
+            <IoClose size={18} />
           </button>
         </div>
         <div className={`${styles.body} ${bodyClassName || ""}`}>

@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Modal } from "@/components/ui/Modal";
 import { MdOpenInNew } from "react-icons/md";
+import { IoChevronBack } from "react-icons/io5";
 import styles from "./styles.module.scss";
 
 // Client-side cache to avoid redundant requests within the same session
@@ -22,8 +23,12 @@ function extractWikiTitle(href) {
   return null;
 }
 
-export default function WikiModal({ title, displayText, children }) {
-  const [open, setOpen] = useState(false);
+export default function WikiModal({ title, displayText, children, externalOpen, onExternalClose }) {
+  const [internalOpen, setInternalOpen] = useState(false);
+  const open = externalOpen !== undefined ? externalOpen : internalOpen;
+  const setOpen = externalOpen !== undefined
+    ? (v) => { if (!v && onExternalClose) onExternalClose(); else setInternalOpen(v); }
+    : setInternalOpen;
   const [currentTitle, setCurrentTitle] = useState(title);
   const [history, setHistory] = useState([]);
   const [article, setArticle] = useState(null);
@@ -142,9 +147,7 @@ export default function WikiModal({ title, displayText, children }) {
           <>
             {history.length > 0 && (
               <button className={styles.backBtn} onClick={goBack} aria-label="Go back">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M10 3L5 8L10 13" />
-                </svg>
+                <IoChevronBack size={14} />
               </button>
             )}
             {displayTitle} — <a href={wikiUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--clr-link)', fontWeight: 400 }}>Wikipedia <MdOpenInNew style={{ verticalAlign: 'middle' }} /></a>

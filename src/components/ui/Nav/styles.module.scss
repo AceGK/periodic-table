@@ -260,10 +260,9 @@
 .elementsDropdown {
   display: flex;
   gap: 0;
-  width: 520px;
 
   > .dropdownList {
-    width: 280px;
+    width: 300px;
     flex-shrink: 0;
   }
 }
@@ -358,7 +357,7 @@
   flex-direction: column;
   padding: 0.5rem;
   border-left: 1px solid var(--clr-border-subtle);
-  min-width: 200px;
+  min-width: 225px;
 }
 
 .elementsScroll {
@@ -382,10 +381,12 @@
 }
 
 .elementItem {
+  --_cat-color: transparent;
   display: flex;
   align-items: center;
   gap: 0.5rem;
   padding: 0.3rem 0.5rem;
+  border-left: 2px solid var(--_cat-color);
   border-radius: var(--border-radius);
   text-decoration: none;
   font-size: 0.8125rem;
@@ -393,7 +394,7 @@
   transition: background-color 0.15s, color 0.15s;
 
   &:hover {
-    background-color: var(--clr-surface-hover);
+    background-color: color-mix(in srgb, var(--_cat-color) 10%, transparent);
     color: var(--clr-text-primary);
   }
 }
@@ -401,7 +402,7 @@
 .elementItemNumber {
   font-size: 0.6875rem;
   color: var(--clr-text-muted);
-  min-width: 1.5rem;
+  min-width: 1rem;
   text-align: right;
 }
 

@@ -35,15 +35,19 @@ function getPhaseAtTemp(element, temperature) {
   return 'phase-unknown';
 }
 
-export default function Element({ element, handleElementClick, isGroupSelected, selectedElement, hoveredGroup, setHoveredElement, showShells, temperature }) {
+export default function Element({ element, handleElementClick, isGroupSelected, selectedElement, hoveredGroup, setHoveredElement, showShells, showPhase = false, temperature, size }) {
   const phaseKey = temperature !== null && temperature !== undefined
     ? getPhaseAtTemp(element, temperature)
     : getPhaseKey(element.phase);
+
+  const sizeClass = size ? styles[`size-${size}`] : '';
+
   return (
     <div
       key={element.number}
       className={`
         ${styles.element}
+        ${sizeClass}
         ${element.block + '-block'}
         ${'group-' + element.group}
         ${element.category.replace(/ /g, "-").toLowerCase()}
@@ -51,19 +55,17 @@ export default function Element({ element, handleElementClick, isGroupSelected, 
         ${selectedElement == element ? 'selected-element': ''}
         ${element.hypothetical ? styles.hypothetical : ''}
       `}
-      style={{
+      style={size ? undefined : {
         gridRow: element.ypos + 1,
         gridColumn: element.xpos + 1,
       }}
       onClick={(e) => handleElementClick && handleElementClick(element, e)}
       onMouseEnter={() => setHoveredElement && setHoveredElement(element)}
-      // onMouseLeave={() => setHoveredElement(null)}
     >
       <div
         className={`
       ${styles.elementBody}
       ${selectedElement && selectedElement.number === element.number ? styles.selected : ''}
-
       ${isGroupSelected && (isGroupSelected(element.category) || isGroupSelected(phaseKey)) ? 'active' : ''}
       ${hoveredGroup === element.category.replace(/ /g, "-").toLowerCase() || hoveredGroup === phaseKey ? 'hovered' : ''}
       `}
@@ -71,7 +73,7 @@ export default function Element({ element, handleElementClick, isGroupSelected, 
 
         <div className={styles.number}>
           <span title="Atomic Number">{element.number}</span>
-          <span title="Phase"><PhaseIndicator phaseKey={phaseKey} /></span>
+          {showPhase && <span title="Phase"><PhaseIndicator phaseKey={phaseKey} /></span>}
         </div>
         <div className={styles.symbol} title="Symbol">{element.symbol}</div>
         <div>

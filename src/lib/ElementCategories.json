@@ -17,7 +17,7 @@
         },
         {
           "name": "post-transition metal",
-          "description": "Metals located between transition metals and metalloids. They are softer and have lower melting points than transition metals, with poor mechanical properties."
+          "description": "Metals located between transition metals and metalloids, with higher electronegativities than typical metals. They tend to be softer, with lower melting points, and show more covalent bonding character."
         },
         {
           "name": "lanthanide",
@@ -43,7 +43,7 @@
       "groups": [
         {
           "name": "diatomic nonmetal",
-          "description": "Nonmetals that naturally exist as diatomic molecules (H₂, N₂, O₂, F₂, Cl₂). They are essential for life and chemical reactions, with high electronegativities."
+          "description": "Nonmetals that naturally exist as diatomic molecules (H₂, N₂, O₂, F₂, Cl₂, Br₂, I₂). They are generally highly electronegative and essential to biological and chemical processes."
         },
         {
           "name": "polyatomic nonmetal",

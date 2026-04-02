@@ -1,12 +1,12 @@
 "use client";
 
 import { useState, useCallback, useEffect, useMemo } from "react";
-import groupsData from "@/lib/GroupFamilies.json";
+import categoriesData from "@/lib/ElementCategories.json";
 import elementsData from "@/lib/Elements.json";
+import { getCategoryColor } from "@/lib/elementColors";
 import WikiModal from "@/components/modules/WikiModal";
 import Element from "@/components/ui/ElementCard";
 import { FlashCard } from "@/components/modules/FlashCards";
-import Select from "@/components/ui/Select";
 import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 import Link from "next/link";
 import cardStyles from "@/components/modules/FlashCards/styles.module.scss";
@@ -26,11 +26,9 @@ const wikiTitles = {
   "unknown": "Superheavy_element",
 };
 
-const frontOptions = [
-  { value: "number", label: "Group #", id: "number" },
-  { value: "number-family", label: "Group # + Family", id: "number-family" },
-  { value: "family", label: "Family Name", id: "family" },
-];
+const allCategories = categoriesData.elementGroups.flatMap((g) =>
+  g.groups.map((sub) => ({ ...sub, parent: g.name }))
+);
 
 function shuffle(arr) {
   const a = [...arr];
@@ -41,25 +39,19 @@ function shuffle(arr) {
   return a;
 }
 
-export default function GroupsFlashCardsPage() {
-  const [cards, setCards] = useState(() => shuffle(groupsData.groups));
+export default function CategoriesFlashCardsPage() {
+  const [cards, setCards] = useState(() => shuffle(allCategories));
   const [index, setIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
   const [animate, setAnimate] = useState(true);
   const [wikiOpen, setWikiOpen] = useState(false);
-  const [frontField, setFrontField] = useState("number");
 
   const total = cards.length;
   const current = cards[index];
-  const groupElements = useMemo(() =>
-    elementsData.elements.filter((el) => {
-      if (el.group !== current.number) return false;
-      if (current.number === 3 && (el.category === "lanthanide" || el.category === "actinide")) {
-        return el.number === 57 || el.number === 89;
-      }
-      return true;
-    }),
-    [current.number]
+  const catColor = getCategoryColor(current.name);
+  const categoryElements = useMemo(() =>
+    elementsData.elements.filter((el) => el.category === current.name),
+    [current.name]
   );
 
   const navigate = useCallback((newIndex) => {
@@ -78,7 +70,7 @@ export default function GroupsFlashCardsPage() {
   const reshuffle = useCallback(() => {
     setAnimate(false);
     setFlipped(false);
-    setCards(shuffle(groupsData.groups));
+    setCards(shuffle(allCategories));
     setIndex(0);
   }, []);
 
@@ -96,29 +88,16 @@ export default function GroupsFlashCardsPage() {
     else if (e.key === " " || e.key === "Enter") { e.preventDefault(); setFlipped((f) => !f); }
   }, [next, prev]);
 
-  const renderFront = () => {
-    if (frontField === "number") return <div className={cardStyles.valuePrimary}>Group {current.number}</div>;
-    if (frontField === "number-family") return (
-      <>
-        <div className={cardStyles.valuePrimary}>Group {current.number}</div>
-        <div className={cardStyles.valueSub}>{current.name}</div>
-        {current.aka && <div className={styles.akaLabel}>{current.aka}</div>}
-      </>
-    );
-    return (
-      <>
-        <div className={cardStyles.valuePrimary}>{current.name}</div>
-        {current.aka && <div className={styles.akaLabel}>{current.aka}</div>}
-      </>
-    );
-  };
+  const renderFront = () => (
+    <>
+      <div className={`${cardStyles.valuePrimary} ${styles.groupTitle}`}>{current.name}</div>
+      <div className={cardStyles.valueSub}>{current.parent}</div>
+    </>
+  );
 
   const renderBack = () => (
     <div className={styles.groupBackInner}>
-      <div className={styles.groupTitle}>
-        Group {current.number} — {current.name}
-      </div>
-      {current.aka && <div className={styles.akaLabel}>{current.aka}</div>}
+      <div className={styles.groupTitle} style={{ color: catColor }}>{current.name}</div>
       <p className={styles.groupDescription}>
         {current.description}{" "}
         <span className={styles.groupWikiLink} onClick={(e) => { e.stopPropagation(); setWikiOpen(true); }}>
@@ -126,7 +105,7 @@ export default function GroupsFlashCardsPage() {
         </span>
       </p>
       <div className={styles.groupElements}>
-        {groupElements.map((el) => (
+        {categoryElements.map((el) => (
           <Element key={el.number} element={el} size="md" />
         ))}
       </div>
@@ -137,22 +116,17 @@ export default function GroupsFlashCardsPage() {
     <main className={`container ${styles.page}`}>
       <div className={styles.pageHeader}>
         <Link href="/learn/flash-cards" className={styles.backLink}>← All Sets</Link>
-        <h1 className={styles.pageTitle}>Groups</h1>
-      </div>
-
-      <div className={styles.toolbar}>
-        <Select label="Front" value={frontField} onChange={setFrontField} options={frontOptions} />
+        <h1 className={styles.pageTitle}>Categories</h1>
       </div>
 
       <div className={cardStyles.deck} onKeyDown={handleKey} tabIndex={0}>
         <FlashCard
-          front={{ id: frontField, label: frontOptions.find(o => o.value === frontField)?.label, render: renderFront }}
+          front={{ render: renderFront }}
           back={{ render: renderBack }}
+          accent={catColor}
           flipped={flipped}
           animate={animate}
           onFlip={() => setFlipped((f) => !f)}
-          frontOptions={frontOptions}
-          onFrontChange={setFrontField}
           backClassName={styles.groupBackScrollable}
         />
 
@@ -174,7 +148,7 @@ export default function GroupsFlashCardsPage() {
         </div>
       </div>
 
-      <WikiModal title={wikiTitles[current.name] || current.wiki} displayText={`Group ${current.number}`} externalOpen={wikiOpen} onExternalClose={() => setWikiOpen(false)}>
+      <WikiModal title={wikiTitles[current.name] || current.name} displayText={current.name} externalOpen={wikiOpen} onExternalClose={() => setWikiOpen(false)}>
         <span className={styles.wikiHidden} />
       </WikiModal>
     </main>

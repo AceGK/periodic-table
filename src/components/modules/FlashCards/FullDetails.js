@@ -2,46 +2,10 @@
 
 import { useState } from "react";
 import { getCategoryColor, getPhaseColor } from "@/lib/elementColors";
+import { d, formatTemp, formatEnergy, formatDensity, tempOptions, energyOptions, densityOptions } from "@/lib/unitConversions";
 import PhaseIcon from "@/components/ui/PhaseIcon";
 import Select from "@/components/ui/Select";
 import styles from "./styles.module.scss";
-
-const d = (v) => (v !== null && v !== undefined ? v : "n/a");
-
-const tempOptions = [
-  { value: "K", label: "K" },
-  { value: "C", label: "°C" },
-  { value: "F", label: "°F" },
-];
-
-const energyOptions = [
-  { value: "kJ/mol", label: "kJ/mol" },
-  { value: "eV", label: "eV" },
-];
-
-const densityOptions = [
-  { value: "g/cm³", label: "g/cm³" },
-  { value: "kg/m³", label: "kg/m³" },
-];
-
-function formatTemp(k, unit) {
-  if (k === null || k === undefined) return "n/a";
-  if (unit === "C") return `${Math.round((k - 273.15) * 100) / 100}`;
-  if (unit === "F") return `${Math.round(((k - 273.15) * 9 / 5 + 32) * 100) / 100}`;
-  return `${k}`;
-}
-
-function formatEnergy(val, unit) {
-  if (val === null || val === undefined) return "n/a";
-  if (unit === "eV") return `${Math.round((val / 96.485) * 1000) / 1000}`;
-  return `${val}`;
-}
-
-function formatDensity(val, unit) {
-  if (val === null || val === undefined) return "n/a";
-  if (unit === "kg/m³") return `${Math.round(val * 1000 * 100) / 100}`;
-  return `${val}`;
-}
 
 export default function FullDetails({ element: el }) {
   const [tempUnit, setTempUnit] = useState("K");

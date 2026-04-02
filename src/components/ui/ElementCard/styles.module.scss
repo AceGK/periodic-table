@@ -76,6 +76,51 @@
   }
 }
 
+// ─── Size variants (for standalone use outside the grid) ──
+
+.size-xs,
+.size-sm,
+.size-md,
+.size-lg {
+  pointer-events: none;
+  aspect-ratio: 1 / 1;
+  &:hover { transform: none; box-shadow: none; cursor: default; }
+}
+
+.size-xs {
+  width: 48px;
+  &.element .symbol { font-size: 14px; }
+  &.element .number { font-size: 7px; line-height: 9px; }
+  &.element .name, &.element .mass { font-size: 6px; line-height: 8px; }
+  &.element .elementBody { padding: 3px; }
+}
+
+.size-sm {
+  width: 64px;
+  &.element .symbol { font-size: 18px; }
+  &.element .number { font-size: 8px; line-height: 10px; }
+  &.element .name, &.element .mass { font-size: 7px; line-height: 9px; }
+  &.element .elementBody { padding: 3px; }
+}
+
+.size-md {
+  width: 90px;
+  &.element .symbol { font-size: 28px; }
+  &.element .number { font-size: 11px; line-height: 13px; }
+  &.element .name { font-size: 10px; line-height: 12px; }
+  &.element .mass { font-size: 9px; line-height: 11px; }
+  &.element .elementBody { padding: 5px; }
+}
+
+.size-lg {
+  width: 120px;
+  &.element .symbol { font-size: 36px; }
+  &.element .number { font-size: 13px; line-height: 15px; }
+  &.element .name { font-size: 12px; line-height: 14px; }
+  &.element .mass { font-size: 11px; line-height: 13px; }
+  &.element .elementBody { padding: 6px; }
+}
+
 .hypothetical {
   opacity: 0.5;
 
@@ -91,6 +136,18 @@
   font-size:0.875rem;
   p {
     margin:0px;
+  }
+}
+
+.elementLink {
+  text-decoration: none;
+  display: block;
+  flex-shrink: 0;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+
+  &:hover .element .elementBody {
+    border-color: currentColor !important;
   }
 }
 
@@ -124,18 +181,11 @@
     width: 264px;
     flex-shrink: 0;
     align-self: flex-start;
-    &:hover {
-      transform: none;
-      z-index: initial;
-      box-shadow: none;
-      cursor: default;
-      > * {
-        color: inherit !important;
-      }
-    }
+    pointer-events: none;
     .elementBody {
       border: 1px solid var(--clr-border);
       padding: 1.25rem;
+      transition: border-color 0.15s;
     }
     .shells {
       top: 3.5rem;

@@ -15,7 +15,7 @@ export default function PeriodicTable({ }) {
   const [selectedGroup, setSelectedGroup] = useState([]);
   const [hoveredGroup, setHoveredGroup] = useState(null);
   const [layout, setLayout] = useState("stacked"); // "stacked" | "side"
-  const [temperature, setTemperature] = useState(273); // Kelvin, 0°C
+  const [temperature, setTemperature] = useState(298); // Kelvin, 25°C (room temp)
 
   const handleElementClick = (element) => {
     if (selectedElement && element.number === selectedElement.number) {
@@ -152,6 +152,7 @@ export default function PeriodicTable({ }) {
                 selectedElement={selectedElement}
                 setHoveredElement={setHoveredElement}
                 hoveredGroup={hoveredGroup}
+                showPhase
                 temperature={temperature}
               />
             ))}

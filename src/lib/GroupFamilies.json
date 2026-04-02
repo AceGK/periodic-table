@@ -1,0 +1,148 @@
+{
+  "groups": [
+    {
+      "number": 1,
+      "name": "Lithium Family",
+      "aka": "Alkali Metals (+ Hydrogen)",
+      "wiki": "Group_1_element",
+      "elements": "H, Li, Na, K, Rb, Cs, Fr",
+      "description": "Group 1 contains hydrogen and the alkali metals. Hydrogen is a nonmetal and an outlier in this group. The alkali metals (Li through Fr) are the most reactive metals, with a single valence electron that is easily lost to form +1 ions. Reactivity increases dramatically down the group — lithium reacts steadily with water, while cesium explodes on contact. Sodium and potassium are essential for nerve function in living organisms."
+    },
+    {
+      "number": 2,
+      "name": "Beryllium Family",
+      "aka": "Alkaline Earth Metals",
+      "wiki": "Group_2_element",
+      "elements": "Be, Mg, Ca, Sr, Ba, Ra",
+      "description": "Group 2 contains the alkaline earth metals, each with two valence electrons forming +2 ions. They are less reactive than Group 1 but still readily react with water and oxygen. Magnesium is vital for photosynthesis (chlorophyll) and calcium forms the structural basis of bones and teeth. Radium is highly radioactive and was historically used in luminous paints."
+    },
+    {
+      "number": 3,
+      "name": "Scandium Family",
+      "aka": "",
+      "wiki": "Group_3_element",
+      "elements": "Sc, Y, La, Ac",
+      "description": "Group 3 marks the beginning of the transition metals. Scandium and yttrium are lightweight metals used in alloys. Lanthanum and actinium head the lanthanide and actinide series respectively. The membership of this group is debated — some place lutetium and lawrencium here instead of lanthanum and actinium."
+    },
+    {
+      "number": 4,
+      "name": "Titanium Family",
+      "aka": "",
+      "wiki": "Group_4_element",
+      "elements": "Ti, Zr, Hf, Rf",
+      "description": "Group 4 elements are strong, corrosion-resistant metals. Titanium is prized for its exceptional strength-to-weight ratio and is used in aerospace, medical implants, and sports equipment. Zirconium is used in nuclear reactors due to its low neutron absorption. Hafnium is used in control rods. Rutherfordium is synthetic and highly radioactive."
+    },
+    {
+      "number": 5,
+      "name": "Vanadium Family",
+      "aka": "",
+      "wiki": "Group_5_element",
+      "elements": "V, Nb, Ta, Db",
+      "description": "Group 5 metals are hard, refractory, and resistant to corrosion. Vanadium is used to strengthen steel alloys. Niobium is a key component in superconducting magnets used in MRI machines and particle accelerators. Tantalum is essential for capacitors in electronics due to its stability. Dubnium is synthetic."
+    },
+    {
+      "number": 6,
+      "name": "Chromium Family",
+      "aka": "",
+      "wiki": "Group_6_element",
+      "elements": "Cr, Mo, W, Sg",
+      "description": "Group 6 includes some of the hardest and most heat-resistant metals. Chromium provides corrosion resistance in stainless steel and decorative plating. Molybdenum strengthens steel at high temperatures. Tungsten has the highest melting point (3,422°C) of any element, used in light bulb filaments and cutting tools. Seaborgium is synthetic."
+    },
+    {
+      "number": 7,
+      "name": "Manganese Family",
+      "aka": "",
+      "wiki": "Group_7_element",
+      "elements": "Mn, Tc, Re, Bh",
+      "description": "Group 7 elements have varied applications. Manganese is used in steel production and dry cell batteries. Technetium is the lightest element with no stable isotopes and is used in medical imaging. Rhenium has an extremely high melting point and is used in jet engine turbine blades. Bohrium is synthetic."
+    },
+    {
+      "number": 8,
+      "name": "Iron Family",
+      "aka": "",
+      "wiki": "Group_8_element",
+      "elements": "Fe, Ru, Os, Hs",
+      "description": "Group 8 contains iron, the most widely used metal on Earth. Iron is essential for hemoglobin in blood and forms the core of Earth's magnetic field. Ruthenium and osmium are platinum group metals — osmium is the densest naturally occurring element. Hassium is synthetic and named after the German state of Hesse."
+    },
+    {
+      "number": 9,
+      "name": "Cobalt Family",
+      "aka": "",
+      "wiki": "Group_9_element",
+      "elements": "Co, Rh, Ir, Mt",
+      "description": "Group 9 elements are hard, dense metals. Cobalt is used in blue pigments, rechargeable batteries, and superalloys. Rhodium is the most expensive precious metal, used in catalytic converters. Iridium is the most corrosion-resistant element and was found in the geological layer marking the asteroid impact that killed the dinosaurs. Meitnerium is synthetic."
+    },
+    {
+      "number": 10,
+      "name": "Nickel Family",
+      "aka": "",
+      "wiki": "Group_10_element",
+      "elements": "Ni, Pd, Pt, Ds",
+      "description": "Group 10 contains important catalytic metals. Nickel is used in stainless steel, coins, and rechargeable batteries. Palladium and platinum are critical in catalytic converters, reducing vehicle emissions. Platinum is also used in chemotherapy drugs and jewelry. Darmstadtium is synthetic."
+    },
+    {
+      "number": 11,
+      "name": "Copper Family",
+      "aka": "Coinage Metals",
+      "wiki": "Group_11_element",
+      "elements": "Cu, Ag, Au, Rg",
+      "description": "Group 11 contains the coinage metals, known since antiquity. Copper is the oldest known metal used by humans, essential for electrical wiring due to its excellent conductivity. Silver has the highest electrical and thermal conductivity of any element. Gold is the most malleable metal and resists corrosion. All three have been used as currency for millennia. Roentgenium is synthetic."
+    },
+    {
+      "number": 12,
+      "name": "Zinc Family",
+      "aka": "",
+      "wiki": "Group_12_element",
+      "elements": "Zn, Cd, Hg, Cn",
+      "description": "Group 12 metals have relatively low melting points for transition metals. Zinc is used to galvanize steel and is essential for immune function. Cadmium is toxic but used in rechargeable batteries and pigments. Mercury is the only metal liquid at room temperature, historically used in thermometers. Copernicium is synthetic and predicted to also be liquid at room temperature."
+    },
+    {
+      "number": 13,
+      "name": "Boron Family",
+      "aka": "Icosagens",
+      "wiki": "Group_13_element",
+      "elements": "B, Al, Ga, In, Tl, Nh",
+      "description": "Group 13 transitions from the metalloid boron to the metals below. Aluminum is the most abundant metal in Earth's crust, lightweight and corrosion-resistant. Gallium famously melts in your hand (29.8°C) and is used in semiconductors. Indium is used in touchscreen displays. Thallium is extremely toxic. Nihonium is synthetic."
+    },
+    {
+      "number": 14,
+      "name": "Carbon Family",
+      "aka": "Crystallogens",
+      "wiki": "Group_14_element",
+      "elements": "C, Si, Ge, Sn, Pb, Fl",
+      "description": "Group 14 spans from the nonmetal carbon through metalloids to metals. Carbon is the basis of all organic chemistry and life. Silicon is the foundation of the semiconductor industry and the second most abundant element in Earth's crust. Germanium was predicted by Mendeleev before its discovery. Tin and lead have been used since ancient times. Flerovium is synthetic."
+    },
+    {
+      "number": 15,
+      "name": "Nitrogen Family",
+      "aka": "Pnictogens",
+      "wiki": "Pnictogen",
+      "elements": "N, P, As, Sb, Bi, Mc",
+      "description": "Group 15, the pnictogens, have five valence electrons and range from gaseous nitrogen to metallic bismuth. Nitrogen makes up 78% of Earth's atmosphere and is essential for amino acids and DNA. Phosphorus is critical for bones, DNA, and ATP energy transfer. Arsenic is a notorious poison but used in semiconductors. Bismuth is used in medicines and cosmetics. Moscovium is synthetic."
+    },
+    {
+      "number": 16,
+      "name": "Oxygen Family",
+      "aka": "Chalcogens",
+      "wiki": "Chalcogen",
+      "elements": "O, S, Se, Te, Po, Lv",
+      "description": "Group 16, the chalcogens ('ore formers'), have six valence electrons. Oxygen is essential for aerobic life and makes up 21% of the atmosphere. Sulfur is used in sulfuric acid (the world's most produced chemical) and vulcanizing rubber. Selenium is used in solar cells and is an essential trace nutrient. Tellurium is used in thermoelectric devices. Polonium is intensely radioactive. Livermorium is synthetic."
+    },
+    {
+      "number": 17,
+      "name": "Fluorine Family",
+      "aka": "Halogens",
+      "wiki": "Halogen",
+      "elements": "F, Cl, Br, I, At, Ts",
+      "description": "Group 17, the halogens ('salt formers'), are highly reactive nonmetals with seven valence electrons that readily gain one electron to form -1 ions. Fluorine is the most reactive element and the most electronegative. Chlorine is used in water purification and PVC production. Bromine is one of two elements liquid at room temperature. Iodine is essential for thyroid function. Astatine is extremely rare. Tennessine is synthetic."
+    },
+    {
+      "number": 18,
+      "name": "Helium/Neon Family",
+      "aka": "Noble Gases",
+      "wiki": "Noble_gas",
+      "elements": "He, Ne, Ar, Kr, Xe, Rn, Og",
+      "description": "Group 18 contains the noble gases with complete valence shells, making them exceptionally stable and unreactive. Helium is the second most abundant element in the universe and remains liquid to absolute zero. Neon is used in iconic illuminated signs. Argon makes up nearly 1% of Earth's atmosphere and is used as a shielding gas in welding. Xenon can form compounds despite its 'inertness.' Radon is radioactive and a health hazard in buildings. Oganesson is synthetic with uncertain properties."
+    }
+  ]
+}

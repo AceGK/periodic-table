@@ -5,6 +5,11 @@
   box-sizing: border-box;
 }
 
+// Remove default padding
+p {
+  margin: 0;
+}
+
 // remove ul styles 
 ul {
   margin: 0;

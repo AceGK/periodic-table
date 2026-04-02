@@ -11,28 +11,25 @@ import PhaseIcon from "@/components/ui/PhaseIcon";
 import Section from "@/components/ui/Section";
 import { DataList, DataItem } from "@/components/ui/DataList";
 import { getCategoryColor, getPhaseColor } from "@/lib/elementColors";
+import { d, formatTemp, formatEnergy, formatDensity, formatTempDisplay, convertToKelvin, getPhaseAtTemp, tempOptions, energyOptions, densityOptions } from "@/lib/unitConversions";
+import Select from "@/components/ui/Select";
+import { FiMaximize2 } from "react-icons/fi";
+import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import styles from "./styles.module.scss";
 
 const GLBViewer = dynamic(() => import("@/components/ui/GlbViewer"), { ssr: false });
 
-const ExpandIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <polyline points="15 3 21 3 21 9" />
-    <polyline points="9 21 3 21 3 15" />
-    <line x1="21" y1="3" x2="14" y2="10" />
-    <line x1="3" y1="21" x2="10" y2="14" />
-  </svg>
-);
-
-const d = (v) => (v !== null && v !== undefined ? v : "n/a");
-const fmtK = (k) => (k != null ? `${k} K` : "n/a");
-
 export default function ElementPage({ element: el }) {
   const [imageModalOpen, setImageModalOpen] = useState(false);
+  const [tempUnit, setTempUnit] = useState("K");
+  const [energyUnit, setEnergyUnit] = useState("kJ/mol");
+  const [densityUnit, setDensityUnit] = useState("g/cm³");
+  const [temperature, setTemperature] = useState(298);
   const catColor = getCategoryColor(el.category);
-  const phaseColor = getPhaseColor(el.phase);
+  const phase = getPhaseAtTemp(el, temperature);
+  const phaseColor = getPhaseColor(phase);
 
   const prevEl = data.elements.find((e) => e.number === el.number - 1);
   const nextEl = data.elements.find((e) => e.number === el.number + 1);
@@ -42,7 +39,7 @@ export default function ElementPage({ element: el }) {
       {/* ─── Hero ──────────────────────────────────────────── */}
       <div className={styles.hero}>
         <div className={`${styles.heroCard} ${elementCardStyles.elementDetails}`}>
-          <Element element={el} showShells />
+          <Element element={el} showShells showPhase />
         </div>
         <div className={styles.heroInfo}>
           <span className={styles.heroNumber} style={{ color: catColor }}>#{el.number}</span>
@@ -101,7 +98,7 @@ export default function ElementPage({ element: el }) {
                 onClick={() => setBohrModalOpen(true)}
                 aria-label="Expand Bohr model"
               >
-                <ExpandIcon />
+                <FiMaximize2 size={14} />
               </button>
             </div>
           )}
@@ -110,16 +107,21 @@ export default function ElementPage({ element: el }) {
             <DataItem label="Full Configuration" value={el.electron_configuration} />
             <DataItem label="Shells" value={el.shells?.join(", ")} />
             <DataItem label="Electronegativity" value={d(el.electronegativity_pauling)} />
-            <DataItem label="Electron Affinity" value={el.electron_affinity != null ? `${el.electron_affinity} kJ/mol` : "n/a"} />
+            <DataItem label="Electron Affinity">
+              <span style={{ display: "flex", alignItems: "center", gap: "0.25rem" }}>
+                {formatEnergy(el.electron_affinity, energyUnit)}
+                <Select className={styles.unitSelect} value={energyUnit} onChange={setEnergyUnit} options={energyOptions} />
+              </span>
+            </DataItem>
             <DataItem label="Oxidation States" value={el.oxidation_states || "n/a"} />
             {el.ionization_energies?.length > 0 && (
               <DataItem label="Ionization Energies">
-                <span style={{ fontSize: "0.8125rem" }}>
+                <span style={{ display: "flex", alignItems: "center", gap: "0.25rem", fontSize: "0.8125rem" }}>
                   {el.ionization_energies.slice(0, 5).map((e, i) => (
-                    <span key={i}>{i > 0 && ", "}{e}</span>
+                    <span key={i}>{i > 0 && ", "}{formatEnergy(e, energyUnit)}</span>
                   ))}
                   {el.ionization_energies.length > 5 && ` … +${el.ionization_energies.length - 5} more`}
-                  <span style={{ color: "var(--clr-text-muted)" }}> kJ/mol</span>
+                  <Select className={styles.unitSelect} value={energyUnit} onChange={setEnergyUnit} options={energyOptions} />
                 </span>
               </DataItem>
             )}
@@ -141,19 +143,48 @@ export default function ElementPage({ element: el }) {
                 onClick={() => setImageModalOpen(true)}
                 aria-label="Expand image"
               >
-                <ExpandIcon />
+                <FiMaximize2 size={14} />
               </button>
             </div>
           )}
           <DataList>
-            <DataItem label="Phase" color={phaseColor}>
+            <DataItem color={phaseColor} label={
+              <span style={{ display: "flex", alignItems: "center", gap: "0.25rem" }}>
+                State at
+                <input
+                  type="number"
+                  value={formatTempDisplay(temperature, tempUnit)}
+                  onChange={(e) => {
+                    const val = Number(e.target.value);
+                    if (!isNaN(val)) setTemperature(Math.round(Math.max(0, Math.min(6500, convertToKelvin(val, tempUnit)))));
+                  }}
+                  className={styles.tempInput}
+                />
+                <Select className={styles.unitSelect} value={tempUnit} onChange={setTempUnit} options={tempOptions} />
+              </span>
+            }>
               <span style={{ display: "flex", alignItems: "center", gap: "0.375rem" }}>
-                <PhaseIcon phase={el.phase} size="1em" /> {el.phase}
+                <PhaseIcon phase={phase} size="1em" /> {phase}
               </span>
             </DataItem>
-            <DataItem label="Melting Point" value={fmtK(el.melt)} />
-            <DataItem label="Boiling Point" value={fmtK(el.boil)} />
-            <DataItem label="Density" value={el.density != null ? `${el.density} g/cm³` : "n/a"} />
+            <DataItem label="Melting Point">
+              <span style={{ display: "flex", alignItems: "center", gap: "0.25rem" }}>
+                {formatTemp(el.melt, tempUnit)}
+                <Select className={styles.unitSelect} value={tempUnit} onChange={setTempUnit} options={tempOptions} />
+              </span>
+            </DataItem>
+            <DataItem label="Boiling Point">
+              <span style={{ display: "flex", alignItems: "center", gap: "0.25rem" }}>
+                {formatTemp(el.boil, tempUnit)}
+                <Select className={styles.unitSelect} value={tempUnit} onChange={setTempUnit} options={tempOptions} />
+              </span>
+            </DataItem>
+            <DataItem label="Density">
+              <span style={{ display: "flex", alignItems: "center", gap: "0.25rem" }}>
+                {formatDensity(el.density, densityUnit)}
+                <Select className={styles.unitSelect} value={densityUnit} onChange={setDensityUnit} options={densityOptions} />
+              </span>
+            </DataItem>
             {el.molar_heat && <DataItem label="Molar Heat" value={`${el.molar_heat} J/(mol·K)`} />}
             <DataItem label="Crystal Structure">
               {el.crystal_structure ? (
@@ -254,7 +285,7 @@ export default function ElementPage({ element: el }) {
       <nav className={styles.elementNav}>
         {prevEl ? (
           <Link href={`/element/${prevEl.name.toLowerCase()}`} className={styles.elementNavLink}>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M10 3L5 8L10 13" /></svg>
+            <IoChevronBack size={16} />
             <div className={styles.elementNavCard}>
               <Element element={prevEl} />
             </div>
@@ -273,7 +304,7 @@ export default function ElementPage({ element: el }) {
             <div className={styles.elementNavCard}>
               <Element element={nextEl} />
             </div>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M6 3L11 8L6 13" /></svg>
+            <IoChevronForward size={16} />
           </Link>
         ) : <span />}
       </nav>

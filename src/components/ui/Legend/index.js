@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import elementGroups from '@/lib/ElementGroups.json';
+import elementGroups from '@/lib/ElementCategories.json';
 import styles from './styles.module.scss';
 import { SolidIcon, LiquidIcon, GasIcon, UnknownIcon } from '@/components/ui/PhaseIcon';
 

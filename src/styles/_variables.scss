@@ -5,13 +5,13 @@ $element-colors: (
   alkali-metal:          hsl(355, 80%, 60%),
   alkaline-earth-metal:  hsl(25, 100%, 55%),
   transition-metal:      hsl(45, 90%, 58%),
-  post-transition-metal: hsl(150, 55%, 50%),
+  post-transition-metal: hsl(80, 75%, 55%),
   metalloid:             hsl(183, 80%, 65%),
   diatomic-nonmetal:     hsl(220, 80%, 65%),
   polyatomic-nonmetal:   hsl(310, 75%, 60%),
   noble-gas:             hsl(265, 90%, 68%),
   lanthanide:            hsl(166, 60%, 50%),
-  actinide:              hsl(80, 75%, 55%),
+  actinide:              hsl(150, 55%, 50%),
   unknown:               hsl(220, 10%, 55%),
 );
 
@@ -57,7 +57,7 @@ $element-colors: (
   --clr-phase-solid: #e85d75;
   --clr-phase-liquid: #5EBBFF;
   --clr-phase-gas: #4AE3B5;
-  --clr-phase-unknown: var(--clr-text-secondary);
+  --clr-phase-unknown: #9A9AA0;
 
   // ─── Misc ───
   --border-radius: 0.2em;

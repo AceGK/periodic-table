@@ -2,8 +2,11 @@
 
 import { useState, useCallback, useEffect } from "react";
 import data from "@/lib/Elements.json";
+import { getCategoryColor } from "@/lib/elementColors";
+import { frontFields, backFields } from "./fields";
 import FlashCard from "./FlashCard";
 import Select from "@/components/ui/Select";
+import { IoChevronBack, IoChevronForward, IoChevronDown } from "react-icons/io5";
 import styles from "./styles.module.scss";
 
 function shuffle(arr) {
@@ -77,9 +80,11 @@ export default function FlashCardDeck({ front, back, set, onFrontChange, onBackC
   return (
     <div className={styles.deck} onKeyDown={handleKey} tabIndex={0}>
       <FlashCard
-        element={current}
-        front={front}
-        back={back}
+        front={{ id: front.id, label: front.label, render: () => front.render(current) }}
+        back={{ id: back.id, label: back.label, render: () => back.render(current) }}
+        accent={getCategoryColor(current.category)}
+        frontOptions={frontFields}
+        backOptions={backFields}
         flipped={flipped}
         animate={animate}
         onFlip={() => setFlipped((f) => !f)}
@@ -89,17 +94,13 @@ export default function FlashCardDeck({ front, back, set, onFrontChange, onBackC
 
       <div className={styles.controls}>
         <button className={styles.controlBtn} onClick={prev} disabled={index === 0}>
-          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-            <path d="M10 3L5 8L10 13" />
-          </svg>
+          <IoChevronBack size={18} />
         </button>
         <div className={styles.progressGroup}>
           <span className={styles.progress}>{index + 1} / {total}</span>
           <label className={styles.setLabel} onClick={(e) => e.stopPropagation()}>
-            <span>{set === "all" ? "All Groups" : set}</span>
-            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
-              <path d="M2.5 4L5 6.5L7.5 4" />
-            </svg>
+            <span>{set === "all" ? "All Categories" : set}</span>
+            <IoChevronDown size={10} />
             <Select
               className={styles.setLabelInput}
               value={set}
@@ -109,9 +110,7 @@ export default function FlashCardDeck({ front, back, set, onFrontChange, onBackC
           </label>
         </div>
         <button className={styles.controlBtn} onClick={next} disabled={index === total - 1}>
-          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-            <path d="M6 3L11 8L6 13" />
-          </svg>
+          <IoChevronForward size={18} />
         </button>
       </div>
 

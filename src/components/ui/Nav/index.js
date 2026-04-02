@@ -3,33 +3,47 @@
 import Link from 'next/link';
 import { useState, useRef, useCallback, useEffect } from 'react';
 import data from '@/lib/Elements.json';
+import { getCategoryColor } from "@/lib/elementColors";
 import styles from './styles.module.scss';
+
+// ─── Icons ────────────────────────────────────────────────
+
 import MinimalPeriodicTable from "@/assets/icons/minimal-periodic-table.svg";
-import { HiListBullet } from "react-icons/hi2";
+import { HiListBullet, HiSun, HiMoon, HiCog6Tooth, HiDocumentText } from "react-icons/hi2";
 import { PiCardsFill } from "react-icons/pi";
 import { MdQuiz } from "react-icons/md";
 import { BsInfoCircleFill, BsQuestionCircleFill } from "react-icons/bs";
-import { HiDocumentText } from "react-icons/hi2";
+import { GoGitCompare } from "react-icons/go";
+import { IoChevronDown } from "react-icons/io5";
 
 // ─── Nav item config ──────────────────────────────────────
+// Types:
+//   - href: direct link (no dropdown)
+//   - links: dropdown with link list
+//   - links + elementSearch: dropdown with link list + searchable element column
 
 const NAV_ITEMS = [
   {
     label: "Elements",
-    content: "elements",
+    elementSearch: true,
+    links: [
+      { href: '/table', title: 'Periodic Table', desc: 'Interactive periodic table of elements', icon: <MinimalPeriodicTable width="1em" height="1em" />, color: 'var(--clr-phase-gas)' },
+      { href: '/elements', title: 'Element List', desc: 'Browse all elements in a sortable list', icon: <HiListBullet />, color: 'var(--clr-phase-liquid)' },
+      { href: '/compare', title: 'Compare', desc: 'Compare properties side by side', icon: <GoGitCompare />, color: 'var(--clr-phase-solid)' },
+    ],
   },
   {
     label: "Learn",
     links: [
-      { href: '/learn/flash-cards', title: 'Flash Cards', desc: 'Memorize elements with flip cards', icon: <PiCardsFill />, color: 'var(--clr-phase-gas)' },
-      { href: '/learn/quizzes', title: 'Quizzes', desc: 'Test your knowledge of the elements', icon: <MdQuiz />, color: 'var(--clr-phase-liquid)' },
+      { href: '/learn/flash-cards', title: 'Flash Cards', desc: 'Memorize elements with flip cards', icon: <PiCardsFill />, color: 'var(--clr-transition-metal)' },
+      { href: '/learn/quizzes', title: 'Quizzes', desc: 'Test your knowledge of the elements', icon: <MdQuiz />, color: 'var(--clr-polyatomic-nonmetal)' },
     ],
   },
   {
     label: "Resources",
     links: [
-      { href: '/', title: 'About', desc: 'About this project', icon: <BsInfoCircleFill />, color: 'var(--clr-accent)' },
-      { href: '/', title: 'Printable PDF', desc: 'Download a printable periodic table', icon: <HiDocumentText />, color: 'var(--clr-phase-solid)' },
+      { href: '/', title: 'About', desc: 'About this project', icon: <BsInfoCircleFill />, color: 'var(--clr-metalloid)' },
+      { href: '/', title: 'Printable PDF', desc: 'Download a printable periodic table', icon: <HiDocumentText />, color: 'var(--clr-alkaline-earth-metal)' },
       { href: '/', title: 'FAQ', desc: 'Frequently asked questions', icon: <BsQuestionCircleFill />, color: 'var(--clr-noble-gas)' },
     ],
   },
@@ -40,34 +54,6 @@ const NAV_ITEMS = [
 ];
 
 const CLOSE_DELAY = 150;
-
-// ─── Icons ────────────────────────────────────────────────
-
-const SettingsIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
-    <circle cx="12" cy="12" r="3" />
-  </svg>
-);
-
-const SunIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="12" r="4" />
-    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
-  </svg>
-);
-
-const MoonIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
-  </svg>
-);
-
-const ChevronDown = () => (
-  <svg className={styles.chevron} width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
-    <path d="M2 3.5L5 6.5L8 3.5" />
-  </svg>
-);
 
 // ─── Component ────────────────────────────────────────────
 
@@ -90,6 +76,7 @@ export default function Nav() {
   const highlightActive = useRef(false);
 
   const isOpen = activeIndex !== null;
+  const dropdownItems = NAV_ITEMS.filter((item) => !item.href);
 
   const filteredElements = elementSearch
     ? data.elements.filter((el) => {
@@ -190,6 +177,11 @@ export default function Nav() {
 
   // ─── Mobile ───────────────────────────────────────────
 
+  const closeDropdown = useCallback(() => {
+    setActiveIndex(null);
+    setIndicatorStyle((s) => ({ ...s, opacity: 0 }));
+  }, []);
+
   const toggleAccordion = (name) => setMobileAccordion(mobileAccordion === name ? null : name);
   const closeMobile = () => { setMobileOpen(false); setMobileAccordion(null); };
 
@@ -197,7 +189,7 @@ export default function Nav() {
 
   const renderDropdownLink = (link) => (
     <li key={link.href + link.title}>
-      <Link href={link.href} className={styles.dropdownLink}>
+      <Link href={link.href} className={styles.dropdownLink} onClick={closeDropdown}>
         <span className={styles.dropdownIcon} style={{ color: link.color }}>{link.icon}</span>
         <div>
           <strong>{link.title}</strong>
@@ -207,50 +199,62 @@ export default function Nav() {
     </li>
   );
 
-  const renderElementsContent = () => (
-    <div className={styles.elementsDropdown}>
+  const renderDropdownContent = (item) => {
+    if (item.elementSearch) {
+      return (
+        <div className={styles.elementsDropdown}>
+          <ul className={styles.dropdownList}>
+            {item.links.map(renderDropdownLink)}
+          </ul>
+          <div className={styles.elementsList}>
+            <span className={styles.elementsListHeading}>Elements</span>
+            <input
+              type="text"
+              placeholder="Search"
+              value={elementSearch}
+              onChange={(e) => setElementSearch(e.target.value)}
+              className={styles.elementsSearch}
+              onClick={(e) => e.stopPropagation()}
+            />
+            <div className={styles.elementsScroll}>
+              {filteredElements.map((el) => (
+                <Link key={el.number} href={`/element/${el.name.toLowerCase()}`} className={styles.elementItem} style={{ '--_cat-color': getCategoryColor(el.category) }} onClick={closeDropdown}>
+                  <span className={styles.elementItemNumber}>{el.number}</span>
+                  <span className={styles.elementItemSymbol}>{el.symbol}</span>
+                  <span className={styles.elementItemName}>{el.name}</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+    }
+    return (
       <ul className={styles.dropdownList}>
-        <li>
-          <Link href="/table" className={styles.dropdownLink}>
-            <span className={styles.dropdownIcon} style={{ color: 'var(--clr-accent)' }}><MinimalPeriodicTable width="1em" height="1em" /></span>
-            <div>
-              <strong>Periodic Table</strong>
-              <small>Interactive periodic table of elements</small>
-            </div>
-          </Link>
-        </li>
-        <li>
-          <Link href="/elements" className={styles.dropdownLink}>
-            <span className={styles.dropdownIcon} style={{ color: 'var(--clr-phase-liquid)' }}><HiListBullet /></span>
-            <div>
-              <strong>List</strong>
-              <small>Browse all elements in a sortable list</small>
-            </div>
-          </Link>
-        </li>
+        {item.links?.map(renderDropdownLink)}
       </ul>
-      <div className={styles.elementsList}>
-        <span className={styles.elementsListHeading}>Elements</span>
-        <input
-          type="text"
-          placeholder="Search"
-          value={elementSearch}
-          onChange={(e) => setElementSearch(e.target.value)}
-          className={styles.elementsSearch}
-          onClick={(e) => e.stopPropagation()}
-        />
-        <div className={styles.elementsScroll}>
-          {filteredElements.map((el) => (
-            <Link key={el.number} href={`/element/${el.name.toLowerCase()}`} className={styles.elementItem}>
-              <span className={styles.elementItemNumber}>{el.number}</span>
-              <span className={styles.elementItemSymbol}>{el.symbol}</span>
-              <span className={styles.elementItemName}>{el.name}</span>
+    );
+  };
+
+  const renderMobileAccordion = (item) => {
+    const key = item.label.toLowerCase();
+    const isAccordionOpen = mobileAccordion === key;
+    return (
+      <div key={item.label} className={styles.mobileAccordion}>
+        <button className={styles.mobileAccordionTrigger} onClick={() => toggleAccordion(key)} aria-expanded={isAccordionOpen}>
+          {item.label}
+          <IoChevronDown className={`${styles.mobileChevron} ${isAccordionOpen ? styles.mobileChevronOpen : ''}`} size={14} />
+        </button>
+        <div className={`${styles.mobileAccordionContent} ${isAccordionOpen ? styles.mobileAccordionOpen : ''}`}>
+          {item.links.map((link) => (
+            <Link key={link.href + link.title} href={link.href} className={styles.mobileSubLink} onClick={closeMobile}>
+              {link.title}
             </Link>
           ))}
         </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <nav className={styles.nav} ref={rootRef} onMouseLeave={startClose}>
@@ -273,7 +277,8 @@ export default function Nav() {
                 : "opacity 150ms ease",
             }}
           />
-          {NAV_ITEMS.map((item, i) => {
+          {NAV_ITEMS.map((item) => {
+            // Direct link (no dropdown)
             if (item.href) {
               return (
                 <li key={item.label} onMouseEnter={(e) => { updateHighlight(e); startClose(); }} onMouseLeave={hideHighlight}>
@@ -281,21 +286,23 @@ export default function Nav() {
                 </li>
               );
             }
+            // Dropdown item
+            const dropdownIndex = dropdownItems.indexOf(item);
             return (
               <li
                 key={item.label}
-                onMouseEnter={(e) => { updateHighlight(e); open(i); }}
+                onMouseEnter={(e) => { updateHighlight(e); open(dropdownIndex); }}
                 onMouseLeave={startClose}
               >
                 <button
                   className={styles.trigger}
-                  ref={(el) => (triggerRefs.current[i] = el)}
-                  data-state={activeIndex === i ? "open" : "closed"}
-                  aria-expanded={activeIndex === i}
-                  onClick={() => activeIndex === i ? startClose() : open(i)}
+                  ref={(el) => (triggerRefs.current[dropdownIndex] = el)}
+                  data-state={activeIndex === dropdownIndex ? "open" : "closed"}
+                  aria-expanded={activeIndex === dropdownIndex}
+                  onClick={() => activeIndex === dropdownIndex ? startClose() : open(dropdownIndex)}
                 >
                   {item.label}
-                  <ChevronDown />
+                  <IoChevronDown className={styles.chevron} size={12} />
                 </button>
               </li>
             );
@@ -305,20 +312,20 @@ export default function Nav() {
         {/* Right-side actions */}
         <div className={styles.navActions}>
           <button className={styles.iconBtn} onClick={() => setDarkMode(!darkMode)} aria-label="Toggle theme">
-            {darkMode ? <SunIcon /> : <MoonIcon />}
+            {darkMode ? <HiSun size={18} /> : <HiMoon size={18} />}
           </button>
           <button className={styles.iconBtn} aria-label="Settings">
-            <SettingsIcon />
+            <HiCog6Tooth size={18} />
           </button>
         </div>
 
         {/* Mobile actions + hamburger */}
         <div className={styles.mobileActions}>
           <button className={styles.iconBtn} onClick={() => setDarkMode(!darkMode)} aria-label="Toggle theme">
-            {darkMode ? <SunIcon /> : <MoonIcon />}
+            {darkMode ? <HiSun size={18} /> : <HiMoon size={18} />}
           </button>
           <button className={styles.iconBtn} aria-label="Settings">
-            <SettingsIcon />
+            <HiCog6Tooth size={18} />
           </button>
           <button className={styles.hamburger} onClick={() => setMobileOpen(!mobileOpen)} aria-label="Toggle menu" aria-expanded={mobileOpen}>
             <span className={`${styles.hamburgerLine} ${mobileOpen ? styles.open : ''}`} />
@@ -359,67 +366,31 @@ export default function Nav() {
             height: viewportSize.height,
           }}
         >
-          {NAV_ITEMS.map((item, i) => (
+          {dropdownItems.map((item, i) => (
             <div
               key={item.label}
               ref={(el) => (contentRefs.current[i] = el)}
               className={styles.content}
               style={{ display: activeIndex === i ? "block" : "none" }}
             >
-              {item.content === "elements" ? renderElementsContent() : (
-                <ul className={styles.dropdownList}>
-                  {item.links?.map(renderDropdownLink)}
-                </ul>
-              )}
+              {renderDropdownContent(item)}
             </div>
           ))}
         </div>
       </div>
 
-      {/* Mobile dropdown menu */}
+      {/* Mobile menu */}
       <div className={`${styles.mobileMenu} ${mobileOpen ? styles.mobileMenuOpen : ''}`}>
-        <div className={styles.mobileAccordion}>
-          <button className={styles.mobileAccordionTrigger} onClick={() => toggleAccordion('elements')} aria-expanded={mobileAccordion === 'elements'}>
-            Elements
-            <svg className={`${styles.mobileChevron} ${mobileAccordion === 'elements' ? styles.mobileChevronOpen : ''}`} width="14" height="14" viewBox="0 0 10 10">
-              <path d="M2 3.5L5 6.5L8 3.5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-            </svg>
-          </button>
-          <div className={`${styles.mobileAccordionContent} ${mobileAccordion === 'elements' ? styles.mobileAccordionOpen : ''}`}>
-            <Link href="/table" className={styles.mobileSubLink} onClick={closeMobile}>Periodic Table</Link>
-            <Link href="/elements" className={styles.mobileSubLink} onClick={closeMobile}>Element List</Link>
-          </div>
-        </div>
-
-        <div className={styles.mobileAccordion}>
-          <button className={styles.mobileAccordionTrigger} onClick={() => toggleAccordion('learn')} aria-expanded={mobileAccordion === 'learn'}>
-            Learn
-            <svg className={`${styles.mobileChevron} ${mobileAccordion === 'learn' ? styles.mobileChevronOpen : ''}`} width="14" height="14" viewBox="0 0 10 10">
-              <path d="M2 3.5L5 6.5L8 3.5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-            </svg>
-          </button>
-          <div className={`${styles.mobileAccordionContent} ${mobileAccordion === 'learn' ? styles.mobileAccordionOpen : ''}`}>
-            {NAV_ITEMS.find((i) => i.label === "Learn")?.links.map((link) => (
-              <Link key={link.href} href={link.href} className={styles.mobileSubLink} onClick={closeMobile}>{link.title}</Link>
-            ))}
-          </div>
-        </div>
-
-        <div className={styles.mobileAccordion}>
-          <button className={styles.mobileAccordionTrigger} onClick={() => toggleAccordion('resources')} aria-expanded={mobileAccordion === 'resources'}>
-            Resources
-            <svg className={`${styles.mobileChevron} ${mobileAccordion === 'resources' ? styles.mobileChevronOpen : ''}`} width="14" height="14" viewBox="0 0 10 10">
-              <path d="M2 3.5L5 6.5L8 3.5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-            </svg>
-          </button>
-          <div className={`${styles.mobileAccordionContent} ${mobileAccordion === 'resources' ? styles.mobileAccordionOpen : ''}`}>
-            {NAV_ITEMS.find((i) => i.label === "Resources")?.links.map((link) => (
-              <Link key={link.title} href={link.href} className={styles.mobileSubLink} onClick={closeMobile}>{link.title}</Link>
-            ))}
-          </div>
-        </div>
-
-        <Link href="/support" className={styles.mobileLink} onClick={closeMobile}>Support</Link>
+        {NAV_ITEMS.map((item) => {
+          if (item.href) {
+            return (
+              <Link key={item.label} href={item.href} className={styles.mobileLink} onClick={closeMobile}>
+                {item.label}
+              </Link>
+            );
+          }
+          return renderMobileAccordion(item);
+        })}
       </div>
     </nav>
   );

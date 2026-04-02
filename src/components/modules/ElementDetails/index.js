@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Element from "@/components/ui/ElementCard";
 import styles from "@/components/ui/ElementCard/styles.module.scss";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/Tabs";
@@ -5,6 +6,8 @@ import { Modal } from "@/components/ui/Modal";
 import WikiModal from "@/components/modules/WikiModal";
 import dynamic from "next/dynamic";
 import { useState } from "react";
+import { FiMaximize2 } from "react-icons/fi";
+import { formatTemp, formatEnergy, formatDensity, formatTempDisplay, convertToKelvin, tempOptions, energyOptions, densityOptions } from "@/lib/unitConversions";
 import Image from "next/image";
 
 const GLBViewerWithNoSSR = dynamic(() => import("@/components/ui/GlbViewer"), {
@@ -26,7 +29,9 @@ export default function ElementDetails({ selectedElement, hoveredElement, compac
   return (
 
     <div className={`${styles.elementDetails} ${compact ? styles.compact : ''}`}>
-      <Element element={elementToShow} showShells temperature={temperature} />
+      <Link href={`/element/${elementToShow.name.toLowerCase()}`} className={styles.elementLink}>
+        <Element element={elementToShow} showShells showPhase temperature={temperature} />
+      </Link>
 
       <Tabs defaultValue="properties">
         <TabsList>
@@ -77,12 +82,7 @@ export default function ElementDetails({ selectedElement, hoveredElement, compac
                   onClick={() => setImageModalOpen(true)}
                   aria-label="Expand image"
                 >
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="15 3 21 3 21 9" />
-                    <polyline points="9 21 3 21 3 15" />
-                    <line x1="21" y1="3" x2="14" y2="10" />
-                    <line x1="3" y1="21" x2="10" y2="14" />
-                  </svg>
+                  <FiMaximize2 size={14} />
                 </button>
               </div>
             )}
@@ -152,12 +152,7 @@ export default function ElementDetails({ selectedElement, hoveredElement, compac
                   onClick={() => setBohrModalOpen(true)}
                   aria-label="Expand Bohr model"
                 >
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="15 3 21 3 21 9" />
-                    <polyline points="9 21 3 21 3 15" />
-                    <line x1="21" y1="3" x2="14" y2="10" />
-                    <line x1="3" y1="21" x2="10" y2="14" />
-                  </svg>
+                  <FiMaximize2 size={14} />
                 </button>
               )}
             </div>
@@ -212,44 +207,21 @@ function Details({ element, temperature, setTemperature }) {
   const [energyUnit, setEnergyUnit] = useState('kJ/mol');
   const [densityUnit, setDensityUnit] = useState('g/cm³');
 
-  const formatDensity = (val) => {
-    if (val === null || val === undefined) return 'n/a';
-    if (densityUnit === 'kg/m³') return `${Math.round(val * 1000 * 100) / 100}`;
-    return `${val}`;
-  };
-
   const DensityUnitSelect = () => (
     <select value={densityUnit} onChange={(e) => setDensityUnit(e.target.value)}>
-      <option value="g/cm³">g/cm³</option>
-      <option value="kg/m³">kg/m³</option>
+      {densityOptions.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
     </select>
   );
-
-  const formatEnergy = (val) => {
-    if (val === null || val === undefined) return 'n/a';
-    if (energyUnit === 'eV') return `${Math.round((val / 96.485) * 1000) / 1000}`;
-    return `${val}`;
-  };
 
   const EnergyUnitSelect = () => (
     <select value={energyUnit} onChange={(e) => setEnergyUnit(e.target.value)}>
-      <option value="kJ/mol">kJ/mol</option>
-      <option value="eV">eV</option>
+      {energyOptions.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
     </select>
   );
 
-  const formatKelvin = (k) => {
-    if (k === null || k === undefined) return 'n/a';
-    if (tempUnit === 'C') return Math.round((k - 273.15) * 100) / 100;
-    if (tempUnit === 'F') return Math.round(((k - 273.15) * 9 / 5 + 32) * 100) / 100;
-    return k;
-  };
-
   const TempUnitSelect = () => (
     <select value={tempUnit} onChange={(e) => setTempUnit(e.target.value)}>
-      <option value="K">K</option>
-      <option value="C">°C</option>
-      <option value="F">°F</option>
+      {tempOptions.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
     </select>
   );
 
@@ -269,16 +241,7 @@ function Details({ element, temperature, setTemperature }) {
   const handleTempInput = (e) => {
     let val = Number(e.target.value);
     if (isNaN(val)) return;
-    if (tempUnit === 'C') val = val + 273.15;
-    if (tempUnit === 'F') val = (val - 32) * 5 / 9 + 273.15;
-    setTemperature(Math.round(Math.max(0, Math.min(6500, val))));
-  };
-
-  const displayTemp = () => {
-    if (temperature === null || temperature === undefined) return '';
-    if (tempUnit === 'C') return Math.round(temperature - 273.15);
-    if (tempUnit === 'F') return Math.round((temperature - 273.15) * 9 / 5 + 32);
-    return temperature;
+    setTemperature(Math.round(Math.max(0, Math.min(6500, convertToKelvin(val, tempUnit)))));
   };
 
   const crystalWikiMap = {
@@ -327,7 +290,7 @@ function Details({ element, temperature, setTemperature }) {
               State at
               <input
                 type="number"
-                value={displayTemp()}
+                value={formatTempDisplay(temperature, tempUnit)}
                 onChange={handleTempInput}
                 style={{ width: '4rem', marginLeft: '4px', marginRight: '2px', padding: '0 4px', background: 'var(--clr-bg-secondary)', border: '1px solid var(--clr-border)', borderRadius: '4px', color: 'var(--clr-text-primary)', fontSize: '0.75rem' }}
               />
@@ -369,16 +332,16 @@ function Details({ element, temperature, setTemperature }) {
         <ul data-type="element-data">
           <li>
             <label>Melting Point</label>
-            <output style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>{formatKelvin(element.melt)} <TempUnitSelect /></output>
+            <output style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>{formatTemp(element.melt, tempUnit)} <TempUnitSelect /></output>
           </li>
           <li>
             <label>Boiling Point</label>
-            <output style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>{formatKelvin(element.boil)} <TempUnitSelect /></output>
+            <output style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>{formatTemp(element.boil, tempUnit)} <TempUnitSelect /></output>
           </li>
           <li>
             <label>Electron Affinity</label>
             <output style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
-              {formatEnergy(element.electron_affinity)} <EnergyUnitSelect />
+              {formatEnergy(element.electron_affinity, energyUnit)} <EnergyUnitSelect />
             </output>
           </li>
           <li>
@@ -396,7 +359,7 @@ function Details({ element, temperature, setTemperature }) {
               </select>
             </label>
             <output style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
-              {formatEnergy(element.ionization_energies[selectedIonizationIndex])} <EnergyUnitSelect />
+              {formatEnergy(element.ionization_energies[selectedIonizationIndex], energyUnit)} <EnergyUnitSelect />
             </output>
           </li>
           <Radius element={element} />
@@ -411,7 +374,7 @@ function Details({ element, temperature, setTemperature }) {
           <li>
             <label>Density</label>
             <output style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
-              {formatDensity(element.density)} <DensityUnitSelect />
+              {formatDensity(element.density, densityUnit)} <DensityUnitSelect />
             </output>
           </li>
           <Conductivity element={element} />

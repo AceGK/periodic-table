@@ -1,6 +1,7 @@
 import styles from './styles.module.scss';
 import PhaseIcon from '@/components/ui/PhaseIcon';
 import { getPhaseKeyColor } from '@/lib/elementColors';
+import { formatMass } from '@/lib/unitConversions';
 
 function PhaseIndicator({ phaseKey }) {
   return (
@@ -78,9 +79,7 @@ export default function Element({ element, handleElementClick, isGroupSelected, 
         <div className={styles.symbol} title="Symbol">{element.symbol}</div>
         <div>
           <div className={styles.name} title="Name">{element.name}</div>
-          <div className={styles.mass} title="Atomic Weight">
-            {Number.isInteger(element.atomic_mass) ? `(${element.atomic_mass})` : element.atomic_mass}
-          </div>
+          <div className={styles.mass} title="Atomic Weight">{formatMass(element.atomic_mass)}</div>
           {showShells && element.shells && (
             <div className={styles.shells} title="Electron Shells">
               {element.shells.map((count, i) => (

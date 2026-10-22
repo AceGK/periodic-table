@@ -1,4 +1,5 @@
 import { getCategoryColor, getPhaseColor } from "@/lib/elementColors";
+import { formatMass } from "@/lib/unitConversions";
 import PhaseIcon from "@/components/ui/PhaseIcon";
 import FullDetails from "./FullDetails";
 import styles from "./styles.module.scss";
@@ -93,7 +94,7 @@ export const backFields = [
   {
     id: "mass",
     label: "Atomic Mass",
-    render: (el) => <div className={styles.valuePrimary}>{el.atomic_mass} u</div>,
+    render: (el) => <div className={styles.valuePrimary}>{formatMass(el.atomic_mass)} u</div>,
   },
   {
     id: "category",

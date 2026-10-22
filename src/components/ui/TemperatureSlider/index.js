@@ -1,7 +1,11 @@
 "use client";
 
 import { useState } from 'react';
+import { FaTemperatureHalf } from "react-icons/fa6";
+import { VscDebugRestart } from "react-icons/vsc";
 import styles from './styles.module.scss';
+
+const DEFAULT_K = 298; // 25°C, room temperature
 
 const MIN_K = 0;
 const MAX_K = 6500;
@@ -37,6 +41,7 @@ export default function TemperatureSlider({ temperature, setTemperature }) {
   return (
     <div className={styles.wrapper}>
       <label className={styles.label}>
+        <FaTemperatureHalf size={14} />
         <span className={styles.labelFull}>Temperature</span>
         <span className={styles.labelShort}>Temp.</span>
       </label>
@@ -56,14 +61,26 @@ export default function TemperatureSlider({ temperature, setTemperature }) {
         <button
           className={styles.stepBtn}
           onClick={() => setTemperature(Math.max(MIN_K, temperature - 50))}
+          aria-label="Decrease by 50K"
+          title="Decrease by 50K"
         >
           &minus;
         </button>
         <button
           className={styles.stepBtn}
           onClick={() => setTemperature(Math.min(MAX_K, temperature + 50))}
+          aria-label="Increase by 50K"
+          title="Increase by 50K"
         >
           +
+        </button>
+        <button
+          className={styles.stepBtn}
+          onClick={() => setTemperature(DEFAULT_K)}
+          aria-label="Reset to room temperature (25°C)"
+          title="Reset to room temperature (25°C)"
+        >
+          <VscDebugRestart size={12} />
         </button>
       </div>
 

@@ -22,7 +22,7 @@
     font-size:clamp(11px, 1.25vmax, 21px);
     line-height:0;
     font-weight: 700;
-    color: #dfdfdf;
+    color: var(--clr-text-primary);
   }
   .name, .mass{
     font-size:clamp(7px, 0.9vmax, 11px);
@@ -328,8 +328,8 @@
   justify-content: center;
   width: 28px;
   height: 28px;
-  background: rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: var(--clr-surface-active);
+  border: 1px solid var(--clr-border-strong);
   border-radius: var(--border-radius);
   color: var(--clr-text-primary);
   cursor: pointer;
@@ -339,6 +339,6 @@
 
   &:hover {
     opacity: 1;
-    background: rgba(0, 0, 0, 0.7);
+    background: var(--clr-bg-elevated);
   }
 }

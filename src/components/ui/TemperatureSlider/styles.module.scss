@@ -8,11 +8,18 @@
 }
 
 .label {
-  font-size: 1.0625rem;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.875rem;
   font-weight: 500;
   color: var(--clr-text-secondary);
   white-space: nowrap;
   flex-shrink: 0;
+
+  svg {
+    color: var(--clr-phase-solid);
+  }
 }
 
 .labelFull {

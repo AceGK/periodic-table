@@ -7,7 +7,7 @@ import WikiModal from "@/components/modules/WikiModal";
 import dynamic from "next/dynamic";
 import { useState } from "react";
 import { FiMaximize2 } from "react-icons/fi";
-import { formatTemp, formatEnergy, formatDensity, formatTempDisplay, convertToKelvin, tempOptions, energyOptions, densityOptions } from "@/lib/unitConversions";
+import { formatMass, formatTemp, formatEnergy, formatDensity, formatTempDisplay, convertToKelvin, tempOptions, energyOptions, densityOptions } from "@/lib/unitConversions";
 import Image from "next/image";
 
 const GLBViewerWithNoSSR = dynamic(() => import("@/components/ui/GlbViewer"), {
@@ -140,13 +140,11 @@ export default function ElementDetails({ selectedElement, hoveredElement, compac
               </ul>
             </div>
 
-            <div style={{ position: 'relative' }}>
-              <div style={{ width: "100%", height: "100%", maxHeight: "220px", position: 'relative' }}>
-                {elementToShow.bohr_model_3d && (
+            {elementToShow.bohr_model_3d && (
+              <div style={{ position: 'relative' }}>
+                <div style={{ width: "100%", height: "100%", maxHeight: "220px", position: 'relative' }}>
                   <GLBViewerWithNoSSR path={elementToShow.bohr_model_3d} />
-                )}
-              </div>
-              {elementToShow.bohr_model_3d && (
+                </div>
                 <button
                   className={styles.expandBtn}
                   onClick={() => setBohrModalOpen(true)}
@@ -154,8 +152,8 @@ export default function ElementDetails({ selectedElement, hoveredElement, compac
                 >
                   <FiMaximize2 size={14} />
                 </button>
-              )}
-            </div>
+              </div>
+            )}
           </div>
 
           {/* Bohr model gallery modal */}
@@ -304,7 +302,7 @@ function Details({ element, temperature, setTemperature }) {
           </li>
           <li>
             <label>Weight</label>
-            <output>{element.atomic_mass} u</output>
+            <output>{formatMass(element.atomic_mass)} u</output>
           </li>
           <li>
             <label>Energy Levels</label>

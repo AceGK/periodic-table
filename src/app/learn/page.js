@@ -1,4 +1,5 @@
 import Link from "next/link";
+import PageHeader from "@/components/ui/PageHeader";
 
 const learnPages = [
   { href: "/learn/quizzes", title: "Quizzes", description: "Test your knowledge of the elements" },
@@ -11,7 +12,7 @@ const learnPages = [
 export default function LearnPage() {
   return (
     <main className="container" style={{ padding: '2rem 1rem' }}>
-      <h1 style={{ fontSize: '1.5rem', marginBottom: '1.5rem' }}>Learn</h1>
+      <PageHeader title="Learn" />
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '1rem' }}>
         {learnPages.map((page) => (
           <Link

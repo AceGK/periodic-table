@@ -1,0 +1,36 @@
+{
+  "blocks": [
+    {
+      "name": "s",
+      "wiki": "Block_(periodic_table)#S-block",
+      "orbitals": "s-orbitals",
+      "groups": "Groups 1–2 + Helium",
+      "valenceElectrons": "1–2",
+      "description": "The s-block includes Groups 1 (alkali metals) and 2 (alkaline earth metals), plus hydrogen and helium. These elements have their outermost electrons in s-orbitals, which are spherical in shape. The s-block contains the most reactive metals — alkali metals lose their single s-electron easily, while alkaline earth metals lose two. Hydrogen is unique as a nonmetal in this block, and helium, despite having a full 1s² shell, is placed here (though often shown with noble gases)."
+    },
+    {
+      "name": "p",
+      "wiki": "Block_(periodic_table)#P-block",
+      "orbitals": "p-orbitals",
+      "groups": "Groups 13–18",
+      "valenceElectrons": "1–6",
+      "description": "The p-block spans Groups 13–18 and contains the most diverse range of element types — metals, metalloids, nonmetals, and noble gases. The outermost electrons fill the three p-orbitals, which are dumbbell-shaped and oriented along the x, y, and z axes. This block includes essential elements for life (carbon, nitrogen, oxygen), the halogens (most reactive nonmetals), and the noble gases (most stable elements). Properties vary dramatically across the block."
+    },
+    {
+      "name": "d",
+      "wiki": "Block_(periodic_table)#D-block",
+      "orbitals": "d-orbitals",
+      "groups": "Groups 3–12",
+      "valenceElectrons": "1–10 (in d-orbitals)",
+      "description": "The d-block contains the transition metals in Groups 3–12. Their distinguishing electrons fill the five d-orbitals, which have complex cloverleaf shapes. These metals exhibit variable oxidation states, form colored compounds, and are excellent catalysts. The d-block includes many industrially important metals: iron for steel, copper for wiring, gold and silver for jewelry, and platinum for catalytic converters. Their partially filled d-orbitals give rise to unique magnetic and spectral properties."
+    },
+    {
+      "name": "f",
+      "wiki": "Block_(periodic_table)#F-block",
+      "orbitals": "f-orbitals",
+      "groups": "Lanthanides + Actinides",
+      "valenceElectrons": "1–14 (in f-orbitals)",
+      "description": "The f-block comprises the lanthanides (elements 57–71) and actinides (elements 89–103), placed below the main table. Their distinguishing electrons fill the seven f-orbitals, which have complex multilobed shapes. Lanthanides are critical for modern technology — neodymium magnets, europium phosphors, and erbium fiber optics. All actinides are radioactive; uranium and plutonium are used in nuclear energy. The f-electrons are deeply shielded, giving elements within each series remarkably similar chemical properties."
+    }
+  ]
+}

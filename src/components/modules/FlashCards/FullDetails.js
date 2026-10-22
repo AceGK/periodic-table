@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { getCategoryColor, getPhaseColor } from "@/lib/elementColors";
-import { d, formatTemp, formatEnergy, formatDensity, tempOptions, energyOptions, densityOptions } from "@/lib/unitConversions";
+import { d, formatMass, formatTemp, formatEnergy, formatDensity, tempOptions, energyOptions, densityOptions } from "@/lib/unitConversions";
 import PhaseIcon from "@/components/ui/PhaseIcon";
 import Select from "@/components/ui/Select";
 import styles from "./styles.module.scss";
@@ -21,7 +21,7 @@ export default function FullDetails({ element: el }) {
         <div className={styles.detailRow}><span>Category</span><span style={{ color: getCategoryColor(el.category), textTransform: "capitalize" }}>{el.category}</span></div>
         <div className={styles.detailRow}><span>Phase</span><span style={{ color: getPhaseColor(el.phase), display: "flex", alignItems: "center", gap: "0.375rem" }}><PhaseIcon phase={el.phase} /> {el.phase}</span></div>
         <div className={styles.detailRow}><span>Block</span><span>{el.block}</span></div>
-        <div className={styles.detailRow}><span>Weight</span><span>{el.atomic_mass} u</span></div>
+        <div className={styles.detailRow}><span>Weight</span><span>{formatMass(el.atomic_mass)} u</span></div>
         <div className={styles.detailRow}><span>Config</span><span className={styles.detailConfig}>{el.electron_configuration_semantic}</span></div>
         <div className={styles.detailRow}><span>Energy Levels</span><span>{el.shells?.join(", ")}</span></div>
         {/* Reactivity */}

@@ -59,6 +59,15 @@ export function formatDensity(val, unit = "g/cm³") {
   return `${val}`;
 }
 
+// ─── Atomic mass formatting ───────────────────────────────
+
+export function formatMass(mass) {
+  if (mass === null || mass === undefined) return "n/a";
+  if (Number.isInteger(mass)) return `(${mass})`;
+  // Round to 4 decimal places, strip trailing zeros
+  return parseFloat(mass.toFixed(4)).toString();
+}
+
 // ─── Phase at temperature ─────────────────────────────────
 
 export function getPhaseAtTemp(element, temperature) {

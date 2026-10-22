@@ -8,7 +8,7 @@ import {
   backFields,
 } from "@/components/modules/FlashCards";
 import Select from "@/components/ui/Select";
-import Link from "next/link";
+import PageHeader from "@/components/ui/PageHeader";
 import styles from "../styles.module.scss";
 
 const categories = [...new Set(data.elements.map((el) => el.category))].sort();
@@ -25,10 +25,7 @@ export default function ElementsFlashCardsPage() {
 
   return (
     <main className={`container ${styles.page}`}>
-      <div className={styles.pageHeader}>
-        <Link href="/learn/flash-cards" className={styles.backLink}>← All Sets</Link>
-        <h1 className={styles.pageTitle}>Elements</h1>
-      </div>
+      <PageHeader title="Elements" backHref="/learn/flash-cards" backLabel="← All Sets" />
 
       <div className={styles.toolbar}>
         <Select label="Category" value={set} onChange={setSet} options={categoryOptions} />

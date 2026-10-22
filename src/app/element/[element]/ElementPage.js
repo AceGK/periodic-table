@@ -11,7 +11,7 @@ import PhaseIcon from "@/components/ui/PhaseIcon";
 import Section from "@/components/ui/Section";
 import { DataList, DataItem } from "@/components/ui/DataList";
 import { getCategoryColor, getPhaseColor } from "@/lib/elementColors";
-import { d, formatTemp, formatEnergy, formatDensity, formatTempDisplay, convertToKelvin, getPhaseAtTemp, tempOptions, energyOptions, densityOptions } from "@/lib/unitConversions";
+import { d, formatMass, formatTemp, formatEnergy, formatDensity, formatTempDisplay, convertToKelvin, getPhaseAtTemp, tempOptions, energyOptions, densityOptions } from "@/lib/unitConversions";
 import Select from "@/components/ui/Select";
 import { FiMaximize2 } from "react-icons/fi";
 import { IoChevronBack, IoChevronForward } from "react-icons/io5";
@@ -23,6 +23,7 @@ const GLBViewer = dynamic(() => import("@/components/ui/GlbViewer"), { ssr: fals
 
 export default function ElementPage({ element: el }) {
   const [imageModalOpen, setImageModalOpen] = useState(false);
+  const [bohrModalOpen, setBohrModalOpen] = useState(false);
   const [tempUnit, setTempUnit] = useState("K");
   const [energyUnit, setEnergyUnit] = useState("kJ/mol");
   const [densityUnit, setDensityUnit] = useState("g/cm³");
@@ -51,7 +52,7 @@ export default function ElementPage({ element: el }) {
               <PhaseIcon phase={el.phase} size="0.9em" /> {el.phase}
             </span>
             <span>·</span>
-            <span>{el.atomic_mass} u</span>
+            <span>{formatMass(el.atomic_mass)} u</span>
           </div>
           {el.summary && (
             <p className={styles.heroSummary}>{el.summary}</p>
@@ -72,7 +73,7 @@ export default function ElementPage({ element: el }) {
           <DataList>
             <DataItem label="Symbol" value={el.symbol} />
             <DataItem label="Atomic Number" value={el.number} />
-            <DataItem label="Atomic Mass" value={`${el.atomic_mass} u`} />
+            <DataItem label="Atomic Mass" value={`${formatMass(el.atomic_mass)} u`} />
             <DataItem label="Category" color={catColor}>
               <WikiModal title={el.category.replace(/ /g, "_")} displayText={el.category}>
                 <span style={{ textTransform: "capitalize" }}>{el.category}</span>
@@ -277,6 +278,20 @@ export default function ElementPage({ element: el }) {
               fill
               style={{ objectFit: "contain", borderRadius: "var(--border-radius)" }}
             />
+          </div>
+        )}
+      </Modal>
+
+      {/* Bohr model modal */}
+      <Modal
+        open={bohrModalOpen}
+        onClose={() => setBohrModalOpen(false)}
+        title={`${el.name} — Bohr Model`}
+        bodyClassName={elementCardStyles.galleryBody}
+      >
+        {bohrModalOpen && el.bohr_model_3d && (
+          <div style={{ width: "100%", height: "100%" }}>
+            <GLBViewer path={el.bohr_model_3d} cameraDistance={1} />
           </div>
         )}
       </Modal>

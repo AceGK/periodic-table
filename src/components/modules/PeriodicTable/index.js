@@ -100,15 +100,24 @@ export default function PeriodicTable({ }) {
             </div>
 
             {/* Column numbers (groups 1-18) */}
-            {Array.from({ length: 18 }, (_, i) => (
-              <span key={`col-${i}`} className="grid-label col-label" style={{ gridColumn: i + 2, gridRow: 1 }}>
-                {i + 1}
-              </span>
-            ))}
+            {Array.from({ length: 18 }, (_, i) => {
+              const groupNames = [
+                "Lithium Family", "Beryllium Family", "Scandium Family", "Titanium Family",
+                "Vanadium Family", "Chromium Family", "Manganese Family", "Iron Family",
+                "Cobalt Family", "Nickel Family", "Copper Family", "Zinc Family",
+                "Boron Family", "Carbon Family", "Pnictogens", "Chalcogens",
+                "Halogens", "Noble Gases"
+              ];
+              return (
+                <span key={`col-${i}`} className="grid-label col-label" style={{ gridColumn: i + 2, gridRow: 1 }} title={`Group ${i + 1} — ${groupNames[i]}`}>
+                  {i + 1}
+                </span>
+              );
+            })}
 
-            {/* Row numbers (periods 1-8) */}
-            {Array.from({ length: 8 }, (_, i) => (
-              <span key={`row-${i}`} className="grid-label row-label" style={{ gridColumn: 1, gridRow: i + 2 }}>
+            {/* Row numbers (periods 1-7) */}
+            {Array.from({ length: 7 }, (_, i) => (
+              <span key={`row-${i}`} className="grid-label row-label" style={{ gridColumn: 1, gridRow: i + 2 }} title={`Period ${i + 1}`}>
                 {i + 1}
               </span>
             ))}
@@ -138,6 +147,11 @@ export default function PeriodicTable({ }) {
             >
               <div>89-103</div>
             </div>
+
+            {/* Footnote in spacer row */}
+            <span className="grid-footnote" style={{ gridRow: 9, gridColumn: '5 / 20' }}>
+              For elements with no stable isotopes, the mass number of the isotope with the longest half-life is in parentheses.
+            </span>
 
             <div className="pnictogen-tag">Pnictogens</div>
             <div className="chalcogen-tag">Chalcogens</div>

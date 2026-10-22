@@ -38,9 +38,9 @@ h1 {
 .periodic-table {
   display: grid;
   // Col 1: period labels, Cols 2-19: elements, Col 20: spacer
-  grid-template-columns: 1.25rem repeat(18, minmax(62px, auto)) 1.25rem;
+  grid-template-columns: 1.25rem repeat(18, minmax(62px, 1fr)) 1.25rem;
   // Row 1: group labels, Rows 2-9: periods 1-8, Row 10: lanthanides, Row 11: actinides
-  grid-template-rows: 1.25rem repeat(10, auto);
+  grid-template-rows: 1.75rem repeat(10, auto);
   grid-gap: 2px;
   position: relative;
   min-width: min-content;
@@ -57,18 +57,28 @@ h1 {
   font-size: 0.75rem;
   font-weight: 500;
   color: var(--clr-text-secondary);
-  pointer-events: none;
+  pointer-events: auto;
   user-select: none;
+  cursor: default;
 }
 
 .col-label {
-  align-items: flex-end;
-  padding-bottom: 2px;
+  align-items: center;
 }
 
 .row-label {
   justify-content: flex-end;
-  padding-right: 4px;
+  padding-right: 8px;
+}
+
+otnote {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  color: var(--clr-text);
+  opacity: 0.9;
+  white-space: nowrap;
+  margin:0.75rem 1rem;
 }
 
 .periodic-list {
@@ -85,6 +95,12 @@ h1 {
   ul[data-type="legend"] {
     display: none;
   }
+}
+
+.grid-footnote {
+  color:var(--clr-text-secondary);
+  font-size:1rem;
+  margin:0.5rem 1rem;
 }
 
 .toggleView {
@@ -167,53 +183,51 @@ ul[data-type="element-data"] {
 
 
 // Uses $element-colors from _variables.scss (single source of truth)
-@each $name, $color in $element-colors
-
-
-{
+// References CSS custom properties so colors respond to dark/light theme
+@each $name, $color in $element-colors {
   li.#{$name},
   div.#{$name} {
-    color: $color;
+    color: var(--clr-#{$name});
   }
   div.#{$name} > div {
-    border: 1px solid rgba($color, 0);
-    color: $color;
+    border: 1px solid transparent;
+    color: var(--clr-#{$name});
     background: linear-gradient(
       135deg,
-      rgba($color, 0.07),
-      rgba($color, 0.015)
+      rgba(from var(--clr-#{$name}) r g b / 0.07),
+      rgba(from var(--clr-#{$name}) r g b / 0.015)
     );
     &.hovered {
-      border: 1px solid rgba($color, 1);
-      background: rgba($color, 0.1);
+      border: 1px solid var(--clr-#{$name});
+      background: rgba(from var(--clr-#{$name}) r g b / 0.1);
     }
     &:hover {
-      border: 1px solid rgba($color, 1);
+      border: 1px solid var(--clr-#{$name});
     }
     &.active {
-      border: 1px solid rgba($color, 1);
-      background: rgba($color, 1);
+      border: 1px solid var(--clr-#{$name});
+      background: var(--clr-#{$name});
       * {
-        opacity:1;
+        opacity: 1;
         color: var(--clr-bg-primary) !important;
       }
     }
   }
   .halogen-tag:hover ~ .group-17.#{$name} > div {
-    border: 1px solid rgba($color, 1);
-    }
-  .chalcogen-tag:hover ~ .group-16.#{$name} > div  {
-    border: 1px solid rgba($color, 1);
-    }
-  .pnictogen-tag:hover ~ .group-15.#{$name} > div  {
-    border: 1px solid rgba($color, 1);
-    }
+    border: 1px solid var(--clr-#{$name});
+  }
+  .chalcogen-tag:hover ~ .group-16.#{$name} > div {
+    border: 1px solid var(--clr-#{$name});
+  }
+  .pnictogen-tag:hover ~ .group-15.#{$name} > div {
+    border: 1px solid var(--clr-#{$name});
+  }
   .#{$name}.selected-element > div {
-    border: 1px solid rgba($color, 1) !important;
-    background: rgba($color, 0.15) !important;
+    border: 1px solid var(--clr-#{$name}) !important;
+    background: rgba(from var(--clr-#{$name}) r g b / 0.15) !important;
   }
   .#{$name}.selected-element > div.active {
-    background: rgba($color, 0.15) !important;
+    background: rgba(from var(--clr-#{$name}) r g b / 0.15) !important;
     * {
       color: var(--clr-text-primary) !important;
     }

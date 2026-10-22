@@ -3,6 +3,7 @@ import '@/styles/reset.scss'
 import '@/styles/globals.scss'
 import Nav from '@/components/ui/Nav'
 import Footer from '@/components/ui/Footer'
+import Providers from './providers'
 
 const Nunito = Nunito_Sans({ subsets: ['latin'] })
 
@@ -13,11 +14,13 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={Nunito.className}>
-      <Nav />
-      {children}
-      <Footer />
+      <Providers>
+        <Nav />
+        {children}
+        <Footer />
+      </Providers>
       </body>
     </html>
   )

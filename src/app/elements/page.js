@@ -7,11 +7,21 @@ import TemperatureSlider from "@/components/ui/TemperatureSlider";
 import PhaseIcon from "@/components/ui/PhaseIcon";
 import { SolidIcon, LiquidIcon, GasIcon, UnknownIcon } from "@/components/ui/PhaseIcon";
 import { getCategoryColor, categoryVarMap, getPhaseKeyColor } from "@/lib/elementColors";
+import PageHeader from "@/components/ui/PageHeader";
+import { formatMass } from "@/lib/unitConversions";
+import MultiSelect from "@/components/ui/MultiSelect";
+import RefinementChips from "@/components/ui/RefinementChips";
 import styles from "./styles.module.scss";
 
-// Unique categories from data
-const categories = [...new Set(data.elements.map((el) => el.category))].sort();
-const blocks = [...new Set(data.elements.map((el) => el.block))].sort();
+// Filter options
+const categoryOptions = [...new Set(data.elements.map((el) => el.category))].sort().map((c) => ({ value: c, label: c, color: getCategoryColor(c) }));
+const phaseOptions = [
+  { value: "phase-solid", label: "Solid" },
+  { value: "phase-liquid", label: "Liquid" },
+  { value: "phase-gas", label: "Gas" },
+  { value: "phase-unknown", label: "Unknown" },
+];
+const blockOptions = [...new Set(data.elements.map((el) => el.block))].sort().map((b) => ({ value: b, label: `${b}-block` }));
 
 const sortOptions = [
   { value: 'number-asc', label: 'Atomic Number ↑' },
@@ -68,9 +78,9 @@ export default function ElementsPage() {
   const [expandedNumber, setExpandedNumber] = useState(null);
   const [sort, setSort] = useState('number-asc');
   const [search, setSearch] = useState('');
-  const [filterCategory, setFilterCategory] = useState('');
-  const [filterPhase, setFilterPhase] = useState('');
-  const [filterBlock, setFilterBlock] = useState('');
+  const [filterCategories, setFilterCategories] = useState([]);
+  const [filterPhases, setFilterPhases] = useState([]);
+  const [filterBlocks, setFilterBlocks] = useState([]);
   const [temperature, setTemperature] = useState(298);
 
   const toggle = (number) => {
@@ -88,31 +98,50 @@ export default function ElementsPage() {
         String(el.number).includes(q)
       );
     }
-    if (filterCategory) {
-      els = els.filter((el) => el.category === filterCategory);
+    if (filterCategories.length > 0) {
+      els = els.filter((el) => filterCategories.includes(el.category));
     }
-    if (filterPhase) {
+    if (filterPhases.length > 0) {
       els = els.filter((el) => {
         const key = getPhaseAtTemp(el, temperature) || getPhaseKey(el.phase);
-        return key === filterPhase;
+        return filterPhases.includes(key);
       });
     }
-    if (filterBlock) {
-      els = els.filter((el) => el.block === filterBlock);
+    if (filterBlocks.length > 0) {
+      els = els.filter((el) => filterBlocks.includes(el.block));
     }
 
     return sortElements(els, sort);
-  }, [search, filterCategory, filterPhase, filterBlock, sort, temperature]);
+  }, [search, filterCategories, filterPhases, filterBlocks, sort, temperature]);
+
+  const hasFilters = search || filterCategories.length > 0 || filterPhases.length > 0 || filterBlocks.length > 0;
+
+  const refinementItems = [
+    ...filterCategories.map((v) => ({ key: `cat-${v}`, group: "Category", label: v, type: "category", value: v })),
+    ...filterPhases.map((v) => ({ key: `phase-${v}`, group: "State", label: phaseOptions.find((o) => o.value === v)?.label || v, type: "phase", value: v })),
+    ...filterBlocks.map((v) => ({ key: `block-${v}`, group: "Block", label: `${v}-block`, type: "block", value: v })),
+  ];
+
+  const removeRefinement = (item) => {
+    if (item.type === "category") setFilterCategories((prev) => prev.filter((v) => v !== item.value));
+    if (item.type === "phase") setFilterPhases((prev) => prev.filter((v) => v !== item.value));
+    if (item.type === "block") setFilterBlocks((prev) => prev.filter((v) => v !== item.value));
+  };
+
+  const clearAllFilters = () => {
+    setSearch('');
+    setFilterCategories([]);
+    setFilterPhases([]);
+    setFilterBlocks([]);
+  };
 
   const selectedElement = expandedNumber
     ? data.elements.find((el) => el.number === expandedNumber)
     : null;
 
-  const hasFilters = search || filterCategory || filterPhase || filterBlock;
-
   return (
     <main className="container" style={{ padding: '2rem 1rem' }}>
-      <h1 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>All Elements</h1>
+      <PageHeader title="All Elements" />
 
       {/* Toolbar */}
       <div className={styles.toolbar}>
@@ -124,43 +153,18 @@ export default function ElementsPage() {
           className={styles.searchInput}
         />
 
-        <select value={filterCategory} onChange={(e) => setFilterCategory(e.target.value)} className={styles.filterSelect}>
-          <option value="">All Categories</option>
-          {categories.map((cat) => (
-            <option key={cat} value={cat}>{cat}</option>
-          ))}
-        </select>
+        <MultiSelect label="Category" value={filterCategories} onChange={setFilterCategories} options={categoryOptions} />
+        <MultiSelect label="State" value={filterPhases} onChange={setFilterPhases} options={phaseOptions} />
+        <MultiSelect label="Block" value={filterBlocks} onChange={setFilterBlocks} options={blockOptions} />
 
-        <select value={filterPhase} onChange={(e) => setFilterPhase(e.target.value)} className={styles.filterSelect}>
-          <option value="">All States</option>
-          <option value="phase-solid">Solid</option>
-          <option value="phase-liquid">Liquid</option>
-          <option value="phase-gas">Gas</option>
-          <option value="phase-unknown">Unknown</option>
-        </select>
-
-        <select value={filterBlock} onChange={(e) => setFilterBlock(e.target.value)} className={styles.filterSelect}>
-          <option value="">All Blocks</option>
-          {blocks.map((b) => (
-            <option key={b} value={b}>{b}-block</option>
-          ))}
-        </select>
-
-        <select value={sort} onChange={(e) => setSort(e.target.value)} className={styles.filterSelect}>
+        <select value={sort} onChange={(e) => setSort(e.target.value)} className={`${styles.filterSelect} ${styles.sortSelect}`}>
           {sortOptions.map((opt) => (
             <option key={opt.value} value={opt.value}>{opt.label}</option>
           ))}
         </select>
-
-        {hasFilters && (
-          <button
-            className={styles.clearBtn}
-            onClick={() => { setSearch(''); setFilterCategory(''); setFilterPhase(''); setFilterBlock(''); }}
-          >
-            Clear
-          </button>
-        )}
       </div>
+
+      <RefinementChips items={refinementItems} onRemove={removeRefinement} onClearAll={clearAllFilters} />
 
       {/* Legend */}
       <details className={styles.legendDetails}>
@@ -212,8 +216,8 @@ export default function ElementsPage() {
                 {Object.entries(categoryVarMap)
                   .filter(([key]) => !key.startsWith('unknown,'))
                   .map(([name, cssVar]) => (
-                    <span key={name} className={styles.legendSwatch}>
-                      <span className={styles.legendDot} style={{ background: `var(${cssVar})` }} />
+                    <span key={name} className={styles.legendSwatch} style={{ color: `var(${cssVar})` }}>
+                      <span className={styles.legendBar} />
                       <span className={styles.legendSwatchLabel}>{name}</span>
                     </span>
                   ))
@@ -251,7 +255,7 @@ export default function ElementsPage() {
                 <span className={styles.symbol}>{el.symbol}</span>
                 <span className={styles.info}>
                   <span className={styles.name}>{el.name}</span>
-                  <span className={styles.mass}>{el.atomic_mass}</span>
+                  <span className={styles.mass}>{formatMass(el.atomic_mass)}</span>
                 </span>
                 <span className={styles.shells}>{el.shells?.join(' · ')}</span>
                 <svg

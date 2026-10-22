@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState, useRef, useCallback, useEffect } from "react";
+import { useTheme } from "next-themes";
 import data from "@/lib/Elements.json";
 import { getCategoryColor } from "@/lib/elementColors";
 import styles from "./styles.module.scss";
@@ -147,7 +148,8 @@ export default function Nav() {
   const [highlightStyle, setHighlightStyle] = useState({ opacity: 0 });
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileAccordion, setMobileAccordion] = useState(null);
-  const [darkMode, setDarkMode] = useState(true);
+  const { resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
   const [elementSearch, setElementSearch] = useState("");
 
   const closeTimer = useRef(null);
@@ -156,6 +158,11 @@ export default function Nav() {
   const rootRef = useRef(null);
   const menuListRef = useRef(null);
   const highlightActive = useRef(false);
+
+  useEffect(() => setMounted(true), []);
+
+  const isDark = resolvedTheme === "dark";
+  const toggleTheme = () => setTheme(isDark ? "light" : "dark");
 
   const isOpen = activeIndex !== null;
   const dropdownItems = NAV_ITEMS.filter((item) => !item.href);
@@ -323,6 +330,7 @@ export default function Nav() {
                   style={{ "--_cat-color": getCategoryColor(el.category) }}
                   onClick={closeDropdown}
                 >
+                  <span className={styles.elementItemSwatch} />
                   <span className={styles.elementItemNumber}>{el.number}</span>
                   <span className={styles.elementItemSymbol}>{el.symbol}</span>
                   <span className={styles.elementItemName}>{el.name}</span>
@@ -451,10 +459,10 @@ export default function Nav() {
         <div className={styles.navActions}>
           <button
             className={styles.iconBtn}
-            onClick={() => setDarkMode(!darkMode)}
+            onClick={toggleTheme}
             aria-label="Toggle theme"
           >
-            {darkMode ? <HiSun size={18} /> : <HiMoon size={18} />}
+            {mounted && isDark ? <HiSun size={18} /> : <HiMoon size={18} />}
           </button>
           <button className={styles.iconBtn} aria-label="Settings">
             <HiCog6Tooth size={18} />
@@ -465,10 +473,10 @@ export default function Nav() {
         <div className={styles.mobileActions}>
           <button
             className={styles.iconBtn}
-            onClick={() => setDarkMode(!darkMode)}
+            onClick={toggleTheme}
             aria-label="Toggle theme"
           >
-            {darkMode ? <HiSun size={18} /> : <HiMoon size={18} />}
+            {mounted && isDark ? <HiSun size={18} /> : <HiMoon size={18} />}
           </button>
           <button className={styles.iconBtn} aria-label="Settings">
             <HiCog6Tooth size={18} />

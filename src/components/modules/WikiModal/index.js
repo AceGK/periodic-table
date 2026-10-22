@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import { useTheme } from "next-themes";
 import { Modal } from "@/components/ui/Modal";
 import { MdOpenInNew } from "react-icons/md";
 import { IoChevronBack } from "react-icons/io5";
@@ -23,7 +24,74 @@ function extractWikiTitle(href) {
   return null;
 }
 
+function getWikiStyles(isDark) {
+  const bg = isDark ? '#1E1E22' : '#FFFFFF';
+  const text = isDark ? '#d0d0d5' : '#2A2A2D';
+  const heading = isDark ? '#EDEDEF' : '#1A1A1D';
+  const link = isDark ? '#7CC4FA' : '#2563EB';
+  const linkVisited = isDark ? '#9B8EC4' : '#6D28D9';
+  const borderColor = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.1)';
+  const thBg = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.04)';
+  const evenRowBg = isDark ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.02)';
+  const infoboxBg = isDark ? '#161619' : '#F5F5F7';
+  const infoboxBorder = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.1)';
+  const thumbBorder = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)';
+  const caption = isDark ? '#9A9AA0' : '#6B6B73';
+  const inlineBg = isDark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.03)';
+
+  return `
+    body {
+      background: ${bg};
+      color: ${text};
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      padding: 1rem;
+      margin: 0;
+    }
+    a { color: ${link}; cursor: pointer; }
+    a:visited { color: ${linkVisited}; }
+    h1, h2, h3, h4, h5 { color: ${heading}; border-color: ${borderColor}; }
+
+    table { border-color: ${borderColor} !important; }
+    table, th, td { border-color: ${borderColor} !important; color: ${text}; }
+    th { background: ${thBg} !important; color: ${heading}; }
+    td { background: transparent !important; }
+    tr:nth-child(even) td { background: ${evenRowBg} !important; }
+    caption { color: ${heading}; }
+
+    .infobox, .sidebar {
+      background: ${infoboxBg} !important;
+      border: 1px solid ${infoboxBorder} !important;
+      color: ${text};
+    }
+    .infobox *, .sidebar * { color: ${text} !important; border-color: ${thumbBorder} !important; }
+    .infobox a, .sidebar a { color: ${link} !important; }
+    .infobox th, .sidebar th { background: ${thBg} !important; color: ${heading} !important; }
+    .infobox td, .sidebar td { background: transparent !important; }
+    .infobox caption, .sidebar caption { color: ${heading} !important; }
+
+    img { max-width: 100%; height: auto; }
+    .thumbinner { background: transparent !important; border-color: ${thumbBorder} !important; }
+    .thumbcaption { color: ${caption} !important; }
+
+    div[style*="background"], span[style*="background"], td[style*="background"] {
+      background-color: ${inlineBg} !important;
+    }
+
+    .hatnote, .dablink, .rellink, .dmbox, .tmbox, .mbox-small,
+    [role="note"], .plainlinks.hlist.navbar,
+    .mw-editsection, .reflist, .refbegin, .navbox, .navbox-container,
+    .sistersitebox, .noprint, .mw-empty-elt, .metadata, .ambox, .portal,
+    .authority-control, .catlinks, .mw-jump-link, .shortdescription,
+    [role="navigation"] { display: none !important; }
+
+    .mw-body-content { max-width: 100%; }
+  `;
+}
+
 export default function WikiModal({ title, displayText, children, externalOpen, onExternalClose }) {
+  const { resolvedTheme } = useTheme();
   const [internalOpen, setInternalOpen] = useState(false);
   const open = externalOpen !== undefined ? externalOpen : internalOpen;
   const setOpen = externalOpen !== undefined

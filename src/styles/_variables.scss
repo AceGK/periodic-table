@@ -15,7 +15,8 @@ $element-colors: (
   unknown:               hsl(220, 10%, 55%),
 );
 
-:root {
+// ─── Dark theme (default) ──────────────────────────────────
+:root, [data-theme="dark"] {
   // ─── Base palette (warm dark with subtle navy tint) ───
   --clr-bg-primary: #19191B;
   --clr-bg-secondary: #1E1E22;
@@ -34,7 +35,7 @@ $element-colors: (
 
   // ─── Text ───
   --clr-text-primary: #EDEDEF;
-  --clr-text-secondary: #9A9AA0;
+  --clr-text-secondary: #afafb3;
   --clr-text-muted: #7C7C86;
   --clr-text-accent: #4AE3B5;
 
@@ -47,6 +48,9 @@ $element-colors: (
 
   // ─── Shadow ───
   --clr-shadow: rgba(0, 0, 0, 0.5);
+
+  // ─── Overlay (mobile menu, modals) ───
+  --clr-overlay: rgba(0, 0, 0, 0.85);
 
   // ─── Element category colors (generated from $element-colors) ───
   @each $name, $color in $element-colors {
@@ -74,4 +78,74 @@ $element-colors: (
   --clr-slate-800: #1e293b;
   --clr-slate-900: #0f172a;
   --clr-slate-950: #020617;
+}
+
+// ─── Light theme ───────────────────────────────────────────
+[data-theme="light"] {
+  // ─── Base palette ───
+  --clr-bg-primary: #F5F5F7;
+  --clr-bg-secondary: #FFFFFF;
+  --clr-bg-tertiary: #ECECEE;
+  --clr-bg-elevated: #FFFFFF;
+
+  // ─── Surface / card backgrounds ───
+  --clr-surface: #EEEEF0;
+  --clr-surface-hover: rgba(0, 0, 0, 0.04);
+  --clr-surface-active: rgba(0, 0, 0, 0.07);
+
+  // ─── Borders ───
+  --clr-border: rgba(0, 0, 0, 0.1);
+  --clr-border-subtle: rgba(0, 0, 0, 0.06);
+  --clr-border-strong: rgba(0, 0, 0, 0.18);
+
+  // ─── Text ───
+  --clr-text-primary: #1A1A1D;
+  --clr-text-secondary: #5A5A62;
+  --clr-text-muted: #82828C;
+  --clr-text-accent: #1A8C6A;
+
+  // ─── Accent ───
+  --clr-accent: #1A8C6A;
+  --clr-accent-dim: rgba(26, 140, 106, 0.12);
+
+  // ─── Link ───
+  --clr-link: #2563EB;
+
+  // ─── Shadow ───
+  --clr-shadow: rgba(0, 0, 0, 0.12);
+
+  // ─── Overlay ───
+  --clr-overlay: rgba(255, 255, 255, 0.88);
+
+  // ─── Element category colors (darkened for WCAG AA on light bg) ───
+  --clr-alkali-metal:          hsl(355, 72%, 46%);
+  --clr-alkaline-earth-metal:  hsl(25, 88%, 40%);
+  --clr-transition-metal:      hsl(42, 82%, 36%);
+  --clr-post-transition-metal: hsl(80, 62%, 33%);
+  --clr-metalloid:             hsl(183, 72%, 32%);
+  --clr-diatomic-nonmetal:     hsl(220, 72%, 46%);
+  --clr-polyatomic-nonmetal:   hsl(310, 62%, 42%);
+  --clr-noble-gas:             hsl(265, 68%, 46%);
+  --clr-lanthanide:            hsl(166, 52%, 33%);
+  --clr-actinide:              hsl(150, 48%, 33%);
+  --clr-unknown:               hsl(220, 8%, 42%);
+
+  // ─── Phase (state) colors (darkened for light bg) ───
+  --clr-phase-solid: hsl(350, 72%, 44%);
+  --clr-phase-liquid: hsl(207, 78%, 42%);
+  --clr-phase-gas: hsl(160, 62%, 34%);
+  --clr-phase-unknown: hsl(240, 3%, 42%);
+
+  // ─── Slate scale (inverted) ───
+  --clr-slate-50: #020617;
+  --clr-slate-100: #0f172a;
+  --clr-slate-200: #1e293b;
+  --clr-slate-300: #334155;
+  --clr-slate-400: #475569;
+  --clr-slate-500: #64748b;
+  --clr-slate-600: #94a3b8;
+  --clr-slate-700: #cbd5e1;
+  --clr-slate-800: #e2e8f0;
+  --clr-slate-900: #f1f5f9;
+  --clr-slate-950: #f8fafc;
 }
